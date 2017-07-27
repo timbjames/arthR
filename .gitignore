@@ -242,17 +242,17 @@ logs*/
 */Exports
 
 # Generated JS files
-SimpleTSTest/wwwroot/scripts
+arthrWeb/wwwroot/scripts
 
 # Generated CSS files
-SimpleTSTest/wwwroot/css/*.min.css
+arthrWeb/wwwroot/css/*.min.css
 
 # Generated JSON Config files
-SimpleTSTest/Properties/launchSettings.json
-SimpleTSTest/appsettings.*.generated.json
+arthrWeb/Properties/launchSettings.json
+arthrWeb/appsettings.*.generated.json
 
 # Generated HTML from Markdown
-SimpleTSTest/wwwroot/docs
+arthrWeb/wwwroot/docs
 
 # logs
 npm-debug-log*
