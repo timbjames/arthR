@@ -1,7 +1,15 @@
 ﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { RouteProps } from 'react-router';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import AppBar from 'material-ui/AppBar';
+import Tabs from 'material-ui/Tabs';
+import Tab from 'material-ui/Tabs/Tab';
 
 import { ReduxContainerBuilder } from './Utility/Components/ReduxContainer';
 
@@ -10,10 +18,15 @@ import { IAreaState } from './Models/IAreaState';
 import { rootReducer } from './Models/AreaReducer';
 
 import { TopMenu } from './App/Navigation/TopMenu';
-import { Index as HomeIndex } from './App/Views/Home/Index';
-import { One, OneTwo } from './App/Views/Home/One';
-import { Two } from './App/Views/Home/Two';
-import { Three } from './App/Views/Home/Three';
+import { Index as Projects } from './App/Views/Projects';
+import { Index as Tasks } from './App/Views/Tasks';
+import { Index as Schedule } from './App/Views/Schedule';
+import { Index as Notes } from './App/Views/Notes';
+import { Index as MasterSites } from './App/Views/MasterSites';
+import { Index as Timesheets } from './App/Views/Timesheets';
+import { Index as Staff } from './App/Views/Staff';
+
+injectTapEventPlugin();
 
 class MyRoute extends Route<RouteProps> { }
 
@@ -29,34 +42,37 @@ class Index extends React.Component<IReduxComponentProps, {}>{
         const { areaActions, areaState } = this.props
 
         return (
-            <Router>
+            <MuiThemeProvider muiTheme={getMuiTheme(darkThemeBase)}>
+                <Router>
 
-                <div>
+                    <div>
 
-                    <TopMenu />
+                        <TopMenu />
 
-                    <div className="container body-content">
+                        <div className="container body-content">
 
-                        <Switch>
-                            <MyRoute exact path="/" component={ HomeIndex } />
-                            <MyRoute exact path="/one" component={One} />
-                            <MyRoute exact path="/one/two" component={OneTwo} />
-                            <MyRoute exact path="/one/two/:id?" component={OneTwo} />
-                            <MyRoute path="/two" component={ Two } />
-                            <MyRoute path="/redux" component={Three(areaActions, areaState)} />
-                        </Switch>
+                            <Switch>
+                                <MyRoute exact path="/projects" component={ Projects } />
+                                <MyRoute exact path="/tasks" component={ Tasks } />
+                                <MyRoute exact path="/schedule" component={ Schedule } />
+                                <MyRoute exact path="/notes" component={ Notes } />
+                                <MyRoute path="/mastersites" component={ MasterSites } />
+                                <MyRoute path="/staff" component={ Staff } />
+                                <MyRoute path="/timesheets" component={ Timesheets } />
+                            </Switch>
 
-                        <hr />
+                            <hr />
 
-                        <footer>
-                            <p>&copy; 2017 - React Typescript Redux .Net Core Website Starter Template</p>
-                        </footer>
+                            <footer>
+                                <p>&copy; 2017 - React Typescript Redux .Net Core Website Starter Template</p>
+                            </footer>
+
+                        </div>
 
                     </div>
 
-                </div>
-
-            </Router>
+                </Router>
+            </MuiThemeProvider>
         );
     }
 }

@@ -4,8 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Rewrite;
+using System.IdentityModel.Tokens.Jwt;
 
-namespace anthrWeb
+namespace arthrWeb
 {
     public class Startup
     {
@@ -44,19 +45,39 @@ namespace anthrWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = "oidc",
+                SignInScheme = "Cookies",
+                Authority = "http://localhost:5000",
+                RequireHttpsMetadata = false,
+                ClientId = "mvc",
+                SaveTokens = true
+            });
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
+                // Testing OAuth
                 routes.MapRoute(
-                    "Root",
-                    "",
-                    defaults: new { controller = "Home", action = "Index" });
+                    "default",
+                    "{controller}/{action}/{id?}",
+                    defaults: new { controller = "Home", action = "Index" }
+                );
 
-                routes.MapRoute(
-                    "DeepLink",
-                    "{*pathInfo}",
-                    defaults: new { controller = "Home", action = "Index" });
+                // SPA Routing
+                //routes.MapRoute(
+                //    "Root",
+                //    "",
+                //    defaults: new { controller = "Home", action = "Index" });
+
+                //routes.MapRoute(
+                //    "DeepLink",
+                //    "{*pathInfo}",
+                //    defaults: new { controller = "Home", action = "Index" });
             });
 
             var options = new RewriteOptions()

@@ -4,9 +4,24 @@
     <TargetFramework>net462</TargetFramework>
     <RuntimeIdentifier>win7-x86</RuntimeIdentifier>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\images\anthr-logo-new.png" />
+    <Content Include="wwwroot\images\anthr-logo.png" />
+    <Content Include="wwwroot\images\dark_wood.png" />
+    <Content Include="wwwroot\images\favico.png" />
+    <Content Include="wwwroot\images\favico.psd" />
+    <Content Include="wwwroot\images\favicon.ico" />
+    <Content Include="wwwroot\images\icon_64.png" />
+    <Content Include="wwwroot\images\logo.psd" />
+    <Content Include="wwwroot\images\slide-bg.png" />
+    <Content Include="wwwroot\images\tick.png" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />

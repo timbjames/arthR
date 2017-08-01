@@ -15,16 +15,20 @@ export class TopMenu extends React.Component<{}, {}>{
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <Link to="/" className="navbar-brand">React Typescript Redux</Link>
+                        <Link to="/" className="navbar-brand">
+                            <i className="glyphicon glyphicon-home"></i>
+                            <img src="/images/anthr-logo.png" alt="anthR" />
+                        </Link>
                     </div>
                     <div className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/one">One</Link></li>
-                            <li><Link to="/one/two">One Two</Link></li>
-                            <li><Link to="/one/two/1">One Two with id</Link></li>
-                            <li><Link to="/two">Two</Link></li>
-                            <li><Link to="/redux">Redux Test</Link></li>
+                            <li><Link to="/projects">Projects</Link></li>
+                            <li><Link to="/tasks">Tasks</Link></li>
+                            <li><Link to="/schedule">Schedule</Link></li>
+                            <li><Link to="/notes">Notes</Link></li>
+                            <li><Link to="/mastersites">Master Site</Link></li>
+                            <li><Link to="/staff">Staff</Link></li>
+                            <li><Link to="/timesheets">Timesheets</Link></li>
                         </ul>
                     </div>
                 </div>
