@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrWeb", "arthrWeb\arthrW
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrIdentityServer", "arthrIdentityServer\arthrIdentityServer.csproj", "{D2BF0DD9-418E-4F61-80C4-868EDC7D43C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arthrApi", "arthrApi\arthrApi.csproj", "{B92E502E-75E2-4F0E-9D9F-ECA872976C10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrApi", "arthrApi\arthrApi.csproj", "{B92E502E-75E2-4F0E-9D9F-ECA872976C10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityTest", "IdentityTest\IdentityTest.csproj", "{F9EE422B-9CEA-4BF8-9981-DB2951F1A2F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arthrCoreWeb", "arthrCoreWeb\arthrCoreWeb.csproj", "{B1005448-EBD0-472A-9C58-85B2CB4167B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F9EE422B-9CEA-4BF8-9981-DB2951F1A2F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9EE422B-9CEA-4BF8-9981-DB2951F1A2F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9EE422B-9CEA-4BF8-9981-DB2951F1A2F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1005448-EBD0-472A-9C58-85B2CB4167B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1005448-EBD0-472A-9C58-85B2CB4167B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1005448-EBD0-472A-9C58-85B2CB4167B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1005448-EBD0-472A-9C58-85B2CB4167B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
