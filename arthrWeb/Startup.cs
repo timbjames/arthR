@@ -45,14 +45,21 @@ namespace arthrWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies"
+            });
+
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
                 SignInScheme = "Cookies",
+
                 Authority = "http://localhost:5000",
                 RequireHttpsMetadata = false,
+
                 ClientId = "mvc",
                 SaveTokens = true
             });
@@ -61,23 +68,23 @@ namespace arthrWeb
 
             app.UseMvc(routes =>
             {
-                // Testing OAuth
-                routes.MapRoute(
-                    "default",
-                    "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
+                //// Testing OAuth
+                //routes.MapRoute(
+                //    "default",
+                //    "{controller}/{action}/{id?}",
+                //    defaults: new { controller = "Home", action = "Index" }
+                //);
 
                 // SPA Routing
-                //routes.MapRoute(
-                //    "Root",
-                //    "",
-                //    defaults: new { controller = "Home", action = "Index" });
+                routes.MapRoute(
+                    "Root",
+                    "",
+                    defaults: new { controller = "Home", action = "Index" });
 
-                //routes.MapRoute(
-                //    "DeepLink",
-                //    "{*pathInfo}",
-                //    defaults: new { controller = "Home", action = "Index" });
+                routes.MapRoute(
+                    "DeepLink",
+                    "{*pathInfo}",
+                    defaults: new { controller = "Home", action = "Index" });
             });
 
             var options = new RewriteOptions()

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using arthrCoreWeb.Data;
-using arthrCoreWeb.Models;
 using arthrCoreWeb.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace arthrCoreWeb
 {
@@ -43,9 +38,9 @@ namespace arthrCoreWeb
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
 
             services.AddMvc();
 
@@ -71,17 +66,48 @@ namespace arthrCoreWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies"
+            });
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = "oidc",
+                SignInScheme = "Cookies",
+
+                Authority = "http://localhost:5000",
+                RequireHttpsMetadata = false,
+
+                ClientId = "arthr",
+                SaveTokens = true
+            });
+
             app.UseStaticFiles();
 
-            app.UseIdentity();
+            //app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
             app.UseMvc(routes =>
             {
+                //// Default Routing
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{controller=Home}/{action=Index}/{id?}");
+
+                // SPA Routing
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "Root",
+                    "",
+                    defaults: new { controller = "Home", action = "Index" });
+
+                routes.MapRoute(
+                    "DeepLink",
+                    "{*pathInfo}",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }

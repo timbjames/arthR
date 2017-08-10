@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace arthrIdentityServer
 {
@@ -18,6 +19,8 @@ namespace arthrIdentityServer
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())
                 .AddTestUsers(Config.GetUsers());
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,10 +35,21 @@ namespace arthrIdentityServer
 
             app.UseIdentityServer();
 
-            app.Run(async (context) =>
+            app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                await context.Response.WriteAsync("Hello World!");
+                AuthenticationScheme = "Cookies",
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false
             });
+
+            app.UseMvcWithDefaultRoute();
+
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }

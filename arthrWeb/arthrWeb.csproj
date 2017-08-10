@@ -33,7 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\App\Person\Components\" />
-    <Folder Include="Scripts\Utility\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\IISUrlRewrite.xml" />

@@ -3,15 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace arthrWeb.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Test()
         {
             return View();
         }
