@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arthrCoreWeb.Models.AccountViewModels
+namespace arthrWeb.Models.AccountViewModels
 {
     public class LoginViewModel
     {

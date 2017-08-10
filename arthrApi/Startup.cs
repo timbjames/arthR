@@ -29,6 +29,7 @@ namespace arthrApi
         {
             // Add framework services.
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +44,16 @@ namespace arthrApi
                 RequireHttpsMetadata = false,
                 ApiName = "api1"
             });
+
+            app.UseCors(builder => {
+                builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
+            });
+
+            //app.UseCors(builder => builder
+            //.AllowCredentials()
+            //.WithOrigins("http://localhost:5003")
+            //.WithHeaders("accept", "content-type", "origin", "x-custom-header")
+            //.AllowAnyHeader());
 
             app.UseMvc();
         }

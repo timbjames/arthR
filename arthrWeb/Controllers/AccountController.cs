@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using arthrCoreWeb.Models;
-using arthrCoreWeb.Models.AccountViewModels;
-using arthrCoreWeb.Services;
+using arthrWeb.Models;
+using arthrWeb.Models.AccountViewModels;
+using arthrWeb.Services;
 
 namespace arthrWeb.Controllers
 {

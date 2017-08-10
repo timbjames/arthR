@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace arthrCoreWeb.Models.ManageViewModels
+namespace arthrWeb.Models.ManageViewModels
 {
     public class FactorViewModel
     {

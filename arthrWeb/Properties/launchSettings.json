@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "arthrCoreWeb": {
+    "arthrWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace arthrCoreWeb.Models.ManageViewModels
+namespace arthrWeb.Models.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

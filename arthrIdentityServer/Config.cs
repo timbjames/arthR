@@ -45,6 +45,7 @@ namespace arthrIdentityServer
                     {
                         new Secret("secret".Sha256())
                     },
+
                     AllowedScopes = { "api1" }
                 },
 
@@ -73,10 +74,17 @@ namespace arthrIdentityServer
                 {
                     ClientId = "arthr",
                     ClientName = "arthR",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
 
                     // where to redirect to after login
                     RedirectUris = { "http://localhost:5003/signin-oidc" },
+
+                    RequireConsent = false,
 
                     // where to redirect to after logout
                     PostLogoutRedirectUris = { "http://localhost:5003/signout-callback-oidc" },
@@ -84,8 +92,10 @@ namespace arthrIdentityServer
                     AllowedScopes = new List<string>
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
-                    }
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    },
+                    AllowOfflineAccess = true
                 }
             };
         }

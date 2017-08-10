@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using arthrCoreWeb.Data;
-using arthrCoreWeb.Services;
+using arthrWeb.Data;
+using arthrWeb.Services;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace arthrCoreWeb
+namespace arthrWeb
 {
     public class Startup
     {
@@ -82,6 +82,12 @@ namespace arthrCoreWeb
                 RequireHttpsMetadata = false,
 
                 ClientId = "arthr",
+                ClientSecret = "secret",
+
+                ResponseType = "code id_token",
+                Scope = { "api1", "offline_access" },
+
+                GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true
             });
 
@@ -97,6 +103,12 @@ namespace arthrCoreWeb
                 //routes.MapRoute(
                 //    name: "default",
                 //    template: "{controller=Home}/{action=Index}/{id?}");
+
+                // Logout Route
+                routes.MapRoute(
+                    name: "Identity Logout",
+                    template: "Identity/Logout",
+                    defaults: new { controller = "Identity", action = "Logout" });
 
                 // SPA Routing
                 routes.MapRoute(

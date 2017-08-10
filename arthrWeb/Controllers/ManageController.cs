@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using arthrCoreWeb.Models;
-using arthrCoreWeb.Models.ManageViewModels;
-using arthrCoreWeb.Services;
+using arthrWeb.Models;
+using arthrWeb.Models.ManageViewModels;
+using arthrWeb.Services;
 
 namespace arthrWeb.Controllers
 {

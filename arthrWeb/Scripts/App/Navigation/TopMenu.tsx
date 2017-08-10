@@ -30,6 +30,18 @@ export class TopMenu extends React.Component<{}, {}>{
                             <li><Link to="/staff">Staff</Link></li>
                             <li><Link to="/timesheets">Timesheets</Link></li>
                         </ul>
+                        <ul className="nav navbar-nav navbar-right">
+                            <li className="dropdown">
+                                <a href="" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true" style={{ paddingTop: 10, paddingBottom: 10 }}>
+                                    <img className="gravatar" src="https://secure.gravatar.com/avatar/10247f791f5065a8e090804c1ecc1cea?s=30&amp;d=mm" title="Gravatar. if you don't have one, then added one for your work email!" />
+                                        Hello, tim!
+                                    <span className="caret"></span>
+                                </a>
+                                <ul className="dropdown-menu">
+                                    <li><a href="/Identity/Logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
