@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Rewrite;
+using arthrCoreWeb.Data;
+using arthrCoreWeb.Services;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace arthrWeb
+namespace arthrCoreWeb
 {
     public class Startup
     {
@@ -15,8 +17,15 @@ namespace arthrWeb
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            if (env.IsDevelopment())
+            {
+                // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets<Startup>();
+            }
+
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -26,7 +35,18 @@ namespace arthrWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+
             services.AddMvc();
+
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +58,7 @@ namespace arthrWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -60,20 +81,22 @@ namespace arthrWeb
                 Authority = "http://localhost:5000",
                 RequireHttpsMetadata = false,
 
-                ClientId = "mvc",
+                ClientId = "arthr",
                 SaveTokens = true
             });
 
             app.UseStaticFiles();
 
+            //app.UseIdentity();
+
+            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
+
             app.UseMvc(routes =>
             {
-                //// Testing OAuth
+                //// Default Routing
                 //routes.MapRoute(
-                //    "default",
-                //    "{controller}/{action}/{id?}",
-                //    defaults: new { controller = "Home", action = "Index" }
-                //);
+                //    name: "default",
+                //    template: "{controller=Home}/{action=Index}/{id?}");
 
                 // SPA Routing
                 routes.MapRoute(
@@ -86,14 +109,6 @@ namespace arthrWeb
                     "{*pathInfo}",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-            var options = new RewriteOptions()
-            ///.AddRedirect("redirect-rule/(.*)", "redirected/$1")
-            //.AddRewrite(@"^rewrite-rule/(\d+)/(\d+)", "rewritten?var1=$1&var2=$2", skipRemainingRules: true)
-            ///.AddApacheModRewrite(env.ContentRootFileProvider, "ApacheModRewrite.txt")
-            .AddIISUrlRewrite(env.ContentRootFileProvider, "IISUrlRewrite.xml");
-
-            app.UseRewriter(options);
         }
     }
 }

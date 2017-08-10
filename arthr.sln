@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrWeb", "arthrWeb\arthrWeb.csproj", "{17B74BBC-7860-407F-B3AF-36A5044E1FC7}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrIdentityServer", "arthrIdentityServer\arthrIdentityServer.csproj", "{D2BF0DD9-418E-4F61-80C4-868EDC7D43C5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrApi", "arthrApi\arthrApi.csproj", "{B92E502E-75E2-4F0E-9D9F-ECA872976C10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityTest", "IdentityTest\IdentityTest.csproj", "{F9EE422B-9CEA-4BF8-9981-DB2951F1A2F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arthrCoreWeb", "arthrCoreWeb\arthrCoreWeb.csproj", "{B1005448-EBD0-472A-9C58-85B2CB4167B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthrWeb", "arthrWeb\arthrWeb.csproj", "{B1005448-EBD0-472A-9C58-85B2CB4167B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{17B74BBC-7860-407F-B3AF-36A5044E1FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17B74BBC-7860-407F-B3AF-36A5044E1FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17B74BBC-7860-407F-B3AF-36A5044E1FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17B74BBC-7860-407F-B3AF-36A5044E1FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D2BF0DD9-418E-4F61-80C4-868EDC7D43C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D2BF0DD9-418E-4F61-80C4-868EDC7D43C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2BF0DD9-418E-4F61-80C4-868EDC7D43C5}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -11,7 +9,7 @@ using arthrCoreWeb.Models;
 using arthrCoreWeb.Models.ManageViewModels;
 using arthrCoreWeb.Services;
 
-namespace arthrCoreWeb.Controllers
+namespace arthrWeb.Controllers
 {
     [Authorize]
     public class ManageController : Controller
