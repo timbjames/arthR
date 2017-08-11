@@ -1,24 +1,27 @@
-﻿using IdentityModel.Client;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IdentityTest
+﻿namespace IdentityTest
 {
-    class Program
+    #region Usings
+
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using IdentityModel.Client;
+    using Newtonsoft.Json.Linq;
+
+    #endregion
+
+    internal static class Program
     {
-        static void Main(string[] args)
+        #region Private Methods
+
+        private static void Main(/*string[] args*/)
         {
-            MainAsync(args).GetAwaiter().GetResult();
+            MainAsync().GetAwaiter().GetResult();
         }
 
-        static async Task MainAsync(string[] args)
+        private static async Task MainAsync()
         {
-            var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
+            DiscoveryResponse disco = await DiscoveryClient.GetAsync("http://localhost:5000");
 
             //var tokenClient = new TokenClient(disco.TokenEndpoint, "client", "secret");
             //var tokenResponse = await tokenClient.RequestClientCredentialsAsync("api1");
@@ -33,7 +36,7 @@ namespace IdentityTest
 
 
             var tokenClient = new TokenClient(disco.TokenEndpoint, "ro.client", "secret");
-            var tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "api1");
+            TokenResponse tokenResponse = await tokenClient.RequestResourceOwnerPasswordAsync("alice", "password", "api1");
 
             if (tokenResponse.IsError)
             {
@@ -46,18 +49,20 @@ namespace IdentityTest
             var client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("http://localhost:5001/identity");
+            HttpResponseMessage response = await client.GetAsync("http://localhost:5001/identity");
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine(response.StatusCode);
             }
             else
             {
-                var content = await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(JArray.Parse(content));
             }
 
             Console.ReadLine();
         }
+
+        #endregion
     }
 }
