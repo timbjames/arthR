@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-
-namespace arthr.Web
+﻿namespace arthr.Web
 {
+    #region Usings
+
+    using System.IO;
+    using Microsoft.AspNetCore.Hosting;
+
+    #endregion
+
     public class Program
     {
+        #region Public Methods
+
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
+            IWebHost host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
@@ -21,5 +23,7 @@ namespace arthr.Web
 
             host.Run();
         }
+
+        #endregion
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace arthr.Data.Bug
+﻿namespace arthr.Data.Bug
 {
     public class Item
     {
+        #region Properties
+
         public int Id { get; set; }
-        public string Title { get; set; }
-        public int ProjectId { get; set; }
-        public int TaskId { get; set; }
         public int IssueId { get; set; }
-        public bool RaisedTask { get; set; }        
+        public int ProjectId { get; set; }
+        public bool RaisedTask { get; set; }
+        public int TaskId { get; set; }
+        public string Title { get; set; }
+
+        #endregion
     }
 }

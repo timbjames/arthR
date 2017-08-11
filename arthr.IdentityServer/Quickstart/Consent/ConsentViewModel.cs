@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 
+// ReSharper disable once CheckNamespace
 namespace IdentityServer4.Quickstart.UI
 {
     public class ConsentViewModel : ConsentInputModel

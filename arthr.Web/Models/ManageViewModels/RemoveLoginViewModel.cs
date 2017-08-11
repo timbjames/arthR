@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace arthr.Web.Models.ManageViewModels
+﻿namespace arthr.Web.Models.ManageViewModels
 {
     public class RemoveLoginViewModel
     {
+        #region Properties
+
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
+
+        #endregion
     }
 }

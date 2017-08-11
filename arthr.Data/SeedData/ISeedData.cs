@@ -1,12 +1,17 @@
-﻿using arthr.Data.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace arthr.Data.SeedData
+﻿namespace arthr.Data.SeedData
 {
+    #region Usings
+
+    using Core;
+
+    #endregion
+
     public interface ISeedData
     {
+        #region Public Methods
+
         bool Seed(ArthRContext arthRContext);
+
+        #endregion
     }
 }

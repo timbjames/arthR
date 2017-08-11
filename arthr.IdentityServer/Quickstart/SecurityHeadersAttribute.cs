@@ -5,6 +5,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
+// ReSharper disable once CheckNamespace
 namespace IdentityServer4.Quickstart.UI
 {
     public class SecurityHeadersAttribute : ActionFilterAttribute

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
 
+// ReSharper disable once CheckNamespace
 namespace IdentityServer4.Quickstart.UI
 {
     public class ConsentService
@@ -42,7 +43,7 @@ namespace IdentityServer4.Quickstart.UI
                 grantedConsent = ConsentResponse.Denied;
             }
             // user clicked 'yes' - validate the data
-            else if (model.Button == "yes" && model != null)
+            else if (model.Button == "yes")
             {
                 // if the user consented to some scope, build the response model
                 if (model.ScopesConsented != null && model.ScopesConsented.Any())
@@ -50,7 +51,7 @@ namespace IdentityServer4.Quickstart.UI
                     var scopes = model.ScopesConsented;
                     if (ConsentOptions.EnableOfflineAccess == false)
                     {
-                        scopes = scopes.Where(x => x != IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess);
+                        scopes = scopes.Where(x => x != IdentityServerConstants.StandardScopes.OfflineAccess);
                     }
 
                     grantedConsent = new ConsentResponse
@@ -123,26 +124,27 @@ namespace IdentityServer4.Quickstart.UI
 
         private ConsentViewModel CreateConsentViewModel(
             ConsentInputModel model, string returnUrl, 
+            // ReSharper disable once UnusedParameter.Local
             AuthorizationRequest request, 
             Client client, Resources resources)
         {
-            var vm = new ConsentViewModel();
-            vm.RememberConsent = model?.RememberConsent ?? true;
-            vm.ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<string>();
-
-            vm.ReturnUrl = returnUrl;
-
-            vm.ClientName = client.ClientName;
-            vm.ClientUrl = client.ClientUri;
-            vm.ClientLogoUrl = client.LogoUri;
-            vm.AllowRememberConsent = client.AllowRememberConsent;
+            var vm = new ConsentViewModel
+            {
+                RememberConsent = model?.RememberConsent ?? true,
+                ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<string>(),
+                ReturnUrl = returnUrl,
+                ClientName = client.ClientName,
+                ClientUrl = client.ClientUri,
+                ClientLogoUrl = client.LogoUri,
+                AllowRememberConsent = client.AllowRememberConsent
+            };
 
             vm.IdentityScopes = resources.IdentityResources.Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
             vm.ResourceScopes = resources.ApiResources.SelectMany(x => x.Scopes).Select(x => CreateScopeViewModel(x, vm.ScopesConsented.Contains(x.Name) || model == null)).ToArray();
             if (ConsentOptions.EnableOfflineAccess && resources.OfflineAccess)
             {
-                vm.ResourceScopes = vm.ResourceScopes.Union(new ScopeViewModel[] {
-                    GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess) || model == null)
+                vm.ResourceScopes = vm.ResourceScopes.Union(new [] {
+                    GetOfflineAccessScope(vm.ScopesConsented.Contains(IdentityServerConstants.StandardScopes.OfflineAccess) || model == null)
                 });
             }
 
@@ -179,7 +181,7 @@ namespace IdentityServer4.Quickstart.UI
         {
             return new ScopeViewModel
             {
-                Name = IdentityServer4.IdentityServerConstants.StandardScopes.OfflineAccess,
+                Name = IdentityServerConstants.StandardScopes.OfflineAccess,
                 DisplayName = ConsentOptions.OfflineAccessDisplayName,
                 Description = ConsentOptions.OfflineAccessDescription,
                 Emphasize = true,

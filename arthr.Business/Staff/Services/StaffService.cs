@@ -1,4 +1,4 @@
-﻿namespace arthr.Business.Staff.Service
+﻿namespace arthr.Business.Staff.Services
 {
     #region Usings
 
@@ -8,10 +8,11 @@
     using Core.Interfaces;
     using Core.Services;
     using Data.Core;
+    using Interfaces;
 
     #endregion
 
-    public class StaffService : BaseService, IDisposable
+    public class StaffService : BaseService, IStaffService
     {
         #region Constructors
 
@@ -22,7 +23,7 @@
 
         #endregion
 
-        #region Public Methods
+        #region Interface Implementations
 
         public async Task<Staff> GetStaffMemberAsync(string username)
         {

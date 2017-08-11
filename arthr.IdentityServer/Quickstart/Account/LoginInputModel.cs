@@ -4,6 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
+// ReSharper disable once CheckNamespace
 namespace IdentityServer4.Quickstart.UI
 {
     public class LoginInputModel

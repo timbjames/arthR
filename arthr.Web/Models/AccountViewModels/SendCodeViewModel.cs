@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace arthr.Web.Models.AccountViewModels
+﻿namespace arthr.Web.Models.AccountViewModels
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
+    #endregion
+
     public class SendCodeViewModel
     {
-        public string SelectedProvider { get; set; }
+        #region Properties
 
         public ICollection<SelectListItem> Providers { get; set; }
 
-        public string ReturnUrl { get; set; }
-
         public bool RememberMe { get; set; }
+
+        public string ReturnUrl { get; set; }
+        public string SelectedProvider { get; set; }
+
+        #endregion
     }
 }

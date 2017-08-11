@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace arthr.Web.Models.ManageViewModels
+﻿namespace arthr.Web.Models.ManageViewModels
 {
     public class FactorViewModel
     {
+        #region Properties
+
         public string Purpose { get; set; }
+
+        #endregion
     }
 }

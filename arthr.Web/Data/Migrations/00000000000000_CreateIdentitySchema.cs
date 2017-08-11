@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace arthr.Web.Data.Migrations
+﻿namespace arthr.Web.Data.Migrations
 {
+    #region Usings
+
+    using System;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    #endregion
+
     public partial class CreateIdentitySchema : Migration
     {
+        #region Protected Methods
+
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -215,5 +218,7 @@ namespace arthr.Web.Data.Migrations
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
         }
+
+        #endregion
     }
 }

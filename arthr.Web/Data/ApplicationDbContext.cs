@@ -1,19 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using arthr.Web.Models;
-
-namespace arthr.Web.Data
+﻿namespace arthr.Web.Data
 {
+    #region Usings
+
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using Models;
+
+    #endregion
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        #region Constructors
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
+        #endregion
+
+        #region Protected Methods
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,5 +28,7 @@ namespace arthr.Web.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        #endregion
     }
 }

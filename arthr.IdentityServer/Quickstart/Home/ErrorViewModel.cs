@@ -4,6 +4,7 @@
 
 using IdentityServer4.Models;
 
+// ReSharper disable once CheckNamespace
 namespace IdentityServer4.Quickstart.UI
 {
     public class ErrorViewModel

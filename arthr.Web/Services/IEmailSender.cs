@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace arthr.Web.Services
+﻿namespace arthr.Web.Services
 {
+    #region Usings
+
+    using System.Threading.Tasks;
+
+    #endregion
+
     public interface IEmailSender
     {
+        #region Public Methods
+
         Task SendEmailAsync(string email, string subject, string message);
+
+        #endregion
     }
 }

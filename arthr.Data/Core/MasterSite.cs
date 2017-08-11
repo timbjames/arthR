@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace arthr.Data.Core
+﻿namespace arthr.Data.Core
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using Todo;
+
+    #endregion
+
     public class MasterSite
     {
-                
-        [Display(Name = "Master Site")]
-        public int MasterSiteId { get; set; }
-        public string Name { get; set; }
-        public int LiveBidMasterSiteId { get; set; }
+        #region Properties
 
         public bool HasVAT { get; set; }
+        public int LiveBidMasterSiteId { get; set; }
 
-        public virtual ICollection<Todo.TodoItem> TodoItems { get; set; }
+        [Display(Name = "Master Site")]
+        public int MasterSiteId { get; set; }
+
+        public string Name { get; set; }
 
         public virtual ICollection<Project> Projects { get; set; }
 
+        public virtual ICollection<TodoItem> TodoItems { get; set; }
+
+        #endregion
     }
 }

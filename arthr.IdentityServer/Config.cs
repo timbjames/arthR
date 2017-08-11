@@ -1,15 +1,18 @@
-﻿using IdentityServer4;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace arthr.IdentityServer
+﻿namespace arthr.IdentityServer
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using IdentityServer4;
+    using IdentityServer4.Models;
+    using IdentityServer4.Test;
+
+    #endregion
+
     public class Config
     {
+        #region Public Methods
+
         public static IEnumerable<ApiResource> GetApiResources()
         {
             return new List<ApiResource>
@@ -100,6 +103,15 @@ namespace arthr.IdentityServer
             };
         }
 
+        public static IEnumerable<IdentityResource> GetIdentityResources()
+        {
+            return new List<IdentityResource>
+            {
+                new IdentityResources.OpenId(),
+                new IdentityResources.Profile()
+            };
+        }
+
         public static List<TestUser> GetUsers()
         {
             return new List<TestUser>
@@ -119,13 +131,6 @@ namespace arthr.IdentityServer
             };
         }
 
-        public static IEnumerable<IdentityResource> GetIdentityResources()
-        {
-            return new List<IdentityResource>
-            {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
-            };
-        }
+        #endregion
     }
 }

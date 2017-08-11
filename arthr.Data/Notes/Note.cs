@@ -1,24 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace arthr.Data.Notes
+﻿namespace arthr.Data.Notes
 {
+    #region Usings
+
+    using System.ComponentModel.DataAnnotations;
+    using Core;
+
+    #endregion
+
     public class Note
     {
-        
-        public int Id { get; set; }
-        public string Title { get; set; }
+        #region Properties
+
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
 
+        public int Id { get; set; }
+        public virtual Staff Staff { get; set; }
+
         public int StaffId { get; set; }
-        public virtual Core.Staff Staff { get; set; }
+        public string Title { get; set; }
 
         public string Username { get; set; }
 
+        #endregion
     }
 }

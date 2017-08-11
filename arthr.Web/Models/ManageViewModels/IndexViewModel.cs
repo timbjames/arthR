@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-
-namespace arthr.Web.Models.ManageViewModels
+﻿namespace arthr.Web.Models.ManageViewModels
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using Microsoft.AspNetCore.Identity;
+
+    #endregion
+
     public class IndexViewModel
     {
+        #region Properties
+
+        public bool BrowserRemembered { get; set; }
         public bool HasPassword { get; set; }
 
         public IList<UserLoginInfo> Logins { get; set; }
@@ -16,6 +20,6 @@ namespace arthr.Web.Models.ManageViewModels
 
         public bool TwoFactor { get; set; }
 
-        public bool BrowserRemembered { get; set; }
+        #endregion
     }
 }
