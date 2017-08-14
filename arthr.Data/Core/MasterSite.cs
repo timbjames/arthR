@@ -5,9 +5,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Todo;
+    using Utils.Attributes;
 
     #endregion
 
+    [DbEntity]
     public class MasterSite
     {
         #region Properties

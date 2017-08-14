@@ -9,9 +9,13 @@
 
     #endregion
 
-    public class ArthRContext : DbContext
+    public sealed class ArthRContext : DbContext
     {
         #region Constructors
+
+        public ArthRContext()
+        {
+        }
 
         public ArthRContext(DbContextOptions<ArthRContext> options)
             : base(options)
@@ -23,6 +27,7 @@
         #region Properties
 
         public DbSet<AnthRTask> AnthRTask { get; set; }
+
         public DbSet<MasterSite> MasterSite { get; set; }
         public DbSet<Note> Note { get; set; }
         public DbSet<Project> Project { get; set; }
@@ -40,14 +45,38 @@
 
         #region Protected Methods
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=KFSZB05\sqlexpress;Database=arthr1;Trusted_Connection=True;MultipleActiveResultSets=true");
+        }
 
-        //    //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-        //    //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //}
+            modelBuilder.Entity<AnthRTask>().HasIndex(x => x.ProjectId);
+            modelBuilder.Entity<AnthRTask>().HasIndex(x => x.StatusId);
+
+            modelBuilder.Entity<MasterSite>().HasIndex(x => x.LiveBidMasterSiteId);
+
+            modelBuilder.Entity<Note>().HasIndex(x => x.StaffId);
+
+            modelBuilder.Entity<Project>().HasIndex(x => x.MasterSiteId);
+
+            modelBuilder.Entity<Staff>().HasIndex(x => x.UserId);
+
+            modelBuilder.Entity<StaffOnProjects>().HasIndex(x => x.ProjectId);
+            modelBuilder.Entity<StaffOnProjects>().HasIndex(x => x.StaffId);
+
+            modelBuilder.Entity<StaffOnTask>().HasIndex(x => x.AnthRTaskId);
+            modelBuilder.Entity<StaffOnTask>().HasIndex(x => x.StaffId);
+
+            modelBuilder.Entity<Timesheet>().HasIndex(x => x.AnthRTaskId);
+            modelBuilder.Entity<Timesheet>().HasIndex(x => x.StaffId);
+
+            modelBuilder.Entity<TodoItem>().HasIndex(x => x.MasterSiteId);
+            modelBuilder.Entity<TodoItem>().HasIndex(x => x.StatusId);
+        }
 
         #endregion
     }

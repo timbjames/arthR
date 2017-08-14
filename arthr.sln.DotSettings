@@ -38,6 +38,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=3C51DD79_002D655F_002D4BF2_002D9636_002DA04A6387A90E_002Fd_003AUnit_002Fd_003AViewModels_002Fd_003AModels/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=54C6BB3F_002D37BB_002D4757_002DAB31_002D63F0B2F9E502_002Fd_003AFundingProviders_002Fd_003AModels_002Ff_003AFundingPartnerProvider_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=5B7B030C_002DE2B1_002D40C1_002DA66D_002DEB3E6FE5944D_002Fd_003AMigrations/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=6CA3B4FA_002DB70F_002D4D31_002DB0A9_002D175FD90ADF54_002Fd_003AMigrations/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=B1005448_002DEBD0_002D472A_002D9C58_002D85B2CB4167B2_002Fd_003AScripts/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D2BF0DD9_002D418E_002D4F61_002D80C4_002D868EDC7D43C5_002Fd_003AViews/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D2BF0DD9_002D418E_002D4F61_002D80C4_002D868EDC7D43C5_002Fd_003Awwwroot/@EntryIndexedValue">ExplicitlyExcluded</s:String>

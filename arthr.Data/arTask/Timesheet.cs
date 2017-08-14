@@ -5,9 +5,11 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Core;
+    using Utils.Attributes;
 
     #endregion
 
+    [DbEntity]
     public class Timesheet
     {
         #region Properties
@@ -27,14 +29,13 @@
 
         public int Hours { get; set; }
 
-        public int Id { get; set; }
+        public int TimesheetId { get; set; }
         public int Mins { get; set; }
 
         [DisplayFormat(DataFormatString="{0:C}")]
         public double Quoted { get; set; }
 
         public virtual Staff Staff { get; set; }
-
         public int StaffId { get; set; }
 
         #endregion

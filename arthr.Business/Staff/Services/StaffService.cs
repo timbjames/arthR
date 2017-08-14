@@ -36,7 +36,7 @@
 
         private Task<Staff> LoadStaffMemberAsync(string username)
         {
-            Staff staffMember = Db.Staff.SingleOrDefault(s => s.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+            Staff staffMember = Db.Staff.SingleOrDefault(s => s.User.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
             return Task.FromResult(staffMember);
         }
 

@@ -6,9 +6,11 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using arTask;
+    using Utils.Attributes;
 
     #endregion
 
+    [DbEntity]
     public class Project
     {
         #region Properties
@@ -24,11 +26,9 @@
 
         public bool? HideFromTimesheet { get; set; }
 
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
 
         public virtual MasterSite MasterSite { get; set; }
-
-        [Display(Name = "Master Site")]
         public int MasterSiteId { get; set; }
 
         [Display(Name = "Project Name")]

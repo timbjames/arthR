@@ -1,5 +1,12 @@
 ﻿namespace arthr.Data.SeedData
 {
-    public sealed class Status
-    {}
+    using Core;
+
+    public sealed class StatusSeedData : ISeedData
+    {
+        public bool Seed(ArthRContext arthRContext)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
 }

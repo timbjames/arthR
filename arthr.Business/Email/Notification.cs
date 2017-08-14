@@ -10,7 +10,7 @@
 //using System.Web.Mvc;
 //using System.Web.Routing;
 
-//namespace arthr.Data.Email
+//namespace arthr.Business.Email
 //{
 //    public class Notification
 //    {
