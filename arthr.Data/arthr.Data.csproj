@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\arthr.Models\arthr.Models.csproj" />
     <ProjectReference Include="..\arthr.Utils\arthr.Utils.csproj" />
   </ItemGroup>
 

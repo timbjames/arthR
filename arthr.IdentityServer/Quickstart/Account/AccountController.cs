@@ -14,6 +14,10 @@ namespace IdentityServer4.Quickstart.UI
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Threading.Tasks;
+    using arthr.Business.User.Exceptions;
+    using arthr.Business.User.Interfaces;
+    using arthr.IdentityServer.Quickstart.Account;
+    using arthr.Models.Core;
     using Events;
     using Extensions;
     using IdentityModel;
@@ -42,6 +46,8 @@ namespace IdentityServer4.Quickstart.UI
         private readonly IIdentityServerInteractionService _interaction;
         private readonly TestUserStore _users;
 
+        private readonly IUserService _userService;
+
         #endregion
 
         #region Constructors
@@ -51,6 +57,7 @@ namespace IdentityServer4.Quickstart.UI
             IClientStore clientStore,
             IHttpContextAccessor httpContextAccessor,
             IEventService events,
+            IUserService userService,
             TestUserStore users = null)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
@@ -58,6 +65,7 @@ namespace IdentityServer4.Quickstart.UI
             _interaction = interaction;
             _events = events;
             _account = new AccountService(interaction, httpContextAccessor, clientStore);
+            _userService = userService;
         }
 
         #endregion
@@ -219,32 +227,45 @@ namespace IdentityServer4.Quickstart.UI
             if (ModelState.IsValid)
             {
                 // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
+
+                try
                 {
-                    AuthenticationProperties props = null;
-                    // only set explicit expiration here if persistent. 
-                    // otherwise we reply upon expiration configured in cookie middleware.
-                    if (AccountOptions.AllowRememberLogin && model.RememberLogin)
+                    if (await _userService.ValidateCredentialsAsync(model.Username, model.Password))
                     {
-                        props = new AuthenticationProperties
+                        AuthenticationProperties props = null;
+                        // only set explicit expiration here if persistent. 
+                        // otherwise we reply upon expiration configured in cookie middleware.
+                        if (AccountOptions.AllowRememberLogin && model.RememberLogin)
                         {
-                            IsPersistent = true,
-                            ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
-                        };
+                            props = new AuthenticationProperties
+                            {
+                                IsPersistent = true,
+                                ExpiresUtc = DateTimeOffset.UtcNow.Add(AccountOptions.RememberMeLoginDuration)
+                            };
+                        }
+
+                        // issue authentication cookie with subject ID and username
+                        User user = await _userService.FindByUsernameAsync(model.Username);
+                        await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.UserId.ToString(), user.Username));
+                        await HttpContext.Authentication.SignInAsync(user.UserId.ToString(), user.Username, props);
+
+                        // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint or a local page
+                        if (_interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
+                        {
+                            return Redirect(model.ReturnUrl);
+                        }
+
+                        return Redirect("~/");
                     }
-
-                    // issue authentication cookie with subject ID and username
-                    TestUser user = _users.FindByUsername(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username));
-                    await HttpContext.Authentication.SignInAsync(user.SubjectId, user.Username, props);
-
-                    // make sure the returnUrl is still valid, and if yes - redirect back to authorize endpoint or a local page
-                    if (_interaction.IsValidReturnUrl(model.ReturnUrl) || Url.IsLocalUrl(model.ReturnUrl))
+                }
+                catch (UserException ex)
+                {
+                    if (ex.Reason == UserExceptionReason.UserPasswordRequiresReset)
                     {
-                        return Redirect(model.ReturnUrl);
+                        return RedirectToAction("ResetPassword", new { model.ReturnUrl });
                     }
 
-                    return Redirect("~/");
+                    throw;
                 }
 
                 await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials"));
@@ -254,6 +275,7 @@ namespace IdentityServer4.Quickstart.UI
 
             // something went wrong, show form with error
             LoginViewModel vm = await _account.BuildLoginViewModelAsync(model);
+
             return View(vm);
         }
 
@@ -308,6 +330,25 @@ namespace IdentityServer4.Quickstart.UI
             }
 
             return View("LoggedOut", vm);
+        }
+
+        public IActionResult ResetPassword(string returnUrl)
+        { 
+            var model = new ResetPasswordModel
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            // save new password to db
+            await _userService.ResetUserPasswordAsync(model.Username, model.Password);
+
+            return RedirectToAction("Login", new { model.ReturnUrl });
         }
 
         #endregion

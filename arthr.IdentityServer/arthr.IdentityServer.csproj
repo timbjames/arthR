@@ -14,5 +14,9 @@
     <PackageReference Include="microsoft.aspnetcore.mvc" Version="1.1.3" />
     <PackageReference Include="microsoft.aspnetcore.staticfiles" Version="1.1.2" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\arthr.Business\arthr.Business.csproj" />
+    <ProjectReference Include="..\arthr.Models\arthr.Models.csproj" />
+  </ItemGroup>
 
 </Project>

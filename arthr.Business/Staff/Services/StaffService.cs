@@ -3,16 +3,18 @@
     #region Usings
 
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Services;
-    using Data.Core;
+    using Models.Core;
     using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Utils.Attributes;
 
     #endregion
 
-    public class StaffService : BaseService, IStaffService
+    [DependencyInjected]
+    public sealed class StaffService : BaseService, IStaffService
     {
         #region Constructors
 
@@ -34,10 +36,10 @@
 
         #region Private Methods
 
-        private Task<Staff> LoadStaffMemberAsync(string username)
+        private async Task<Staff> LoadStaffMemberAsync(string username)
         {
-            Staff staffMember = Db.Staff.SingleOrDefault(s => s.User.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
-            return Task.FromResult(staffMember);
+            Staff staffMember = await Db.Staff.SingleOrDefaultAsync(s => s.User.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+            return staffMember;
         }
 
         #endregion

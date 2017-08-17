@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthr.Data", "arthr.Data\ar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthr.Business", "arthr.Business\arthr.Business.csproj", "{3C0B6A04-B3B1-4703-A0AB-43B3D731C18E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arthr.Utils", "arthr.Utils\arthr.Utils.csproj", "{2E44EF8A-9D23-498D-AE9C-BE87C95F5AEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthr.Utils", "arthr.Utils\arthr.Utils.csproj", "{2E44EF8A-9D23-498D-AE9C-BE87C95F5AEB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arthr.Models", "arthr.Models\arthr.Models.csproj", "{D863F8C8-4267-491B-9EFB-41D673B5D781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arthr.Models", "arthr.Models\arthr.Models.csproj", "{D863F8C8-4267-491B-9EFB-41D673B5D781}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{A118A96C-AD50-470C-98F9-EB5553C0D948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -60,5 +62,14 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6CA3B4FA-B70F-4D31-B0A9-175FD90ADF54} = {A118A96C-AD50-470C-98F9-EB5553C0D948}
+		{3C0B6A04-B3B1-4703-A0AB-43B3D731C18E} = {A118A96C-AD50-470C-98F9-EB5553C0D948}
+		{2E44EF8A-9D23-498D-AE9C-BE87C95F5AEB} = {A118A96C-AD50-470C-98F9-EB5553C0D948}
+		{D863F8C8-4267-491B-9EFB-41D673B5D781} = {A118A96C-AD50-470C-98F9-EB5553C0D948}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC8967E9-DF2D-48FB-AFD6-9A9BBC6740BB}
 	EndGlobalSection
 EndGlobal

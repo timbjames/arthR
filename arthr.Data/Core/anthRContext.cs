@@ -2,10 +2,13 @@
 {
     #region Usings
 
-    using arTask;
     using Microsoft.EntityFrameworkCore;
-    using Notes;
-    using Todo;
+    using Microsoft.EntityFrameworkCore.Metadata;
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using Models.arTask;
+    using Models.Core;
+    using Models.Notes;
+    using Models.Todo;
 
     #endregion
 
@@ -41,6 +44,8 @@
 
         public DbSet<TodoItem> TodoItems { get; set; }
 
+        public  DbSet<User> Users { get; set; }
+
         #endregion
 
         #region Protected Methods
@@ -53,6 +58,11 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            foreach (IMutableEntityType entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.Relational().TableName = entity.DisplayName();
+            }
 
             modelBuilder.Entity<AnthRTask>().HasIndex(x => x.ProjectId);
             modelBuilder.Entity<AnthRTask>().HasIndex(x => x.StatusId);

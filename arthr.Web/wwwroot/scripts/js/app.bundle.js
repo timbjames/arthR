@@ -398,7 +398,7 @@ var Index = (function (_super) {
         return _this;
     }
     Index.prototype.componentDidMount = function () {
-        fetch('http://localhost:5001/identity', {
+        fetch('http://localhost:5001/api/project?completed=true&all=', {
             credentials: 'include',
             method: 'get',
             headers: {

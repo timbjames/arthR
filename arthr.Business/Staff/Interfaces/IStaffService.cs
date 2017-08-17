@@ -3,7 +3,7 @@
     #region Usings
 
     using System.Threading.Tasks;
-    using Data.Core;
+    using Models.Core;
 
     #endregion
 

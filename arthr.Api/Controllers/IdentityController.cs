@@ -3,13 +3,12 @@
     #region Usings
 
     using System.Linq;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     #endregion
 
-    [Route("identity"), Authorize]
-    public class IdentityController : Controller
+    [Route("identity")]
+    public sealed class IdentityController : BaseController
     {
         #region Public Methods
 

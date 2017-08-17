@@ -31,7 +31,7 @@ export class Index extends React.Component<IIndexProps, { message: string }> {
 
     componentDidMount() {
 
-        fetch('http://localhost:5001/identity',
+        fetch('http://localhost:5001/api/project?completed=true&all=',
             {
                 credentials: 'include',
                 method: 'get',

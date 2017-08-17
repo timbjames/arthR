@@ -3,13 +3,18 @@
     #region Usings
 
     using System.Collections.Generic;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using Business.User.Interfaces;
     using IdentityServer4;
+    using IdentityServer4.Extensions;
     using IdentityServer4.Models;
+    using IdentityServer4.Services;
     using IdentityServer4.Test;
 
     #endregion
 
-    public class Config
+    public sealed class Config
     {
         #region Public Methods
 
@@ -132,5 +137,29 @@
         }
 
         #endregion
+    }
+
+    public sealed class IdentityProfileService : IProfileService
+    {
+        private readonly IUserService _userService;
+
+        public IdentityProfileService(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        {
+            var sub = context.Subject.GetSubjectId();
+            var user = await _userService.FindByIdAsync(int.Parse(sub));
+
+            context.IssuedClaims.Add(new Claim("Username", user.Username));
+            context.IssuedClaims.Add(new Claim("Email", user.Email));
+        }
+
+        public Task IsActiveAsync(IsActiveContext context)
+        {
+            return Task.FromResult(true);
+        }
     }
 }

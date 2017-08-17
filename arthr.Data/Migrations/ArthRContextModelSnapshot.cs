@@ -16,7 +16,7 @@ namespace arthr.Data.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("arthr.Data.arTask.AnthRTask", b =>
+            modelBuilder.Entity("arthr.Models.arTask.AnthRTask", b =>
                 {
                     b.Property<int>("AnthRTaskId")
                         .ValueGeneratedOnAdd();
@@ -54,7 +54,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("AnthRTask");
                 });
 
-            modelBuilder.Entity("arthr.Data.arTask.Timesheet", b =>
+            modelBuilder.Entity("arthr.Models.arTask.Timesheet", b =>
                 {
                     b.Property<int>("TimesheetId")
                         .ValueGeneratedOnAdd();
@@ -83,10 +83,10 @@ namespace arthr.Data.Migrations
 
                     b.HasIndex("StaffId");
 
-                    b.ToTable("Timesheets");
+                    b.ToTable("Timesheet");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.MasterSite", b =>
+            modelBuilder.Entity("arthr.Models.Core.MasterSite", b =>
                 {
                     b.Property<int>("MasterSiteId")
                         .ValueGeneratedOnAdd();
@@ -104,7 +104,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("MasterSite");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.Project", b =>
+            modelBuilder.Entity("arthr.Models.Core.Project", b =>
                 {
                     b.Property<int>("ProjectId")
                         .ValueGeneratedOnAdd();
@@ -142,7 +142,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.Staff", b =>
+            modelBuilder.Entity("arthr.Models.Core.Staff", b =>
                 {
                     b.Property<int>("StaffId")
                         .ValueGeneratedOnAdd();
@@ -160,7 +160,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("Staff");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.StaffOnProjects", b =>
+            modelBuilder.Entity("arthr.Models.Core.StaffOnProjects", b =>
                 {
                     b.Property<long>("StaffOnProjectsId")
                         .ValueGeneratedOnAdd();
@@ -178,7 +178,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("StaffOnProjects");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.StaffOnTask", b =>
+            modelBuilder.Entity("arthr.Models.Core.StaffOnTask", b =>
                 {
                     b.Property<long>("StaffOnTaskId")
                         .ValueGeneratedOnAdd();
@@ -196,7 +196,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("StaffOnTask");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.Status", b =>
+            modelBuilder.Entity("arthr.Models.Core.Status", b =>
                 {
                     b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd();
@@ -216,7 +216,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("Status");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.User", b =>
+            modelBuilder.Entity("arthr.Models.Core.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd();
@@ -233,6 +233,10 @@ namespace arthr.Data.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<bool?>("RequiresPasswordReset");
+
+                    b.Property<string>("Salt");
+
                     b.Property<string>("Username");
 
                     b.HasKey("UserId");
@@ -240,7 +244,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("arthr.Data.Notes.Note", b =>
+            modelBuilder.Entity("arthr.Models.Notes.Note", b =>
                 {
                     b.Property<int>("NoteId")
                         .ValueGeneratedOnAdd();
@@ -260,7 +264,7 @@ namespace arthr.Data.Migrations
                     b.ToTable("Note");
                 });
 
-            modelBuilder.Entity("arthr.Data.Todo.TodoItem", b =>
+            modelBuilder.Entity("arthr.Models.Todo.TodoItem", b =>
                 {
                     b.Property<int>("TodoItemId")
                         .ValueGeneratedOnAdd();
@@ -285,97 +289,97 @@ namespace arthr.Data.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("TodoItems");
+                    b.ToTable("TodoItem");
                 });
 
-            modelBuilder.Entity("arthr.Data.arTask.AnthRTask", b =>
+            modelBuilder.Entity("arthr.Models.arTask.AnthRTask", b =>
                 {
-                    b.HasOne("arthr.Data.Core.Project", "Project")
+                    b.HasOne("arthr.Models.Core.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Status", "Status")
+                    b.HasOne("arthr.Models.Core.Status", "Status")
                         .WithMany("AnthRTasks")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.arTask.Timesheet", b =>
+            modelBuilder.Entity("arthr.Models.arTask.Timesheet", b =>
                 {
-                    b.HasOne("arthr.Data.arTask.AnthRTask", "AnthRTask")
+                    b.HasOne("arthr.Models.arTask.AnthRTask", "AnthRTask")
                         .WithMany("Timesheet")
                         .HasForeignKey("AnthRTaskId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Staff", "Staff")
+                    b.HasOne("arthr.Models.Core.Staff", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.Project", b =>
+            modelBuilder.Entity("arthr.Models.Core.Project", b =>
                 {
-                    b.HasOne("arthr.Data.Core.MasterSite", "MasterSite")
+                    b.HasOne("arthr.Models.Core.MasterSite", "MasterSite")
                         .WithMany("Projects")
                         .HasForeignKey("MasterSiteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Status")
+                    b.HasOne("arthr.Models.Core.Status")
                         .WithMany("Projects")
                         .HasForeignKey("StatusId");
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.Staff", b =>
+            modelBuilder.Entity("arthr.Models.Core.Staff", b =>
                 {
-                    b.HasOne("arthr.Data.Core.User", "User")
+                    b.HasOne("arthr.Models.Core.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.StaffOnProjects", b =>
+            modelBuilder.Entity("arthr.Models.Core.StaffOnProjects", b =>
                 {
-                    b.HasOne("arthr.Data.Core.Project", "Project")
+                    b.HasOne("arthr.Models.Core.Project", "Project")
                         .WithMany("StaffOnProjects")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Staff", "Staff")
+                    b.HasOne("arthr.Models.Core.Staff", "Staff")
                         .WithMany("StaffOnProjects")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.Core.StaffOnTask", b =>
+            modelBuilder.Entity("arthr.Models.Core.StaffOnTask", b =>
                 {
-                    b.HasOne("arthr.Data.arTask.AnthRTask", "AnthRTask")
+                    b.HasOne("arthr.Models.arTask.AnthRTask", "AnthRTask")
                         .WithMany("StaffOnTasks")
                         .HasForeignKey("AnthRTaskId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Staff", "Staff")
+                    b.HasOne("arthr.Models.Core.Staff", "Staff")
                         .WithMany("StaffOnTasks")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.Notes.Note", b =>
+            modelBuilder.Entity("arthr.Models.Notes.Note", b =>
                 {
-                    b.HasOne("arthr.Data.Core.Staff", "Staff")
+                    b.HasOne("arthr.Models.Core.Staff", "Staff")
                         .WithMany("Notes")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("arthr.Data.Todo.TodoItem", b =>
+            modelBuilder.Entity("arthr.Models.Todo.TodoItem", b =>
                 {
-                    b.HasOne("arthr.Data.Core.MasterSite", "MasterSite")
+                    b.HasOne("arthr.Models.Core.MasterSite", "MasterSite")
                         .WithMany("TodoItems")
                         .HasForeignKey("MasterSiteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("arthr.Data.Core.Status", "Status")
+                    b.HasOne("arthr.Models.Core.Status", "Status")
                         .WithMany("TodoItems")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);

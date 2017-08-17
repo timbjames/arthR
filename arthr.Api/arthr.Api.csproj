@@ -19,12 +19,15 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\arthr.Data\arthr.Data.csproj" />
+    <ProjectReference Include="..\arthr.Business\arthr.Business.csproj" />
+    <ProjectReference Include="..\arthr.Models\arthr.Models.csproj" />
+    <ProjectReference Include="..\arthr.Utils\arthr.Utils.csproj" />
   </ItemGroup>
 
 </Project>

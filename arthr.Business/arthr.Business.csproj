@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\arthr.Data\arthr.Data.csproj" />
+    <ProjectReference Include="..\arthr.Models\arthr.Models.csproj" />
   </ItemGroup>
 
 </Project>
