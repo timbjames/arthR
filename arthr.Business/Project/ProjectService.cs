@@ -12,6 +12,7 @@
     using Models.Core;
     using Data.Extensions;
     using Utils.Exceptions.Enums;
+    using System;
 
     #endregion
 
@@ -51,6 +52,26 @@
         public async Task<Project> GetProject(int id)
         {
             return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == id, ErrorCode.Project);
+        }
+
+        public async Task<bool> CreateProject(Project project)
+        {
+            Db.Project.Add(project);
+            return await Db.SaveChangesAsync() > 1;
+        }
+
+        public async Task<bool> EditProject(Project project)
+        {
+            Db.Entry(project).State = EntityState.Modified;
+            return await Db.SaveChangesAsync() > 1;
+        }
+
+        public async Task<bool> DeleteProject(int id)
+        {
+            Project project = await GetProject(id);
+            project.Deleted = true;
+
+            return await Db.SaveChangesAsync() > 1;
         }
 
         #endregion

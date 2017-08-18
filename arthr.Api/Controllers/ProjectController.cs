@@ -42,6 +42,30 @@
             return Ok(await _projectService.GetProject(id));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Project project)
+        {
+            return Ok(await _projectService.CreateProject(project));
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody]Project project)
+        {
+            return Ok(await _projectService.EditProject(project));
+        }
+
+        [HttpDelete, Route("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            return Ok(await _projectService.DeleteProject(id));
+        }
+
+        [HttpPatch, Route("Complete")]
+        public async Task<IActionResult> Complete([FromBody]Project project)
+        {
+            return Ok(await _projectService.EditProject(project));
+        }
+
         #endregion
     }
 }

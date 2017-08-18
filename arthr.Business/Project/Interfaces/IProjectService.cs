@@ -23,6 +23,12 @@
 
         Task<Project> GetProject(int id);
 
+        Task<bool> CreateProject(Project project);
+
+        Task<bool> EditProject(Project project);
+
+        Task<bool> DeleteProject(int id);
+
         #endregion
     }
 }

@@ -24,6 +24,8 @@
 
         public DateTime? Deadline { get; set; }
 
+        public bool? Deleted { get; set; }
+
         public bool? HideFromTimesheet { get; set; }
 
         public int ProjectId { get; set; }

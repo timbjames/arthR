@@ -8,9 +8,10 @@ using arthr.Data.Core;
 namespace arthr.Data.Migrations
 {
     [DbContext(typeof(ArthRContext))]
-    partial class ArthRContextModelSnapshot : ModelSnapshot
+    [Migration("20170818110441_ProjectDeleted")]
+    partial class ProjectDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
