@@ -21,6 +21,8 @@
         /// <returns></returns>
         Task<IEnumerable<Project>> GetProjectsAsync(string username, bool completed, string all);
 
+        Task<Project> GetProject(int id);
+
         #endregion
     }
 }

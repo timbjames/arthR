@@ -10,6 +10,8 @@
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models.Core;
+    using Data.Extensions;
+    using Utils.Exceptions.Enums;
 
     #endregion
 
@@ -35,13 +37,20 @@
         public async Task<IEnumerable<Project>> GetProjectsAsync(string username, bool completed, string all)
         {
             IQueryable<Project> query = Db.Project
+                .Include(x => x.MasterSite)
                 .Where(x => x.Completed == completed && (
                     x.Username.Equals(username) 
                     || x.StaffOnProjects.Any(sp => sp.Staff.User.Username == username)
                     || !string.IsNullOrEmpty(all)
-                ));
+                ))
+                .OrderBy(x => x.MasterSite.Name).ThenBy(x => x.Name);
 
             return await query.ToListAsync();
+        }
+
+        public async Task<Project> GetProject(int id)
+        {
+            return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == id, ErrorCode.Project);
         }
 
         #endregion

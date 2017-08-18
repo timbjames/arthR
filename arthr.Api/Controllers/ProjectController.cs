@@ -33,8 +33,13 @@
         [HttpGet]
         public async Task<IActionResult> Get(bool completed, string all)
         {
-            IEnumerable<Project> projects = await _projectService.GetProjectsAsync(ArthRUser.Username, completed, all);
-            return Ok(projects);
+            return Ok(await _projectService.GetProjectsAsync(ArthRUser.Username, completed, all));
+        }
+
+        [HttpGet, Route("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            return Ok(await _projectService.GetProject(id));
         }
 
         #endregion

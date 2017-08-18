@@ -3,6 +3,9 @@
     public enum ErrorCode
     {
         User = 0,
-        UtilityCode
+        UtilityCode,
+        Project,
+        Status,
+        ArthRTask
     }
 }
