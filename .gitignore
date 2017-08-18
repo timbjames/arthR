@@ -242,17 +242,17 @@ logs*/
 */Exports
 
 # Generated JS files
-arthrWeb/wwwroot/scripts
+arthr.Web/wwwroot/scripts
 
 # Generated CSS files
-arthrWeb/wwwroot/css/*.min.css
+arthr.Web/wwwroot/css/*.min.css
 
 # Generated JSON Config files
-arthrWeb/Properties/launchSettings.json
-arthrWeb/appsettings.*.generated.json
+arthr.Web/Properties/launchSettings.json
+arthr.Web/appsettings.*.generated.json
 
 # Generated HTML from Markdown
-arthrWeb/wwwroot/docs
+arthr.Web/wwwroot/docs
 
 # logs
 npm-debug-log*
