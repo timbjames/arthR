@@ -5,14 +5,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
-    using Business.User.Interfaces;
+    using Business.Interfaces;
     using Controllers;
     using IdentityModel;
     using Microsoft.AspNetCore.Mvc.Filters;
 
     #endregion
 
-    public class ClaimsFilter : ActionFilterAttribute
+    public sealed class ClaimsFilter : ActionFilterAttribute
     {
         #region Fields
 

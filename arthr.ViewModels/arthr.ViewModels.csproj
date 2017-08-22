@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\arthr.Models\arthr.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="arTask\" />
+    <Folder Include="Todo\" />
+  </ItemGroup>
+
+</Project>

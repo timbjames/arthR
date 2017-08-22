@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using Business.User.Interfaces;
+    using Business.Interfaces;
     using IdentityServer4;
     using IdentityServer4.Extensions;
     using IdentityServer4.Models;

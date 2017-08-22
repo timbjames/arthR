@@ -14,8 +14,8 @@ namespace IdentityServer4.Quickstart.UI
     using System.Security.Claims;
     using System.Security.Principal;
     using System.Threading.Tasks;
-    using arthr.Business.User.Exceptions;
-    using arthr.Business.User.Interfaces;
+    using arthr.Business.Exceptions;
+    using arthr.Business.Interfaces;
     using arthr.IdentityServer.Quickstart.Account;
     using arthr.Models.Core;
     using Events;

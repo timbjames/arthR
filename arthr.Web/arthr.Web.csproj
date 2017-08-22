@@ -66,6 +66,12 @@
     <None Update="Scripts\Models\Project.ts">
       <CustomToolNamespace>..\arthr.Models\Core\Project.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Models\ProjectToolsViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\ProjectToolsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\ProjectUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\ProjectUpsertViewModel.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Models\Schedule.ts">
       <CustomToolNamespace>..\arthr.Models\arTask\Schedule.cs</CustomToolNamespace>
     </None>
@@ -99,8 +105,35 @@
     <None Update="Scripts\Services\Api\ItemApi.ts">
       <CustomToolNamespace>..\arthr.Api\Controllers\ItemController.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Services\Api\MasterSiteApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\MasterSiteController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\NotesApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\NotesController.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Services\Api\ProjectApi.ts">
       <CustomToolNamespace>..\arthr.Api\Controllers\ProjectController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\ScheduleApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ScheduleController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\StaffApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\StaffOnProjectApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffOnProjectController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\StaffOnTaskApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffOnTaskController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\TaskApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\TaskController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\TimesheetApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\TimesheetController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\UserApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\UserController.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Services\IdentityService.ts">
       <CustomToolNamespace>..\arthr.Api\Controllers\IdentityController.cs</CustomToolNamespace>
@@ -108,8 +141,35 @@
     <None Update="Scripts\Services\ItemService.ts">
       <CustomToolNamespace>..\arthr.Api\Controllers\ItemController.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Services\MasterSiteService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\MasterSiteController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\NotesService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\NotesController.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Services\ProjectService.ts">
       <CustomToolNamespace>..\arthr.Api\Controllers\ProjectController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\ScheduleService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ScheduleController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\StaffOnProjectService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffOnProjectController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\StaffOnTaskService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffOnTaskController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\StaffService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\StaffController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\TaskService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\TaskController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\TimesheetService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\TimesheetController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\UserService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\UserController.cs</CustomToolNamespace>
     </None>
   </ItemGroup>
 

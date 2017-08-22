@@ -14,10 +14,6 @@
     {
         #region Constructors
 
-        protected BaseController()
-        {
-        }
-
         #endregion
 
         #region Properties

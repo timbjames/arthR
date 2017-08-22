@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using IdentityModel.Client;
     using Newtonsoft.Json.Linq;
-    using IdentityTest.Models;
 
     #endregion
 
@@ -17,16 +16,7 @@
 
         private static void Main(/*string[] args*/)
         {
-            //MainAsync().GetAwaiter().GetResult();
-            Type myType = typeof(Person);
-            try
-            {
-                Console.WriteLine(myType.Name);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
+              MainAsync().GetAwaiter().GetResult();
         }
 
         private static async Task MainAsync()

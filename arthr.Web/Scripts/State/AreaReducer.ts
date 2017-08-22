@@ -1,20 +1,25 @@
 ﻿import { combineReducers } from 'redux';
 import { handleActions, Action } from 'redux-actions';
 
+import { ActionTypes } from './ActionTypes';
 import { IAreaState } from './IAreaState';
 
 const initialState = (): IAreaState => {
     return {
-        name: ''
+        project: {
+            project: null,
+            projectTools: null,
+            projectUpsert: null
+        }
     };
 }
 
 const areaStateReducer = handleActions<IAreaState>({
 
-    'TEST': (state: IAreaState, action: Action<string>): IAreaState => {
-
-        return { name: action.payload };
-    }
+    [ActionTypes.project.receiveUpsert, (state: IAreaState, action: Action) =>
+{
+    
+}]
 
 }, initialState());
 

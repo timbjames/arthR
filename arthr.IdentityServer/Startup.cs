@@ -4,8 +4,8 @@
 
     using Business.Core.Interfaces;
     using Business.Core.Services;
-    using Business.User;
-    using Business.User.Interfaces;
+    using Business.Interfaces;
+    using Business.Services;
     using Data.Core;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -18,17 +18,11 @@
 
     public class Startup
     {
-        #region Properties
-
-        public IConfigurationRoot Configuration { get; }
-
-        #endregion
-
-        #region Public Methods
+        #region Constructors
 
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            IConfigurationBuilder builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", false, true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
@@ -37,6 +31,16 @@
 
             Configuration = builder.Build();
         }
+
+        #endregion
+
+        #region Properties
+
+        public IConfigurationRoot Configuration { get; }
+
+        #endregion
+
+        #region Public Methods
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

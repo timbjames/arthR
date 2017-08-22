@@ -13,9 +13,9 @@ import Tab from 'material-ui/Tabs/Tab';
 
 import { ReduxContainerBuilder } from './Utility/Components/ReduxContainer';
 
-import { ActionsDispatcherFactory, IAreaActions } from './Services/AreaActions';
-import { IAreaState } from './Services/IAreaState';
-import { rootReducer } from './Services/AreaReducer';
+import { ActionsDispatcherFactory, IAreaActions } from './State/AreaActions';
+import { IAreaState } from './State/IAreaState';
+import { rootReducer } from './State/AreaReducer';
 
 import { TopMenu } from './App/Navigation/TopMenu';
 import { Index as Projects } from './App/Views/Projects';

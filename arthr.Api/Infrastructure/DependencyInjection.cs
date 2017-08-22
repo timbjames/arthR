@@ -4,10 +4,8 @@
 
     using Business.Core.Interfaces;
     using Business.Core.Services;
-    using Business.Project;
-    using Business.Project.Interfaces;
-    using Business.User;
-    using Business.User.Interfaces;
+    using Business.Interfaces;
+    using Business.Services;
     using Filters;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -21,7 +19,16 @@
         {
             services.AddScoped<IArthrContext, ArthRContextWrapper>();
             services.AddScoped<IBaseServiceBundle, BaseServiceBundle>();
+
+            services.AddScoped<IMasterSiteService, MasterSiteService>();
+            services.AddScoped<INotesService, NotesService>();
             services.AddScoped<IProjectService, ProjectService>();
+            //services.AddScoped<IScheduleService, ScheduleService>();
+            services.AddScoped<IStaffOnProjectService, StaffOnProjectService>();
+            services.AddScoped<IStaffOnTaskService, StaffOnTaskService>();
+            services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<ITimesheetService, TimesheetService>();
             services.AddScoped<IUserService, UserService>();
 
             services.AddScoped<ClaimsFilter>();

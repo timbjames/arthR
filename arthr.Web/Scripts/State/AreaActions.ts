@@ -1,18 +1,35 @@
-﻿import { createAction } from 'redux-actions';
+﻿// 3rd Party
+import { createAction } from 'redux-actions';
+
+// Utility
+import { Api, IApiCallWithPayload } from '../Utility';
+
+// Models
+import { ProjectUpsertViewModel } from '../Models'
+
+// Services
+import { ProjectService } from '../Services'
 
 export interface IAreaActions {
-    doSomething: () => void;
-    receive: (name: string) => void;
+    getProjectTemplateAsync: () => void;
 }
 
 class AreaActions implements IAreaActions {
 
-    public doSomething = () => (dispatch: any): void => {
-
-        dispatch(this.receive('tim'));
+    private onFailure = (): void => {
+        
     }
 
-    public receive = createAction('TEST', (name: string) => name);
+    public getProjectTemplateAsync = () => (dispatch: any): void => {
+
+        const onSuccess = (upsert: ProjectUpsertViewModel) => {
+            dispatch(this.receiveProjectUpsert(upsert));
+        };
+
+        Api(dispatch).call(ProjectService.getTemplate(), null, onSuccess, this.onFailure);
+    }
+
+    private receiveProjectUpsert = createAction('TEST', (upsert: ProjectUpsertViewModel) => upsert);
 }
 
 const actionsDispatcherFactory = (dispatch: any): IAreaActions => {
@@ -20,11 +37,8 @@ const actionsDispatcherFactory = (dispatch: any): IAreaActions => {
     const localActions = new AreaActions();
 
     return {
-        doSomething: () => {
-            dispatch(localActions.doSomething());
-        },
-        receive: (name: string) => {
-            dispatch(localActions.receive(name));
+        getProjectTemplateAsync: () => {
+            dispatch(localActions.getProjectTemplateAsync());
         }
     }
 }
