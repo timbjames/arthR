@@ -44,5 +44,73 @@
   <ItemGroup>
     <Folder Include="Scripts\App\Person\Components\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Scripts\Models\AnthRTask.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\AnthRTask.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Item.ts">
+      <CustomToolNamespace>..\arthr.Models\Bug\Item.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\MasterSite.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\MasterSite.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\MasterSiteEditModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\MasterSiteEditModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Note.ts">
+      <CustomToolNamespace>..\arthr.Models\Notes\Note.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Person.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\Person.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Project.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\Project.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Schedule.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\Schedule.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Staff.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\Staff.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\StaffOnProjects.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\StaffOnProjects.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\StaffOnTask.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\StaffOnTask.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Status.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\Status.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\Timesheet.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\Timesheet.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TodoEditItemModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Todo\TodoEditItemModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TodoItem.ts">
+      <CustomToolNamespace>..\arthr.Models\Todo\TodoItem.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\User.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\User.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\IdentityApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\IdentityController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\ItemApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ItemController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\Api\ProjectApi.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ProjectController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\IdentityService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\IdentityController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\ItemService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ItemController.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Services\ProjectService.ts">
+      <CustomToolNamespace>..\arthr.Api\Controllers\ProjectController.cs</CustomToolNamespace>
+    </None>
+  </ItemGroup>
 
 </Project>

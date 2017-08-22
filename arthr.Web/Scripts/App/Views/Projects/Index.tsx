@@ -1,8 +1,18 @@
 ﻿import * as React from 'react';
 import 'whatwg-fetch';
 
+import { Project } from '../../../Models/Project';
+import { Api, IApiCallWithPayload } from '../../../Utility';
+
 interface IIndexProps {
     
+}
+
+const url = (): IApiCallWithPayload<Project, Project> => {
+    return {
+        method: 'get',
+        url: 'http://localhost:5001/api/project'
+    };
 }
 
 export class Index extends React.Component<IIndexProps, { message: string }> {
@@ -15,66 +25,54 @@ export class Index extends React.Component<IIndexProps, { message: string }> {
         };
     }
 
-    private checkStatus = (response: Response) => {
-        if (response.status >= 200 && response.status < 300){
-            return response;
-        } else {
-            const error = new Error(response.statusText);
-            //error.response = response;
-            throw error;
-        }
-    }
-
-    private parseJSON = (response: Response) => {
-        return response.json();
-    }
 
     componentDidMount() {
 
-        fetch('http://localhost:5001/api/project?completed=true&all=',
-            {
-                credentials: 'include',
-                method: 'get',
-                headers: {
-                    'Authorization': 'Bearer ' + (window as any).accessToken
-                }
-            }
-        )
-            .then(this.checkStatus)
-            .then(this.parseJSON)
-            .then((data) => {
-                console.log('data: ', data);
-            })
-            .catch((error) => {
-                console.log('error: ', error);
-            });
+        //fetch('http://localhost:5001/api/project?completed=true&all=',
+        //    {
+        //        credentials: 'include',
+        //        method: 'get',
+        //        headers: {
+        //            'Authorization': 'Bearer ' + (window as any).accessToken
+        //        }
+        //    }
+        //)
+        //    .then(this.checkStatus)
+        //    .then(this.parseJSON)
+        //    .then((data) => {
+        //        console.log('data: ', data);
+        //    })
+        //    .catch((error) => {
+        //        console.log('error: ', error);
+        //    });
     }
 
     private handleCreate = (): void => {
 
-        const data = JSON.stringify({ name: 'Test' });
+        const data: Project = {
+            alreadyBilled: false,
+            completed: false,
+            dateCompleted: null,
+            deadline: null,
+            deleted: false,
+            hideFromTimesheet: false,
+            masterSiteId: 1,
+            name: 'Test',
+            onGoing: true,
+            plannedStart: new Date(),
+            quoted: 500,
+            username: 'tim'
+        } as Project;
 
-        fetch('http://localhost:5001/api/project',
-            {
-                credentials: 'include',
-                method: 'post',
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Authorization': 'Bearer ' + (window as any).accessToken,
-                    'Content-Type': 'application/json'
-                },
-                body: data
-            }
-        )
-            .then(this.checkStatus)
-            .then(this.parseJSON)
-            .then((data) => {
-                console.log('data: ', data);
-            })
-            .catch((error) => {
-                console.log('error: ', error);
-            });
+        const onSuccess = (data: Project) => {
+            console.log(data);
+        };
 
+        Api(null).call(url(), data, onSuccess, (error) => {
+
+            console.log(error);
+
+        });
     }
 
     render() {

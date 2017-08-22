@@ -17,9 +17,11 @@
         public string Content { get; set; }
 
         public int NoteId { get; set; }
+
         public virtual Staff Staff { get; set; }
 
         public int StaffId { get; set; }
+
         public string Title { get; set; }
 
         public string Username { get; set; }

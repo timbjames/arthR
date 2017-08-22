@@ -7,6 +7,7 @@
     using Business.Project.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using Models.Core;
+    using arthr.Utils.Attributes;
 
     #endregion
 
@@ -30,37 +31,37 @@
 
         #region Public Methods
 
-        [HttpGet]
+        [HttpGet, Route("/api/project"), ReturnType(typeof(List<Project>))]
         public async Task<IActionResult> Get(bool completed, string all)
         {
             return Ok(await _projectService.GetProjectsAsync(ArthRUser.Username, completed, all));
         }
 
-        [HttpGet, Route("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet, Route("/api/project/getbyid/{id:int}"), ReturnType(typeof(Project))]
+        public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _projectService.GetProject(id));
         }
 
-        [HttpPost]
+        [HttpPost, Route("/api/project"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Post([FromBody]Project project)
         {
             return Ok(await _projectService.CreateProject(project));
         }
 
-        [HttpPut]
+        [HttpPut, Route("/api/project"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Put([FromBody]Project project)
         {
             return Ok(await _projectService.EditProject(project));
         }
 
-        [HttpDelete, Route("{id}")]
+        [HttpDelete, Route("/api/project/delele/{id:int}"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Delete(int id)
         {
             return Ok(await _projectService.DeleteProject(id));
         }
 
-        [HttpPatch, Route("Complete")]
+        [HttpPatch, Route("/api/project/complete"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Complete([FromBody]Project project)
         {
             return Ok(await _projectService.EditProject(project));
