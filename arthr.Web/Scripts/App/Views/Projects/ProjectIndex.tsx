@@ -36,6 +36,9 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
             <div>
                 <h1>Projects</h1>
 
+                <table>
+
+                </table>
                 {
                     appState.project.projects && appState.project.projects.map((p, i) => <span key={i}>{p.name}</span>)
                 }

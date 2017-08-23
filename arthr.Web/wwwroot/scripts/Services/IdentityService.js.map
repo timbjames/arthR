@@ -1,0 +1,1 @@
+{"version":3,"file":"IdentityService.js","sourceRoot":"","sources":["../../../Scripts/Services/IdentityService.ts"],"names":[],"mappings":";;AAEA,IAAM,eAAe,GAAG;IACpB,GAAG,EAAE;QAED,MAAM,CAAC;YACH,MAAM,EAAE,KAAK;YACb,GAAG,EAAE,eAAe;SACvB,CAAC;IACN,CAAC;CACJ,CAAA;AAE2B,0CAAe;AAC3C;;;EAGE"}

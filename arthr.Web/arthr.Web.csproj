@@ -43,9 +43,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\App\Person\Components\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Update="Scripts\Models\AnthRTask.ts">
       <CustomToolNamespace>..\arthr.Models\arTask\AnthRTask.cs</CustomToolNamespace>
     </None>
