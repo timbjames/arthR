@@ -12,7 +12,6 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 // 3rd Party
 var React = require("react");
-require("whatwg-fetch");
 var ProjectIndex = (function (_super) {
     __extends(ProjectIndex, _super);
     function ProjectIndex() {
@@ -40,14 +39,14 @@ var ProjectIndex = (function (_super) {
                                 React.createElement("td", null, p.masterSite.name),
                                 React.createElement("td", null, p.name),
                                 React.createElement("td", null, p.staffOnProjects && p.staffOnProjects.map(function (s, i) { return React.createElement("span", { key: i }, s); })),
-                                React.createElement("td", null, p.dateCompleted),
+                                React.createElement("td", null, p.tasks ? p.tasks.filter(function (t) { return !t.dateCompleted; }).length : 0),
                                 React.createElement("td", null,
                                     React.createElement("div", { className: "btn-group pull-right" },
                                         React.createElement("button", { className: "btn btn-default btn-sm dropdown-toggle", type: "button", "data-toggle": "dropdown", "aria-expanded": "false" },
                                             React.createElement("span", { className: "glyphicon glyphicon-menu-hamburger" })),
                                         React.createElement("ul", { className: "dropdown-menu", role: "menu" },
                                             React.createElement("li", null,
-                                                React.createElement("a", { href: "" }, "Create")))))));
+                                                React.createElement("a", { href: "/projects/create" }, "Create")))))));
                         }))))));
     };
     return ProjectIndex;

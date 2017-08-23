@@ -1,15 +1,11 @@
 ﻿// 3rd Party
 import * as React from 'react';
-import 'whatwg-fetch';
 
 // Utility
-import { Api, IApiCallWithPayload } from '../../../Utility';
+//import {  } from '../../../Utility';
 
 // Models
-import { Project } from '../../../Models/Project';
-
-// Services
-import { ProjectService } from '../../../Services';
+//import {  } from '../../../Models/Project';
 
 // State
 import { IAreaActions, IAreaState } from '../../../State';
@@ -65,14 +61,14 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
                                             <td>{p.masterSite.name}</td>
                                             <td>{p.name}</td>
                                             <td>{p.staffOnProjects && p.staffOnProjects.map((s, i) => <span key={i}>{s}</span>)}</td>
-                                            <td>{p.dateCompleted}</td>
+                                            <td>{p.tasks ? p.tasks.filter(t => !t.dateCompleted).length : 0}</td>
                                             <td>
                                                 <div className="btn-group pull-right">
                                                     <button className="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                         <span className="glyphicon glyphicon-menu-hamburger"></span>
                                                     </button>
                                                     <ul className="dropdown-menu" role="menu">
-                                                        <li><a href="">Create</a></li>
+                                                        <li><a href="/projects/create">Create</a></li>
                                                     </ul>
                                                 </div>
                                             </td>

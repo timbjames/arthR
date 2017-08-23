@@ -8,6 +8,8 @@
     using Core.Services;
     using Interfaces;
     using Models.Core;
+    using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     #endregion
 
@@ -21,9 +23,10 @@
 
         #endregion
 
-        public Task<List<MasterSite>> GetAsync()
+        public async Task<List<MasterSite>> GetAsync()
         {
-            throw new System.NotImplementedException();
+            IQueryable<MasterSite> query = Db.MasterSite;
+            return await query.ToListAsync();
         }
 
         public Task<MasterSite> GetAsync(int id)

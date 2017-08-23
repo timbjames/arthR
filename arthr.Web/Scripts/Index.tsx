@@ -4,7 +4,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { RouteProps } from 'react-router';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
+//import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
@@ -18,7 +18,7 @@ import { IAreaState } from './State/IAreaState';
 import { rootReducer } from './State/AreaReducer';
 
 import { TopMenu } from './App/Navigation/TopMenu';
-import { IProjectIndexProps, ProjectIndex } from './App/Views/Projects';
+import { CreateProject, ICreateProjectProps, IProjectIndexProps, ProjectIndex } from './App/Views/Projects';
 import { Index as Tasks } from './App/Views/Tasks';
 import { Index as Schedule } from './App/Views/Schedule';
 import { Index as Notes } from './App/Views/Notes';
@@ -47,7 +47,7 @@ class Index extends React.Component<IReduxComponentProps, {}>{
         };
 
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkThemeBase)}>
+            <MuiThemeProvider /*muiTheme={getMuiTheme(darkThemeBase)}*/>
                 <Router>
 
                     <div>
@@ -59,6 +59,9 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                             <Switch>
                                 <MyRoute exact path="/projects">
                                     <ProjectIndex appActions={areaActions} appState={areaState} />
+                                </MyRoute>
+                                <MyRoute exact path="/projects/create">
+                                    <CreateProject appActions={areaActions} appState={areaState} />
                                 </MyRoute>
                                 <MyRoute exact path="/tasks">
                                     <Tasks />

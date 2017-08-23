@@ -14,9 +14,8 @@ var React = require("react");
 var ReactDOM = require("react-dom");
 var injectTapEventPlugin = require("react-tap-event-plugin");
 var react_router_dom_1 = require("react-router-dom");
-var darkBaseTheme_1 = require("material-ui/styles/baseThemes/darkBaseTheme");
+//import darkThemeBase from 'material-ui/styles/baseThemes/darkBaseTheme';
 var MuiThemeProvider_1 = require("material-ui/styles/MuiThemeProvider");
-var getMuiTheme_1 = require("material-ui/styles/getMuiTheme");
 var ReduxContainer_1 = require("./Utility/Components/ReduxContainer");
 var AreaActions_1 = require("./State/AreaActions");
 var AreaReducer_1 = require("./State/AreaReducer");
@@ -46,7 +45,7 @@ var Index = (function (_super) {
         var getProjectIndex = function () {
             return React.createElement(Projects_1.ProjectIndex, { appActions: areaActions, appState: areaState });
         };
-        return (React.createElement(MuiThemeProvider_1.default, { muiTheme: getMuiTheme_1.default(darkBaseTheme_1.default) },
+        return (React.createElement(MuiThemeProvider_1.default /*muiTheme={getMuiTheme(darkThemeBase)}*/, null,
             React.createElement(react_router_dom_1.BrowserRouter, null,
                 React.createElement("div", null,
                     React.createElement(TopMenu_1.TopMenu, null),
@@ -54,6 +53,8 @@ var Index = (function (_super) {
                         React.createElement(react_router_dom_1.Switch, null,
                             React.createElement(MyRoute, { exact: true, path: "/projects" },
                                 React.createElement(Projects_1.ProjectIndex, { appActions: areaActions, appState: areaState })),
+                            React.createElement(MyRoute, { exact: true, path: "/projects/create" },
+                                React.createElement(Projects_1.CreateProject, { appActions: areaActions, appState: areaState })),
                             React.createElement(MyRoute, { exact: true, path: "/tasks" },
                                 React.createElement(Tasks_1.Index, null)),
                             React.createElement(MyRoute, { exact: true, path: "/schedule" },

@@ -63,6 +63,9 @@ var actionsDispatcherFactory = function (dispatch) {
         },
         getProjectTemplateAsync: function () {
             dispatch(localActions.getProjectTemplateAsync());
+        },
+        receiveProjectUpsert: function (upsert) {
+            dispatch(localActions.receiveProjectUpsert(upsert));
         }
     };
 };

@@ -5,7 +5,7 @@
 }
 <div id="mountNode"></div>
 
-<div>access token @await ViewContext.HttpContext.Authentication.GetTokenAsync("access_token")</div>
+@*<div>access token @await ViewContext.HttpContext.Authentication.GetTokenAsync("access_token")</div>
 
 <dl>
     @foreach (var claim in User.Claims)
@@ -13,7 +13,7 @@
         <dt>@claim.Type</dt>
         <dt>@claim.Value</dt>
     }
-</dl>
+</dl>*@
 
 <script>
     window.accessToken = '@await ViewContext.HttpContext.Authentication.GetTokenAsync("access_token")';

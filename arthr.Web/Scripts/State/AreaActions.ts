@@ -17,6 +17,7 @@ export interface IAreaActions {
     createProjectAsync: () => void;
     getProjectsAsync: () => void;
     getProjectTemplateAsync: () => void;
+    receiveProjectUpsert: (upsert: ProjectUpsertViewModel) => void;
 }
 
 class AreaActions implements IAreaActions {
@@ -70,7 +71,7 @@ class AreaActions implements IAreaActions {
     }
 
     private receiveProjects = createAction(ActionTypes.project.receiveProjects, (projects: Project[]) => projects);
-    private receiveProjectUpsert = createAction(ActionTypes.project.receiveUpsert, (upsert: ProjectUpsertViewModel) => upsert);
+    public receiveProjectUpsert = createAction(ActionTypes.project.receiveUpsert, (upsert: ProjectUpsertViewModel) => upsert);
 }
 
 const actionsDispatcherFactory = (dispatch: any): IAreaActions => {
@@ -86,6 +87,9 @@ const actionsDispatcherFactory = (dispatch: any): IAreaActions => {
         },
         getProjectTemplateAsync: () => {
             dispatch(localActions.getProjectTemplateAsync());
+        },
+        receiveProjectUpsert: (upsert: ProjectUpsertViewModel) => {
+            dispatch(localActions.receiveProjectUpsert(upsert));
         }
     }
 }
