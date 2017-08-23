@@ -6,35 +6,35 @@ const masterSiteService = {
 
         return {
             method: 'delete',
-            url: `http://localhost:5002/api/mastersite/${id}`
+            url: `http://localhost:5001/api/mastersite/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, MasterSite[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/mastersite`
+            url: `http://localhost:5001/api/mastersite`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, MasterSite> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/mastersite/${id}`
+            url: `http://localhost:5001/api/mastersite/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<MasterSite, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5002/api/mastersite`
+            url: `http://localhost:5001/api/mastersite`
         };
     }, 
     put: (): IApiCallWithPayload<MasterSite, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5002/api/mastersite`
+            url: `http://localhost:5001/api/mastersite`
         };
     }
 }

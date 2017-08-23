@@ -6,35 +6,35 @@ const taskService = {
 
         return {
             method: 'delete',
-            url: `http://localhost:5002/api/task/${id}`
+            url: `http://localhost:5001/api/task/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, AnthRTask[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/task`
+            url: `http://localhost:5001/api/task`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, AnthRTask> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/task/${id}`
+            url: `http://localhost:5001/api/task/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<AnthRTask, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5002/api/task`
+            url: `http://localhost:5001/api/task`
         };
     }, 
     put: (): IApiCallWithPayload<AnthRTask, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5002/api/task`
+            url: `http://localhost:5001/api/task`
         };
     }
 }

@@ -6,35 +6,35 @@ const staffService = {
 
         return {
             method: 'delete',
-            url: `http://localhost:5002/api/staff/${id}`
+            url: `http://localhost:5001/api/staff/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, Staff[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/staff`
+            url: `http://localhost:5001/api/staff`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, Staff> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/staff/${id}`
+            url: `http://localhost:5001/api/staff/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<Staff, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5002/api/staff`
+            url: `http://localhost:5001/api/staff`
         };
     }, 
     put: (): IApiCallWithPayload<Staff, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5002/api/staff`
+            url: `http://localhost:5001/api/staff`
         };
     }
 }

@@ -174,7 +174,7 @@ const $ServiceName = {$Methods[
 
         return {
             method: '$HttpMethod',
-            url: `http://localhost:5002$Url`
+            url: `http://localhost:5001$Url`
         };
     }][, ]
 }

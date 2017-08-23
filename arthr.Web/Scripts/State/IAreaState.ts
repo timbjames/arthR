@@ -3,6 +3,7 @@
 export interface IAreaState {
     project: {
         project: Project,
+        projects: Project[],
         projectTools: ProjectToolsViewModel,
         projectUpsert: ProjectUpsertViewModel
     }

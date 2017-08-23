@@ -18,7 +18,7 @@ import { IAreaState } from './State/IAreaState';
 import { rootReducer } from './State/AreaReducer';
 
 import { TopMenu } from './App/Navigation/TopMenu';
-import { Index as Projects } from './App/Views/Projects';
+import { IProjectIndexProps, ProjectIndex } from './App/Views/Projects';
 import { Index as Tasks } from './App/Views/Tasks';
 import { Index as Schedule } from './App/Views/Schedule';
 import { Index as Notes } from './App/Views/Notes';
@@ -41,6 +41,11 @@ class Index extends React.Component<IReduxComponentProps, {}>{
 
         const { areaActions, areaState } = this.props
 
+        const getProjectIndex = () => {
+
+            return <ProjectIndex appActions={areaActions} appState={areaState} />
+        };
+
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(darkThemeBase)}>
                 <Router>
@@ -52,13 +57,27 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                         <div className="container body-content">
 
                             <Switch>
-                                <MyRoute exact path="/projects" component={ Projects } />
-                                <MyRoute exact path="/tasks" component={ Tasks } />
-                                <MyRoute exact path="/schedule" component={ Schedule } />
-                                <MyRoute exact path="/notes" component={ Notes } />
-                                <MyRoute path="/mastersites" component={ MasterSites } />
-                                <MyRoute path="/staff" component={ Staff } />
-                                <MyRoute path="/timesheets" component={ Timesheets } />
+                                <MyRoute exact path="/projects">
+                                    <ProjectIndex appActions={areaActions} appState={areaState} />
+                                </MyRoute>
+                                <MyRoute exact path="/tasks">
+                                    <Tasks />
+                                </MyRoute>
+                                <MyRoute exact path="/schedule">
+                                    <Schedule />
+                                </MyRoute>
+                                <MyRoute exact path="/notes">
+                                    <Notes />
+                                </MyRoute>
+                                <MyRoute path="/mastersites">
+                                    <MasterSites />
+                                </MyRoute>
+                                <MyRoute path="/staff">
+                                    <Staff />
+                                </MyRoute>
+                                <MyRoute path="/timesheets">
+                                    <Timesheets />
+                                </MyRoute>
                             </Switch>
 
                             <hr />

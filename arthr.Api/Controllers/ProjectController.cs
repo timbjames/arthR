@@ -46,7 +46,8 @@
         [HttpGet, Route("/api/project"), ReturnType(typeof(List<Project>))]
         public async Task<IActionResult> Get(bool completed, string all)
         {
-            return Ok(await _projectService.GetProjectsAsync(ArthRUser.Username, completed, all));
+            var projects = await _projectService.GetProjectsAsync(ArthRUser.Username, completed, all);
+            return Ok(projects);
         }
 
         [HttpGet, Route("/api/project/getbyid/{id:int}"), ReturnType(typeof(Project))]

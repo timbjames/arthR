@@ -63,12 +63,6 @@
                 builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials();
             });
 
-            //app.UseCors(builder => builder
-            //.AllowCredentials()
-            //.WithOrigins("http://localhost:5003")
-            //.WithHeaders("accept", "content-type", "origin", "x-custom-header")
-            //.AllowAnyHeader());
-
             app.UseMvc();
         }
 
@@ -81,6 +75,7 @@
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.DateFormatHandling = DateFormatHandling.IsoDateFormat;
                 options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddCors();

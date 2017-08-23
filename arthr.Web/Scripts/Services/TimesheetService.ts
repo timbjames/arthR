@@ -6,35 +6,35 @@ const timesheetService = {
 
         return {
             method: 'delete',
-            url: `http://localhost:5002/api/timesheet/${id}`
+            url: `http://localhost:5001/api/timesheet/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, Timesheet[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/timesheet`
+            url: `http://localhost:5001/api/timesheet`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, Timesheet> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5002/api/timesheet/${id}`
+            url: `http://localhost:5001/api/timesheet/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<Timesheet, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5002/api/timesheet`
+            url: `http://localhost:5001/api/timesheet`
         };
     }, 
     put: (): IApiCallWithPayload<Timesheet, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5002/api/timesheet`
+            url: `http://localhost:5001/api/timesheet`
         };
     }
 }
