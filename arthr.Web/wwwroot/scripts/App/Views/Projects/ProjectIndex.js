@@ -26,6 +26,7 @@ var ProjectIndex = (function (_super) {
         var _a = this.props, appActions = _a.appActions, appState = _a.appState;
         return (React.createElement("div", null,
             React.createElement("h1", null, "Projects"),
+            React.createElement("table", null),
             appState.project.projects && appState.project.projects.map(function (p, i) { return React.createElement("span", { key: i }, p.name); })));
     };
     return ProjectIndex;
