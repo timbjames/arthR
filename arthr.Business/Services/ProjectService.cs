@@ -66,13 +66,16 @@
             return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == id, ErrorCode.Project);
         }
 
-        public async Task<bool> CreateProjectAsync(Project project)
+        public async Task<bool> CreateProjectAsync(Project project, User user)
         {
+            project.Username = user.Username;
+            project.Deleted = false;
+
             Db.Project.Add(project);
             return await Db.SaveChangesAsync() > 1;
         }
 
-        public async Task<bool> EditProjectAsync(Project project)
+        public async Task<bool> EditProjectAsync(Project project, User user)
         {
             Db.Entry(project).State = EntityState.Modified;
             return await Db.SaveChangesAsync() > 1;

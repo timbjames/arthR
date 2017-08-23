@@ -34,7 +34,7 @@
         [HttpPatch, Route("/api/project/complete"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Complete([FromBody]Project project)
         {
-            return Ok(await _projectService.EditProjectAsync(project));
+            return Ok(await _projectService.EditProjectAsync(project, ArthRUser));
         }
 
         [HttpDelete, Route("/api/project/delele/{id:int}"), ReturnType(typeof(bool))]
@@ -65,13 +65,13 @@
         [HttpPost, Route("/api/project"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Post([FromBody]Project project)
         {
-            return Ok(await _projectService.CreateProjectAsync(project));
+            return Ok(await _projectService.CreateProjectAsync(project, ArthRUser));
         }
 
         [HttpPut, Route("/api/project"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Put([FromBody]Project project)
         {
-            return Ok(await _projectService.EditProjectAsync(project));
+            return Ok(await _projectService.EditProjectAsync(project, ArthRUser));
         }
 
         #endregion

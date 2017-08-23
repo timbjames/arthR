@@ -14,7 +14,7 @@ import { ProjectService } from '../Services'
 import { ActionTypes } from '../State';
 
 export interface IAreaActions {
-    createProjectAsync: () => void;
+    createProjectAsync: (project: Project) => void;
     getProjectsAsync: () => void;
     getProjectTemplateAsync: () => void;
     receiveProjectUpsert: (upsert: ProjectUpsertViewModel) => void;
@@ -22,34 +22,16 @@ export interface IAreaActions {
 
 class AreaActions implements IAreaActions {
 
-    private onFailure = (): void => {
-        
+    private onFailure = (error): void => {
+        console.log(error);
     }
 
-    public  createProjectAsync = () => (dispatch: any): void => {
-
-        const data: Project = {
-            alreadyBilled: false,
-            completed: false,
-            dateCompleted: null,
-            deadline: null,
-            deleted: false,
-            hideFromTimesheet: false,
-            masterSiteId: 1,
-            name: 'Test',
-            onGoing: true,
-            plannedStart: new Date(),
-            quoted: 500,
-            username: 'tim'
-        } as Project;
+    public  createProjectAsync = (project: Project) => (dispatch: any): void => {
 
         const onSuccess = (result: boolean) => {
             alert('success');
         };
-
-        Api(null).call(ProjectService.post(), data, onSuccess, (error) => {
-            console.log(error);
-        });
+        Api(dispatch).call(ProjectService.post(), project, onSuccess, this.onFailure);
     }
 
     public getProjectsAsync = () => (dispatch: any): void => {
@@ -79,8 +61,8 @@ const actionsDispatcherFactory = (dispatch: any): IAreaActions => {
     const localActions = new AreaActions();
 
     return {
-        createProjectAsync: () => {
-            dispatch(localActions.createProjectAsync());
+        createProjectAsync: (project: Project) => {
+            dispatch(localActions.createProjectAsync(project));
         },
         getProjectsAsync: () => {
             dispatch(localActions.getProjectsAsync());

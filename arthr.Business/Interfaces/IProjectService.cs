@@ -12,11 +12,11 @@
     {
         #region Public Methods
 
-        Task<bool> CreateProjectAsync(Project project);
+        Task<bool> CreateProjectAsync(Project project, User user);
 
         Task<bool> DeleteProjectAsync(int id);
 
-        Task<bool> EditProjectAsync(Project project);
+        Task<bool> EditProjectAsync(Project project, User user);
 
         Task<Project> GetProjectAsync(int id);
 
