@@ -61,9 +61,15 @@
             return upsert;
         }
 
-        public async Task<Project> GetProjectAsync(int id)
+        public async Task<ProjectUpsertViewModel> GetProjectAsync(int id)
         {
-            return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == id, ErrorCode.Project);
+            ProjectUpsertViewModel upsert = new ProjectUpsertViewModel
+            {
+                Model =  await GetProject(id),
+                Tools = await GetUpsertTools()
+            };
+
+            return upsert;
         }
 
         public async Task<bool> CreateProjectAsync(Project project, User user)
@@ -83,13 +89,18 @@
 
         public async Task<bool> DeleteProjectAsync(int id)
         {
-            Project project = await GetProjectAsync(id);
+            Project project = await GetProject(id);
             project.Deleted = true;
 
             return await Db.SaveChangesAsync() > 1;
         }
 
         #endregion
+
+        private async Task<Project> GetProject(int projectId)
+        {
+            return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == projectId, ErrorCode.Project);
+        }
 
         private async Task<ProjectToolsViewModel> GetUpsertTools()
         {

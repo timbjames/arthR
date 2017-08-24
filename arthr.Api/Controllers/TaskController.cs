@@ -12,6 +12,7 @@ namespace arthr.Api.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Models.arTask;
     using Utils.Attributes;
+    using System.Runtime.InteropServices;
 
     #endregion
 
@@ -47,10 +48,18 @@ namespace arthr.Api.Controllers
             return Ok(await _taskService.GetAsync());
         }
 
-        [HttpGet, Route("/api/task/{id:int}"), ReturnType(typeof(AnthRTask))]
+        [HttpGet, Route("/api/task/{id:int}"), ReturnType(typeof(TaskUpsertViewModel))]
         public async Task<IActionResult> GetById(int id)
         {
-            return Ok(await _taskService.GetAsync(id));
+            return Ok(await _taskService.GetAsync(id, ArthRUser));
+        }
+
+        [HttpGet, Route("/api/task/template/{projectId:int}"), ReturnType(typeof(TaskUpsertViewModel))]
+        public async Task<IActionResult> GetTemplate(int projectId)
+        {
+            int? pId = projectId == 0 ? default(int) : projectId;
+
+            return Ok(await _taskService.GetTemplateAsync(ArthRUser, pId));
         }
 
         [HttpPost, Route("/api/task"), ReturnType(typeof(bool))]
@@ -62,7 +71,7 @@ namespace arthr.Api.Controllers
         [HttpPut, Route("/api/task"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Put([FromBody]AnthRTask anthRTask)
         {
-            return Ok(await _taskService.CreateAsync(anthRTask));
+            return Ok(await _taskService.EditAsync(anthRTask));
         }
 
         #endregion

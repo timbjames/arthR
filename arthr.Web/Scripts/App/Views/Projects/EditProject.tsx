@@ -1,5 +1,6 @@
 ﻿// 3rd Party
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 
 // Utility
 //import { } from '../../../Utility';
@@ -14,18 +15,19 @@ import { IAppActions, IAppState } from '../../../State';
 // Module
 import { IProjectUpsertFormProps, ProjectUpsertForm } from './ProjectUpsertForm';
 
-export interface ICreateProjectProps {
+export interface IEditProjectProps extends RouteComponentProps<{ projectId: number }> {
     appActions: IAppActions;
     appState: IAppState;
 }
 
-export class CreateProject extends React.Component<ICreateProjectProps, {}> {
+export class EditProject extends React.Component<IEditProjectProps, {}> {
 
     componentDidMount() {
 
-        const { appActions } = this.props;
+        const { appActions, appState, match } = this.props;
+        const { params } = match;
 
-        appActions.getProjectTemplateAsync();
+        appActions.getProjectAsync(params.projectId);
     }
 
     render() {
@@ -42,7 +44,7 @@ export class CreateProject extends React.Component<ICreateProjectProps, {}> {
 
                 <div className="col-xs-12">
 
-                    <h2>Create</h2>
+                    <h2>Edit</h2>
 
                     <ProjectUpsertForm {...upsertProps} />
 

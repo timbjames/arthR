@@ -50,7 +50,7 @@
             return Ok(projects);
         }
 
-        [HttpGet, Route("/api/project/getbyid/{id:int}"), ReturnType(typeof(Project))]
+        [HttpGet, Route("/api/project/getbyid/{id:int}"), ReturnType(typeof(ProjectUpsertViewModel))]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _projectService.GetProjectAsync(id));

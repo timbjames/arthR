@@ -1,3 +1,3 @@
-﻿export * from './AreaActions';
+﻿export * from './AppActions';
 export * from './ActionTypes';
-export * from './IAreaState';
+export * from './IAppState';

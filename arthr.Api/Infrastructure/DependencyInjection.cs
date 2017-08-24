@@ -27,6 +27,7 @@
             services.AddScoped<IStaffOnProjectService, StaffOnProjectService>();
             services.AddScoped<IStaffOnTaskService, StaffOnTaskService>();
             services.AddScoped<IStaffService, StaffService>();
+            services.AddScoped<IStatusService, StatusService>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddScoped<ITimesheetService, TimesheetService>();
             services.AddScoped<IUserService, UserService>();

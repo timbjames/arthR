@@ -1,7 +1,11 @@
 ﻿const actionTypes = {
     project: {
-        receiveProjects: 'project.receive.projects',
+        receiveCollection: 'project.receive.collection',
         receiveUpsert: 'project.receive.upsert'
+    },
+    task: {
+        receiveCollection: 'task.receive.collection',
+        receiveUpsert: 'task.receive.upsert'
     }
 };
 

@@ -6,23 +6,23 @@ import { Link } from 'react-router-dom';
 //import {  } from '../../../Utility';
 
 // Models
-//import {  } from '../../../Models/Project';
+//import {  } from '../../../Models/Task';
 
 // State
 import { IAppActions, IAppState } from '../../../State';
 
-export interface IProjectIndexProps {
+export interface ITaskIndexProps {
     appActions: IAppActions;
     appState: IAppState;
 }
 
-export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
+export class TaskIndex extends React.Component<ITaskIndexProps, {}> {
 
     componentDidMount() {
-        console.log(this.props);
+
         const { appActions, appState } = this.props;
 
-        appActions.getProjectsAsync();
+        appActions.getTasksAsync();
     }
 
     render() {
@@ -35,7 +35,7 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
 
                 <div className="row">
                     <div className="col-xs-6">
-                        <Link className="btn btn-xs btn-primary" to="/projects/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Project</Link>
+                        <Link className="btn btn-xs btn-primary" to="/tasks/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Task</Link>
                     </div>
                 </div>
 
@@ -48,15 +48,15 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
                             <thead>
                                 <tr>
                                     <th>
-                                        Site
+                                        Task
                                     </th>
                                     <th>
-                                        Project
+                                        Planned Start
                                     </th>
                                     <th>
-                                        Staff On Project
+                                        Deadline
                                     </th>
-                                    <th>Current Tasks</th>
+                                    <th>Staff On Task</th>
                                     <th className="text-right">Options</th>
                                 </tr>
                             </thead>
@@ -64,22 +64,35 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
                             <tbody>
 
                                 {
-                                    appState.project.projects
-                                    && appState.project.projects.map((p, i) => {
+                                    appState.task.tasks
+                                    && appState.task.tasks.map((t, i) => {
                                         return (
                                             <tr key={i}>
-                                                <td>{p.masterSite.name}</td>
-                                                <td>{p.name}</td>
-                                                <td>{p.staffOnProjects && p.staffOnProjects.map((s, i) => <span key={i}>{s}</span>)}</td>
-                                                <td>{p.tasks ? p.tasks.filter(t => !t.dateCompleted).length : 0}</td>
+                                                <td>
+                                                    <i>
+                                                        {t.project.masterSite.name}
+                                                        <br />
+                                                        <strong>{t.project.name}</strong>
+                                                    </i>
+                                                    <br />
+                                                    {t.name}
+                                                </td>
+                                                <td>
+                                                    {t.plannedStart}
+                                                </td>
+                                                <td>
+                                                    {t.deadline}
+                                                </td>
+                                                <td>
+                                                    {t.staffOnTasks ? 'TODO' : '-'}
+                                                </td>
                                                 <td>
                                                     <div className="btn-group pull-right">
                                                         <button className="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                             <span className="glyphicon glyphicon-menu-hamburger"></span>
                                                         </button>
                                                         <ul className="dropdown-menu" role="menu">
-                                                            <li><Link to={`/tasks/create/${p.projectId}`}>Add Task</Link></li>
-                                                            <li><Link to={`/projects/edit/${p.projectId}`}>Edit</Link></li>
+                                                            <li><Link to={`/tasks/edit/${t.anthRTaskId}`}>Edit</Link></li>
                                                         </ul>
                                                     </div>
                                                 </td>

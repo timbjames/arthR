@@ -3,12 +3,15 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Models.arTask;
+    using arthr.Models.Core;
 
     public interface ITaskService
     {
         Task<List<AnthRTask>> GetAsync();
 
-        Task<AnthRTask> GetAsync(int id);
+        Task<TaskUpsertViewModel> GetAsync(int id, User user);
+
+        Task<TaskUpsertViewModel> GetTemplateAsync(User user, int? projectId);
 
         Task<bool> CreateAsync(AnthRTask anthRTask);
 

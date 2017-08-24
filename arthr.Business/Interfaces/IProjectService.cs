@@ -18,7 +18,7 @@
 
         Task<bool> EditProjectAsync(Project project, User user);
 
-        Task<Project> GetProjectAsync(int id);
+        Task<ProjectUpsertViewModel> GetProjectAsync(int id);
 
         /// <summary>
         /// Gets the projects asynchronous.

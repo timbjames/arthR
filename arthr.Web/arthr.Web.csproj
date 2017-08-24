@@ -21,8 +21,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\App\Navigation\Breadcrumb.tsx" />
     <None Remove="Scripts\App\Views\Projects\CreateProject.tsx" />
+    <None Remove="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
     <None Remove="Scripts\Utility\Helpers\DateHelper.ts" />
+    <None Remove="Scripts\Utility\Interfaces\GenericInterfaces.ts" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -48,8 +51,13 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\App\Navigation\Breadcrumb.tsx" />
+    <TypeScriptCompile Include="Scripts\App\Views\Projects\EditProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\CreateProject.tsx" />
+    <TypeScriptCompile Include="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
+    <TypeScriptCompile Include="Scripts\App\Views\Tasks\CreateTask.tsx" />
     <TypeScriptCompile Include="Scripts\Utility\Helpers\DateHelper.ts" />
+    <TypeScriptCompile Include="Scripts\Utility\Interfaces\GenericInterfaces.ts" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Scripts\Models\AnthRTask.ts">
@@ -93,6 +101,12 @@
     </None>
     <None Update="Scripts\Models\Status.ts">
       <CustomToolNamespace>..\arthr.Models\Core\Status.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TaskToolsViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\TaskToolsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TaskUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\TaskUpsertViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\Timesheet.ts">
       <CustomToolNamespace>..\arthr.Models\arTask\Timesheet.cs</CustomToolNamespace>

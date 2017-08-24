@@ -154,7 +154,13 @@
         string result = "";
 
         if (knownTypes.Any(k => k.ToString().ToLower() == parameter.Type.Name.ToLower())){
-            result += parameter.Name + ": " + parameter.Type;
+
+            if (parameter.Attributes.Any(a => a.Name == "Optional")){
+                result += parameter.Name + "?: " + parameter.Type;
+            }
+            else {
+                result += parameter.Name + ": " + parameter.Type;
+            }
         }
 
         return result;

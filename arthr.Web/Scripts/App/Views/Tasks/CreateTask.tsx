@@ -1,5 +1,6 @@
 ﻿// 3rd Party
 import * as React from 'react';
+import { RouteComponentProps } from 'react-router';
 
 // Utility
 //import { } from '../../../Utility';
@@ -12,27 +13,30 @@ import * as React from 'react';
 import { IAppActions, IAppState } from '../../../State';
 
 // Module
-import { IProjectUpsertFormProps, ProjectUpsertForm } from './ProjectUpsertForm';
+import { ITaskUpsertFormProps, TaskUpsertForm } from './TaskUpsertForm';
 
-export interface ICreateProjectProps {
+export interface ICreateTaskProps extends RouteComponentProps<{ projectId: number }> {
     appActions: IAppActions;
     appState: IAppState;
 }
 
-export class CreateProject extends React.Component<ICreateProjectProps, {}> {
+export class CreateTask extends React.Component<ICreateTaskProps, {}> {
 
     componentDidMount() {
 
-        const { appActions } = this.props;
+        const { appActions, match } = this.props;
+        const { params } = match;
 
-        appActions.getProjectTemplateAsync();
+        const projectId = params.projectId && params.projectId;
+
+        appActions.getTaskTemplateAsync(projectId);
     }
 
     render() {
 
         const { appActions, appState } = this.props;
 
-        const upsertProps: IProjectUpsertFormProps = {
+        const upsertProps: ITaskUpsertFormProps = {
             appActions,
             appState
         };
@@ -44,7 +48,7 @@ export class CreateProject extends React.Component<ICreateProjectProps, {}> {
 
                     <h2>Create</h2>
 
-                    <ProjectUpsertForm {...upsertProps} />
+                    <TaskUpsertForm {...upsertProps} />
 
                 </div>
 
