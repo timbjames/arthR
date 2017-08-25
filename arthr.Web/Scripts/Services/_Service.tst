@@ -1,4 +1,5 @@
-﻿${
+﻿import { AppService } from './AppService';
+${
     // Enable extension methods by adding using Typewriter.Extensions.*
     using Typewriter.Extensions.Types;
     using Typewriter.Extensions.WebApi;
@@ -96,42 +97,33 @@
 
         if (m.Type.Name == "IActionResult"){
 
-            //if (m.Parameters.Count() > 0){
+            foreach (var a in m.Attributes){
 
-                foreach (var a in m.Attributes){
+                debugInfo.Add(a.Value);
 
-                    debugInfo.Add(a.Value);
+                if (a.name == "returnType"){
 
-                    if (a.name == "returnType"){
+                    string type = string.Empty;
+                    bool isArray = a.Value.Contains("<");
+                    string formattedType = a.Value.Replace("<", "").Replace(">", "").Replace("typeof(", "").Replace(")", "");
+                    string[] ar;
 
-                        string type = string.Empty;
-                        string[] ar;
+                    ar = formattedType.Split('.');
+                    type = ar[ar.Length - 1];
 
-                        if (a.Value.Contains("<")){
-                            
-                            ar = a.Value.Replace("<", "").Replace(">", "").Replace("typeof(", "").Split('.');
-                            type = ar[ar.Length - 1].Replace(")", "") + "[]";
-                        }
-                        else
-                        {
-                            ar = a.Value.Replace("typeof(", "").Split('.');
-                            type = ar[ar.Length - 1].Replace(")", "");
-                        }
-
-                        if (type == "bool"){
-                            type = "boolean";
-                        }
-
-                        return type;
+                    if (isArray){
+                        type += "[]";
                     }
-                }
 
-                return "void";
-                //return m.Type.Name;
-            //}
-            //else {
-                //return "void";
-            //}
+                    if (type == "bool"){
+                        type = "boolean";
+                    }
+
+                    return type;
+                }
+            }
+
+            return "void";
         }
 
         return m.Type.Name;
@@ -175,12 +167,14 @@
     }
 
 }$Classes(:BaseController)[$Imports
+const appConfig = AppService().config;
+
 const $ServiceName = {$Methods[
     $name: ($Parameters[$SimpleParameters][, ]): IApiCallWithPayload<$RequestType, $ReturnType> => {
 
         return {
             method: '$HttpMethod',
-            url: `http://localhost:5001$Url`
+            url: `${appConfig.apiUrl}$Url`
         };
     }][, ]
 }

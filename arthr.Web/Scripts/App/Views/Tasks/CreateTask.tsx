@@ -29,7 +29,7 @@ export class CreateTask extends React.Component<ICreateTaskProps, {}> {
 
         const projectId = params.projectId && params.projectId;
 
-        appActions.getTaskTemplateAsync(projectId);
+        appActions.task.getTaskTemplateAsync(projectId);
     }
 
     render() {

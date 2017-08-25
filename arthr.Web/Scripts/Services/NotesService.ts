@@ -1,4 +1,7 @@
-﻿import { IApiCallWithPayload } from '../Utility';
+﻿import { AppService } from './AppService';
+import { IApiCallWithPayload } from '../Utility';
+
+const appConfig = AppService().config;
 
 const notesService = {
 }

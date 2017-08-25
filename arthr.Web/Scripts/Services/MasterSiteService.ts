@@ -1,40 +1,43 @@
-﻿import { IApiCallWithPayload } from '../Utility';
+﻿import { AppService } from './AppService';
+import { IApiCallWithPayload } from '../Utility';
 import { MasterSite } from '../Models/MasterSite';
+
+const appConfig = AppService().config;
 
 const masterSiteService = {
     delete: (id: number): IApiCallWithPayload<number, boolean> => {
 
         return {
             method: 'delete',
-            url: `http://localhost:5001/api/mastersite/${id}`
+            url: `${appConfig.apiUrl}/api/mastersite/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, MasterSite[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/mastersite`
+            url: `${appConfig.apiUrl}/api/mastersite`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, MasterSite> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/mastersite/${id}`
+            url: `${appConfig.apiUrl}/api/mastersite/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<MasterSite, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5001/api/mastersite`
+            url: `${appConfig.apiUrl}/api/mastersite`
         };
     }, 
     put: (): IApiCallWithPayload<MasterSite, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5001/api/mastersite`
+            url: `${appConfig.apiUrl}/api/mastersite`
         };
     }
 }

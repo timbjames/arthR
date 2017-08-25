@@ -1,40 +1,43 @@
-﻿import { IApiCallWithPayload } from '../Utility';
+﻿import { AppService } from './AppService';
+import { IApiCallWithPayload } from '../Utility';
 import { Staff } from '../Models/Staff';
+
+const appConfig = AppService().config;
 
 const staffService = {
     delete: (id: number): IApiCallWithPayload<number, boolean> => {
 
         return {
             method: 'delete',
-            url: `http://localhost:5001/api/staff/${id}`
+            url: `${appConfig.apiUrl}/api/staff/${id}`
         };
     }, 
     get: (): IApiCallWithPayload<void, Staff[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/staff`
+            url: `${appConfig.apiUrl}/api/staff`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, Staff> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/staff/${id}`
+            url: `${appConfig.apiUrl}/api/staff/${id}`
         };
     }, 
     post: (): IApiCallWithPayload<Staff, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5001/api/staff`
+            url: `${appConfig.apiUrl}/api/staff`
         };
     }, 
     put: (): IApiCallWithPayload<Staff, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5001/api/staff`
+            url: `${appConfig.apiUrl}/api/staff`
         };
     }
 }

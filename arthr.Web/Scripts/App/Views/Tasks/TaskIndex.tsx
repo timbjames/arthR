@@ -22,7 +22,7 @@ export class TaskIndex extends React.Component<ITaskIndexProps, {}> {
 
         const { appActions, appState } = this.props;
 
-        appActions.getTasksAsync();
+        appActions.task.getTasksAsync();
     }
 
     render() {

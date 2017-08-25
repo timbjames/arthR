@@ -27,7 +27,7 @@ export class EditProject extends React.Component<IEditProjectProps, {}> {
         const { appActions, appState, match } = this.props;
         const { params } = match;
 
-        appActions.getProjectAsync(params.projectId);
+        appActions.project.getProjectAsync(params.projectId);
     }
 
     render() {

@@ -1,55 +1,58 @@
-﻿import { IApiCallWithPayload } from '../Utility';
+﻿import { AppService } from './AppService';
+import { IApiCallWithPayload } from '../Utility';
 import { Project } from '../Models/Project';
 import { ProjectUpsertViewModel } from '../Models/ProjectUpsertViewModel';
+
+const appConfig = AppService().config;
 
 const projectService = {
     complete: (): IApiCallWithPayload<Project, boolean> => {
 
         return {
             method: 'patch',
-            url: `http://localhost:5001/api/project/complete`
+            url: `${appConfig.apiUrl}/api/project/complete`
         };
     }, 
     delete: (id: number): IApiCallWithPayload<number, boolean> => {
 
         return {
             method: 'delete',
-            url: `http://localhost:5001/api/project/delele/${id}`
+            url: `${appConfig.apiUrl}/api/project/delele/${id}`
         };
     }, 
     get: (completed: boolean, all: string): IApiCallWithPayload<boolean, Project[]> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/project?completed=${completed}&all=${encodeURIComponent(all)}`
+            url: `${appConfig.apiUrl}/api/project?completed=${completed}&all=${encodeURIComponent(all)}`
         };
     }, 
     getById: (id: number): IApiCallWithPayload<number, ProjectUpsertViewModel> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/project/getbyid/${id}`
+            url: `${appConfig.apiUrl}/api/project/getbyid/${id}`
         };
     }, 
     getTemplate: (): IApiCallWithPayload<void, ProjectUpsertViewModel> => {
 
         return {
             method: 'get',
-            url: `http://localhost:5001/api/project/template`
+            url: `${appConfig.apiUrl}/api/project/template`
         };
     }, 
     post: (): IApiCallWithPayload<Project, boolean> => {
 
         return {
             method: 'post',
-            url: `http://localhost:5001/api/project`
+            url: `${appConfig.apiUrl}/api/project`
         };
     }, 
     put: (): IApiCallWithPayload<Project, boolean> => {
 
         return {
             method: 'put',
-            url: `http://localhost:5001/api/project`
+            url: `${appConfig.apiUrl}/api/project`
         };
     }
 }

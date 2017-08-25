@@ -35,7 +35,7 @@ export class TaskUpsertForm extends React.Component<ITaskUpsertFormProps, {}> {
 
         const { appActions } = this.props;
 
-        this.modelBinder = appActions.receiveTaskUpsert;
+        this.modelBinder = appActions.task.receiveTaskUpsert;
     }
 
     //#region handlers
@@ -87,9 +87,9 @@ export class TaskUpsertForm extends React.Component<ITaskUpsertFormProps, {}> {
     private handleSave = (appActions: IAppActions, upsert: TaskUpsertViewModel) => (e: React.MouseEvent<HTMLButtonElement>) => {
 
         if (upsert.model.anthRTaskId) {
-            appActions.editTaskAsync(upsert.model);
+            appActions.task.editTaskAsync(upsert.model);
         } else {
-            appActions.createTaskAsync(upsert.model);
+            appActions.task.createTaskAsync(upsert.model);
         }
     }
 

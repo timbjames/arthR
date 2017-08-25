@@ -25,7 +25,7 @@ export class CreateProject extends React.Component<ICreateProjectProps, {}> {
 
         const { appActions } = this.props;
 
-        appActions.getProjectTemplateAsync();
+        appActions.project.getProjectTemplateAsync();
     }
 
     render() {

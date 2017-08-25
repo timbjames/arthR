@@ -27,7 +27,7 @@ export class EditTask extends React.Component<IEditTaskProps, {}> {
         const { appActions, appState, match } = this.props;
         const { params } = match;
 
-        appActions.getTaskAsync(params.taskId);
+        appActions.task.getTaskAsync(params.taskId);
     }
 
     render() {

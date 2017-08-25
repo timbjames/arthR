@@ -36,7 +36,7 @@ export class ProjectUpsertForm extends React.Component<IProjectUpsertFormProps, 
 
         const { appActions } = this.props;
 
-        this.modelBinder = appActions.receiveProjectUpsert;
+        this.modelBinder = appActions.project.receiveProjectUpsert;
     }
 
     //#region handlers
@@ -82,9 +82,9 @@ export class ProjectUpsertForm extends React.Component<IProjectUpsertFormProps, 
     private handleSave = (appActions: IAppActions, upsert: ProjectUpsertViewModel) => (e: React.MouseEvent<HTMLButtonElement>) => {
 
         if (upsert.model.projectId) {
-            appActions.editProjectAsync(upsert.model);
+            appActions.project.editProjectAsync(upsert.model);
         } else {
-            appActions.createProjectAsync(upsert.model);
+            appActions.project.createProjectAsync(upsert.model);
         }
     }
 

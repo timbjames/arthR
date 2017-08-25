@@ -22,7 +22,7 @@ export class ProjectIndex extends React.Component<IProjectIndexProps, {}> {
         console.log(this.props);
         const { appActions, appState } = this.props;
 
-        appActions.getProjectsAsync();
+        appActions.project.getProjectsAsync();
     }
 
     render() {

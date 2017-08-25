@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { RouteProps } from 'react-router';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Dispatch } from 'redux';
 
 import ReduxToastr from 'react-redux-toastr'
 
@@ -16,8 +17,7 @@ import Tab from 'material-ui/Tabs/Tab';
 import { ReduxContainerBuilder } from './Utility/Components/ReduxContainer';
 
 import { ActionsDispatcherFactory, IAppActions } from './State/AppActions';
-import { IAppState } from './State/IAppState';
-import { rootReducer } from './State/AppReducer';
+import { IAppState, RootReducer } from './State/AppState';
 
 import { Breadcrumb } from './App/Navigation/Breadcrumb';
 import { TopMenu } from './App/Navigation/TopMenu';
@@ -113,14 +113,14 @@ class IndexRedux extends React.Component<{}, {}>{
 
         const ReduxWrapper = () => {
             return ReduxContainerBuilder().NoneProps({
-                mapDispatchToProps: (dispatch: any) => ({
+                mapDispatchToProps: (dispatch: Dispatch<IAppState>) => ({
                     appActions: ActionsDispatcherFactory(dispatch)
                 }),
-                mapStateToProps: (state: any) => ({
+                mapStateToProps: (state: { appState: IAppState }) => ({
                     appState: state.appState
                 }),
                 pageComponent: Index,
-                rootReducer: rootReducer
+                rootReducer: RootReducer
             });
         };
 
