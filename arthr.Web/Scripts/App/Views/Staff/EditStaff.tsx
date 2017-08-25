@@ -5,18 +5,16 @@ import * as React from 'react';
 import { RoutedBaseComponent } from '../../BaseComponent';
 
 // Module
-import { TaskUpsertForm } from './TaskUpsertForm';
+import { StaffUpsertForm } from './StaffUpsertForm';
 
-export class CreateTask extends RoutedBaseComponent {
+export class EditStaff extends RoutedBaseComponent {
 
     componentDidMount() {
 
-        const { appActions, match } = this.props;
+        const { appActions, appState, match } = this.props;
         const { params } = match;
 
-        const projectId = params.projectId && params.projectId;
-
-        appActions.task.getTaskTemplateAsync(projectId);
+        appActions.staff.getStaffAsync(params.staffId);
     }
 
     render() {
@@ -26,9 +24,9 @@ export class CreateTask extends RoutedBaseComponent {
 
                 <div className="col-xs-12">
 
-                    <h2>Create</h2>
+                    <h2>Edit</h2>
 
-                    <TaskUpsertForm {...this.props} />
+                    <StaffUpsertForm {...this.props} />
 
                 </div>
 

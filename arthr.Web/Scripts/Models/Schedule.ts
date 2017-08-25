@@ -1,7 +1,4 @@
-﻿export class ScheduleResult {
-    result: Events[];
-    success: number;
-}
+﻿
 export class Events {
     end: number;
     id: number;

@@ -1,6 +1,9 @@
 ﻿// 3rd Party
 import * as React from 'react';
 
+// Base
+import { BaseComponent } from '../../BaseComponent';
+
 // Material Ui
 import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
@@ -18,16 +21,11 @@ import { DateHelper, ObjectHelper } from '../../../Utility/Helpers';
 import { ProjectUpsertViewModel } from '../../../Models/ProjectUpsertViewModel';
 
 // State
-import { IAppActions, IAppState } from '../../../State';
-
-export interface IProjectUpsertFormProps {
-    appActions: IAppActions;
-    appState: IAppState;
-}
+import { IAppActions } from '../../../State';
 
 type updateFunc = (upsert: ProjectUpsertViewModel) => void;
 
-export class ProjectUpsertForm extends React.Component<IProjectUpsertFormProps, {}> {
+export class ProjectUpsertForm extends BaseComponent {
 
     private modelBinder: updateFunc;
     private upsert: ProjectUpsertViewModel;

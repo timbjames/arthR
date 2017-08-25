@@ -2,8 +2,9 @@
 import { StaffOnProjects } from './StaffOnProjects';
 import { StaffOnTask } from './StaffOnTask';
 import { User } from './User';
+import { Person } from './Person';
 
-export class Staff {
+export class Staff extends Person {
     staffId: number;
     notes: Note[];
     staffOnProjects: StaffOnProjects[];

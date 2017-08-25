@@ -1,6 +1,9 @@
 ﻿// 3rd Party
 import * as React from 'react';
 
+// Base
+import { BaseComponent } from '../../BaseComponent';
+
 // Material Ui
 import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
@@ -17,16 +20,11 @@ import { DateHelper, ObjectHelper } from '../../../Utility/Helpers';
 import { TaskUpsertViewModel } from '../../../Models/TaskUpsertViewModel';
 
 // State
-import { IAppActions, IAppState } from '../../../State';
-
-export interface ITaskUpsertFormProps {
-    appActions: IAppActions;
-    appState: IAppState;
-}
+import { IAppActions } from '../../../State';
 
 type updateFunc = (upsert: TaskUpsertViewModel) => void;
 
-export class TaskUpsertForm extends React.Component<ITaskUpsertFormProps, {}> {
+export class TaskUpsertForm extends BaseComponent {
 
     private modelBinder: updateFunc;
     private upsert: TaskUpsertViewModel;

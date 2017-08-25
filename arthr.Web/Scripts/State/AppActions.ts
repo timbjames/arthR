@@ -14,10 +14,12 @@ import { AnthRTask, Project, ProjectToolsViewModel, ProjectUpsertViewModel, Task
 
 import { IAppState } from './AppState';
 import { IProjectActions, ProjectDispatcherFactory } from './Project/Actions';
+import { IStaffActions, StaffDispatcherFactory } from './Staff/Actions';
 import { ITaskActions, TaskDispatcherFactory } from './Task/Actions';
 
 export interface IAppActions {
     project: IProjectActions;
+    staff: IStaffActions;
     task: ITaskActions;
 }
 
@@ -25,6 +27,7 @@ const actionsDispatcherFactory = (dispatch: Dispatch<IAppState>): IAppActions =>
 
     return {
         project: ProjectDispatcherFactory(dispatch),
+        staff: StaffDispatcherFactory(dispatch),
         task: TaskDispatcherFactory(dispatch)
     }
 }

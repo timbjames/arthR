@@ -6,9 +6,9 @@
 
     public interface INotesService
     {
-        Task<List<Note>> GetAsync();
+        Task<List<Note>> GetAsync(string username);
 
-        Task<Note> GetAsync(int id);
+        Task<NoteUpsertViewModel> GetAsync(int id);
 
         Task<bool> CreateAsync(Note note);
 

@@ -47,7 +47,7 @@ namespace arthr.Api.Controllers
             return Ok(await _staffService.GetAsync());
         }
 
-        [HttpGet, Route("/api/staff/{id:int}"), ReturnType(typeof(Staff))]
+        [HttpGet, Route("/api/staff/{id:int}"), ReturnType(typeof(StaffUpsertViewModel))]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _staffService.GetAsync(id));

@@ -4,10 +4,11 @@ import { handleActions, Action } from 'redux-actions';
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
 // Models
-import { Project, ProjectToolsViewModel, ProjectUpsertViewModel, AnthRTask, TaskToolsViewModel, TaskUpsertViewModel } from '../Models';
+import { AnthRTask, Project, ProjectToolsViewModel, ProjectUpsertViewModel, Staff, StaffUpsertViewModel, TaskToolsViewModel, TaskUpsertViewModel } from '../Models';
 
 // Reducers
 import { ProjectReducer } from './Project/State';
+import { StaffReducer } from './Staff/State';
 import { TaskReducer } from './Task/State';
 
 export interface IAppState {
@@ -16,6 +17,10 @@ export interface IAppState {
         projects: Project[],
         projectTools: ProjectToolsViewModel,
         projectUpsert: ProjectUpsertViewModel
+    },
+    staff: {
+        staffs: Staff[],
+        staffUpsert: StaffUpsertViewModel
     },
     task: {
         task: AnthRTask,
@@ -27,6 +32,7 @@ export interface IAppState {
 
 const areaStateReducer = combineReducers({
     project: ProjectReducer,
+    staff: StaffReducer,
     task: TaskReducer
 });
 

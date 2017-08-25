@@ -6,6 +6,8 @@
         UtilityCode,
         Project,
         Status,
-        ArthRTask
+        ArthRTask,
+        Note,
+        Staff
     }
 }

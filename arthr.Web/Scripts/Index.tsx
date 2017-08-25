@@ -27,7 +27,7 @@ import { Index as Schedule } from './App/Views/Schedule';
 import { Index as Notes } from './App/Views/Notes';
 import { Index as MasterSites } from './App/Views/MasterSites';
 import { Index as Timesheets } from './App/Views/Timesheets';
-import { Index as Staff } from './App/Views/Staff';
+import { CreateStaff, EditStaff, StaffIndex } from './App/Views/Staff';
 
 injectTapEventPlugin();
 
@@ -62,6 +62,9 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                     <MyRoute exact path="/tasks" render={props => <Breadcrumb active="Tasks" />} />
                                     <MyRoute exact path="/tasks/create/:projectId" render={props => <Breadcrumb active="Create Task" links={[{ href: '/tasks', name: 'Tasks' }]} />} />
                                     <MyRoute exact path="/tasks/edit/:taskId" render={props => <Breadcrumb active="Edit Task" links={[{ href: '/tasks', name: 'Tasks' }]} />} />
+                                    <MyRoute exact path="/staff" render={props => <Breadcrumb active="Staff" />} />
+                                    <MyRoute exact path="/staff/create" render={props => <Breadcrumb active="Create Staff" links={[{ href: '/staff', name: 'Staff' }]} />} />
+                                    <MyRoute exact path="/staff/edit/:staffId" render={props => <Breadcrumb active="Edit Staff" links={[{ href: '/staff', name: 'Staff' }]} />} />
                                 </Switch>
                             </div>
                         </div>
@@ -77,9 +80,11 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                 <MyRoute exact path="/tasks/edit/:taskId" render={props => <EditTask appActions={appActions} appState={appState} {...props} />} />
                                 <MyRoute exact path="/schedule" render={props => <Schedule />} />
                                 <MyRoute exact path="/notes" render={props => <Notes />} />
-                                <MyRoute path="/mastersites" render={props => <MasterSites />} />
-                                <MyRoute path="/staff" render={props => <Staff />} />
-                                <MyRoute path="/timesheets" render={props => <Timesheets />} />
+                                <MyRoute exact path="/mastersites" render={props => <MasterSites />} />
+                                <MyRoute exact path="/staff" render={props => <StaffIndex appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/staff/create" render={props => <CreateStaff appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/staff/edit/:staffId" render={props => <EditStaff appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/timesheets" render={props => <Timesheets />} />
                             </Switch>
 
                             <hr />

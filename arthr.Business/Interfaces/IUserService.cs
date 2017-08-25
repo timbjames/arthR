@@ -4,12 +4,14 @@
 
     using System.Threading.Tasks;
     using Models.Core;
+    using System.Collections.Generic;
 
     #endregion
 
     public interface IUserService
     {
         #region Public Methods
+
 
         Task<User> FindByIdAsync(int id);
 
@@ -19,6 +21,8 @@
         /// <param name="username">The username.</param>
         /// <returns></returns>
         Task<User> FindByUsernameAsync(string username);
+
+        Task<List<User>> GetAsync();
 
         Task<bool> ResetUserPasswordAsync(string username, string password);
 

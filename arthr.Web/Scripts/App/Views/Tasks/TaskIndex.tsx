@@ -2,21 +2,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-// Utility
-//import {  } from '../../../Utility';
+// Base
+import { BaseComponent } from '../../BaseComponent';
 
-// Models
-//import {  } from '../../../Models/Task';
-
-// State
-import { IAppActions, IAppState } from '../../../State';
-
-export interface ITaskIndexProps {
-    appActions: IAppActions;
-    appState: IAppState;
-}
-
-export class TaskIndex extends React.Component<ITaskIndexProps, {}> {
+export class TaskIndex extends BaseComponent {
 
     componentDidMount() {
 

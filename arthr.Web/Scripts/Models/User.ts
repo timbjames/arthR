@@ -1,5 +1,6 @@
-﻿
-export class User {
+﻿import { Person } from './Person';
+
+export class User extends Person {
     created: Date;
     deleted: boolean;
     lastLogin: Date;

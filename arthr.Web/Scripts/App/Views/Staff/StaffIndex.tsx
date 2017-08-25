@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
-export class ProjectIndex extends BaseComponent {
+export class StaffIndex extends BaseComponent {
 
     componentDidMount() {
 
         const { appActions, appState } = this.props;
 
-        appActions.project.getProjectsAsync();
+        appActions.staff.getStaffsAsync();
     }
 
     render() {
@@ -24,7 +24,7 @@ export class ProjectIndex extends BaseComponent {
 
                 <div className="row">
                     <div className="col-xs-6">
-                        <Link className="btn btn-xs btn-primary" to="/projects/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Project</Link>
+                        <Link className="btn btn-xs btn-primary" to="/staff/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Staff</Link>
                     </div>
                 </div>
 
@@ -37,15 +37,14 @@ export class ProjectIndex extends BaseComponent {
                             <thead>
                                 <tr>
                                     <th>
-                                        Site
+                                        Gravatar
                                     </th>
                                     <th>
-                                        Project
+                                        Name
                                     </th>
                                     <th>
-                                        Staff On Project
+                                        Email
                                     </th>
-                                    <th>Current Tasks</th>
                                     <th className="text-right">Options</th>
                                 </tr>
                             </thead>
@@ -53,22 +52,20 @@ export class ProjectIndex extends BaseComponent {
                             <tbody>
 
                                 {
-                                    appState.project.projects
-                                    && appState.project.projects.map((p, i) => {
+                                    appState.staff.staffs
+                                    && appState.staff.staffs.map((p, i) => {
                                         return (
                                             <tr key={i}>
-                                                <td>{p.masterSite.name}</td>
+                                                <td>N/A</td>
                                                 <td>{p.name}</td>
-                                                <td>{p.staffOnProjects && p.staffOnProjects.map((s, i) => <span key={i}>{s}</span>)}</td>
-                                                <td>{p.tasks ? p.tasks.filter(t => !t.dateCompleted).length : 0}</td>
+                                                <td>{p.email}</td>
                                                 <td>
                                                     <div className="btn-group pull-right">
                                                         <button className="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                             <span className="glyphicon glyphicon-menu-hamburger"></span>
                                                         </button>
                                                         <ul className="dropdown-menu" role="menu">
-                                                            <li><Link to={`/tasks/create/${p.projectId}`}>Add Task</Link></li>
-                                                            <li><Link to={`/projects/edit/${p.projectId}`}>Edit</Link></li>
+                                                            <li><Link to={`/staff/edit/${p.staffId}`}>Edit</Link></li>
                                                         </ul>
                                                     </div>
                                                 </td>

@@ -44,14 +44,27 @@
             }
         }
 
+        if (c.BaseClass != null) { 
+            imports.Add("import { " + c.BaseClass.Name +" } from './" + c.BaseClass.Name + "';");
+        }
+
         if (imports.Any()){
             return string.Join(Environment.NewLine, imports.ToArray()) + Environment.NewLine;
         } else {
             return null;
         }
     }
+
+    string Inherit(Class c)
+    {
+    if (c.BaseClass!=null)
+	    return " extends " + c.BaseClass.ToString();
+      else
+	     return  "";
+    }
+
 }$Classes(*)[$TestClass
-export class $Name {$Properties[
+export class $Name$Inherit {$Properties[
     $name: $Type;]
 }]
 /*

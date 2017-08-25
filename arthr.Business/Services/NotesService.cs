@@ -9,6 +9,10 @@
     using Core.Services;
     using Interfaces;
     using Models.Notes;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using arthr.Utils.Exceptions.Enums;
+    using arthr.Data.Extensions;
 
     #endregion
 
@@ -24,27 +28,37 @@
 
         #region Interface Implementations
 
-        public Task<List<Note>> GetAsync()
+        public async Task<List<Note>> GetAsync(string username)
         {
-            throw new NotImplementedException();
+            return await Db.Note
+                .Where(n => n.Username == username)
+                .ToListAsync();
         }
 
-        public Task<Note> GetAsync(int id)
+        public async Task<NoteUpsertViewModel> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var upsert = new NoteUpsertViewModel
+            {
+                Model =  await Db.Note.FirstOrNotFoundAsync(n => n.NoteId == id, ErrorCode.Note),
+                Tools = null
+            };
+
+            return upsert;
         }
 
-        public Task<bool> CreateAsync(Note note)
+        public async Task<bool> CreateAsync(Note note)
         {
-            throw new NotImplementedException();
+            Db.Note.Add(note);
+            return await Db.SaveChangesAsync() > 1;
         }
 
-        public Task<bool> EditAsync(Note note)
+        public async Task<bool> EditAsync(Note note)
         {
-            throw new NotImplementedException();
+            Db.Entry(note).State = EntityState.Modified;
+            return await Db.SaveChangesAsync() > 1;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

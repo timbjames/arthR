@@ -1,26 +1,13 @@
 ﻿// 3rd Party
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 
-// Utility
-//import { } from '../../../Utility';
-//import {  } from '../../../Utility/Helpers';
-
-// Models
-//import {  } from '../../../Models/ProjectUpsertViewModel';
-
-// State
-import { IAppActions, IAppState } from '../../../State';
+// Base
+import { RoutedBaseComponent } from '../../BaseComponent';
 
 // Module
-import { IProjectUpsertFormProps, ProjectUpsertForm } from './ProjectUpsertForm';
+import { ProjectUpsertForm } from './ProjectUpsertForm';
 
-export interface IEditProjectProps extends RouteComponentProps<{ projectId: number }> {
-    appActions: IAppActions;
-    appState: IAppState;
-}
-
-export class EditProject extends React.Component<IEditProjectProps, {}> {
+export class EditProject extends RoutedBaseComponent {
 
     componentDidMount() {
 
@@ -32,13 +19,6 @@ export class EditProject extends React.Component<IEditProjectProps, {}> {
 
     render() {
 
-        const { appActions, appState } = this.props;
-
-        const upsertProps: IProjectUpsertFormProps = {
-            appActions,
-            appState
-        };
-
         return (
             <div className="row">
 
@@ -46,7 +26,7 @@ export class EditProject extends React.Component<IEditProjectProps, {}> {
 
                     <h2>Edit</h2>
 
-                    <ProjectUpsertForm {...upsertProps} />
+                    <ProjectUpsertForm {...this.props} />
 
                 </div>
 

@@ -20,7 +20,7 @@
 
         Task<List<Staff>> GetAsync();
 
-        Task<Staff> GetAsync(int id);
+        Task<StaffUpsertViewModel> GetAsync(int id);
 
         Task<Staff> GetByUsernameAsync(string username);
 

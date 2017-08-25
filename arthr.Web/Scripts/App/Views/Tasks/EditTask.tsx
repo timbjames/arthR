@@ -1,26 +1,13 @@
 ﻿// 3rd Party
 import * as React from 'react';
-import { RouteComponentProps } from 'react-router';
 
-// Utility
-//import { } from '../../../Utility';
-//import {  } from '../../../Utility/Helpers';
-
-// Models
-//import {  } from '../../../Models/TaskUpsertViewModel';
-
-// State
-import { IAppActions, IAppState } from '../../../State';
+// Base
+import { RoutedBaseComponent } from '../../BaseComponent';
 
 // Module
-import { ITaskUpsertFormProps, TaskUpsertForm } from './TaskUpsertForm';
+import { TaskUpsertForm } from './TaskUpsertForm';
 
-export interface IEditTaskProps extends RouteComponentProps<{ taskId: number }> {
-    appActions: IAppActions;
-    appState: IAppState;
-}
-
-export class EditTask extends React.Component<IEditTaskProps, {}> {
+export class EditTask extends RoutedBaseComponent {
 
     componentDidMount() {
 
@@ -32,13 +19,6 @@ export class EditTask extends React.Component<IEditTaskProps, {}> {
 
     render() {
 
-        const { appActions, appState } = this.props;
-
-        const upsertProps: ITaskUpsertFormProps = {
-            appActions,
-            appState
-        };
-
         return (
             <div className="row">
 
@@ -46,7 +26,7 @@ export class EditTask extends React.Component<IEditTaskProps, {}> {
 
                     <h2>Edit</h2>
 
-                    <TaskUpsertForm {...upsertProps} />
+                    <TaskUpsertForm {...this.props} />
 
                 </div>
 

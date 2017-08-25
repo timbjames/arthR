@@ -24,6 +24,7 @@
     <None Remove="Scripts\App\Navigation\Breadcrumb.tsx" />
     <None Remove="Scripts\App\Views\Projects\CreateProject.tsx" />
     <None Remove="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
+    <None Remove="Scripts\App\Views\Staff\Index.ts" />
     <None Remove="Scripts\Services\AppService.ts" />
     <None Remove="Scripts\State\Project\Actions.ts" />
     <None Remove="Scripts\State\Project\State.ts" />
@@ -61,6 +62,7 @@
     <TypeScriptCompile Include="Scripts\App\Views\Projects\EditProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\CreateProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
+    <TypeScriptCompile Include="Scripts\App\Views\Staff\Index.ts" />
     <TypeScriptCompile Include="Scripts\App\Views\Tasks\CreateTask.tsx" />
     <TypeScriptCompile Include="Scripts\Services\AppService.ts" />
     <TypeScriptCompile Include="Scripts\State\Project\Actions.ts" />
@@ -88,6 +90,12 @@
     <None Update="Scripts\Models\Note.ts">
       <CustomToolNamespace>..\arthr.Models\Notes\Note.cs</CustomToolNamespace>
     </None>
+    <None Update="Scripts\Models\NoteToolsViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Notes\NoteToolsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\NoteUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Notes\NoteUpsertViewModel.cs</CustomToolNamespace>
+    </None>
     <None Update="Scripts\Models\Person.ts">
       <CustomToolNamespace>..\arthr.Models\Core\Person.cs</CustomToolNamespace>
     </None>
@@ -111,6 +119,12 @@
     </None>
     <None Update="Scripts\Models\StaffOnTask.ts">
       <CustomToolNamespace>..\arthr.Models\Core\StaffOnTask.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\StaffToolsViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\StaffToolsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\StaffUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\StaffUpsertViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\Status.ts">
       <CustomToolNamespace>..\arthr.Models\Core\Status.cs</CustomToolNamespace>

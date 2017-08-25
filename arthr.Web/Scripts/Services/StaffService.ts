@@ -1,6 +1,7 @@
 ﻿import { AppService } from './AppService';
 import { IApiCallWithPayload } from '../Utility';
 import { Staff } from '../Models/Staff';
+import { StaffUpsertViewModel } from '../Models/StaffUpsertViewModel';
 
 const appConfig = AppService().config;
 
@@ -19,7 +20,7 @@ const staffService = {
             url: `${appConfig.apiUrl}/api/staff`
         };
     }, 
-    getById: (id: number): IApiCallWithPayload<number, Staff> => {
+    getById: (id: number): IApiCallWithPayload<number, StaffUpsertViewModel> => {
 
         return {
             method: 'get',
@@ -45,5 +46,5 @@ const staffService = {
 export { staffService as StaffService }
 /*
     Debug Info:
-    , /api/mastersite/{id:int}, typeof(bool), , /api/mastersite, typeof(System.Collections.Generic.List<arthr.Models.Core.MasterSite>), , /api/mastersite/{id:int}, typeof(arthr.Models.Core.MasterSite), , /api/mastersite, typeof(bool), , /api/mastersite, typeof(bool), , /api/project/complete, typeof(bool), , /api/project/delele/{id:int}, typeof(bool), , /api/project, typeof(System.Collections.Generic.List<arthr.Models.Core.Project>), , /api/project/getbyid/{id:int}, typeof(arthr.Models.Core.ProjectUpsertViewModel), , /api/project/template, typeof(arthr.Models.Core.ProjectUpsertViewModel), , /api/project, typeof(bool), , /api/project, typeof(bool), , /api/staff/{id:int}, typeof(bool), , /api/staff, typeof(System.Collections.Generic.List<arthr.Models.Core.Staff>), , /api/staff/{id:int}, typeof(arthr.Models.Core.Staff), , /api/staff, typeof(bool), , /api/staff, typeof(bool) Unknown Types: Staff
+    , /api/staff/{id:int}, typeof(bool), , /api/staff, typeof(System.Collections.Generic.List<arthr.Models.Core.Staff>), , /api/staff/{id:int}, typeof(arthr.Models.Core.StaffUpsertViewModel), , /api/staff, typeof(bool), , /api/staff, typeof(bool) Unknown Types: Staff, StaffUpsertViewModel
 */

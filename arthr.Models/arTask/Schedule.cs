@@ -11,17 +11,17 @@
     /// <summary>
     /// Used to populate the Bootstrap Calendar
     /// </summary>
-    public class ScheduleResult
-    {
+    //public class ScheduleResult
+    //{
         #region Properties
 
-        public List<Events> result { get; set; }
+        //public List<Events> result { get; set; }
         
-        public int success { get; set; }
+        //public int success { get; set; }
         
 
         #endregion
-    }
+    //}
 
     public class Events
     {

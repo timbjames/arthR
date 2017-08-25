@@ -14,6 +14,7 @@
     using Utils.Attributes;
     using Utils.Crypto;
     using Utils.StringUtils;
+    using System.Collections.Generic;
 
     #endregion
 
@@ -52,6 +53,11 @@
         public async Task<User> FindByIdAsync(int id)
         {
             return await Db.Users.SingleOrDefaultAsync(x => x.UserId == id);
+        }
+
+        public async Task<List<User>> GetAsync()
+        {
+            return await Db.Users.ToListAsync();
         }
 
         public async Task<bool> ResetUserPasswordAsync(string username, string password)
