@@ -30,6 +30,7 @@
     <None Remove="Scripts\State\Task\Actions.ts" />
     <None Remove="Scripts\State\Task\State.ts" />
     <None Remove="Scripts\Utility\Helpers\DateHelper.ts" />
+    <None Remove="Scripts\Utility\Helpers\Types.ts" />
     <None Remove="Scripts\Utility\Interfaces\GenericInterfaces.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +69,7 @@
     <TypeScriptCompile Include="Scripts\State\Task\State.ts" />
     <TypeScriptCompile Include="Scripts\Utility\Helpers\DateHelper.ts" />
     <TypeScriptCompile Include="Scripts\Utility\Helpers\ReduxHelper.ts" />
+    <TypeScriptCompile Include="Scripts\Utility\Helpers\Types.ts" />
     <TypeScriptCompile Include="Scripts\Utility\Interfaces\GenericInterfaces.ts" />
   </ItemGroup>
   <ItemGroup>
