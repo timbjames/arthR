@@ -1,23 +1,19 @@
 ﻿// 3rd Party
 import { Dispatch } from 'redux';
-import { createAction } from 'redux-actions';
-import { createHashHistory } from 'history';
-
-// https://github.com/diegoddox/react-redux-toastr
-import { toastr } from 'react-redux-toastr'
 
 // Utility
-import { Api, IApiCallWithPayload } from '../Utility';
-
-// Models
-import { AnthRTask, Project, ProjectToolsViewModel, ProjectUpsertViewModel, TaskToolsViewModel, TaskUpsertViewModel } from '../Models';
+import { Api } from '../Utility';
 
 import { IAppState } from './AppState';
+import { IMasterSiteActions, MasterSiteDispatcherFactory } from './MasterSite/Actions';
+import { INoteActions, NoteDispatcherFactory } from './Note/Actions';
 import { IProjectActions, ProjectDispatcherFactory } from './Project/Actions';
 import { IStaffActions, StaffDispatcherFactory } from './Staff/Actions';
 import { ITaskActions, TaskDispatcherFactory } from './Task/Actions';
 
 export interface IAppActions {
+    masterSite: IMasterSiteActions;
+    note: INoteActions;
     project: IProjectActions;
     staff: IStaffActions;
     task: ITaskActions;
@@ -26,6 +22,8 @@ export interface IAppActions {
 const actionsDispatcherFactory = (dispatch: Dispatch<IAppState>): IAppActions => {
 
     return {
+        masterSite: MasterSiteDispatcherFactory(dispatch),
+        note: NoteDispatcherFactory(dispatch),
         project: ProjectDispatcherFactory(dispatch),
         staff: StaffDispatcherFactory(dispatch),
         task: TaskDispatcherFactory(dispatch)

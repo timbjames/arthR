@@ -22,7 +22,7 @@ import { IAppActions } from '../../../State';
 
 type updateFunc = (upsert: StaffUpsertViewModel) => void;
 
-export class StaffUpsertForm extends BaseComponent {
+export class StaffUpsertForm extends BaseComponent<{}> {
 
     private modelBinder: updateFunc;
     private upsert: StaffUpsertViewModel;

@@ -8,7 +8,7 @@
     {
         Task<List<MasterSite>> GetAsync();
 
-        Task<MasterSite> GetAsync(int id);
+        Task<MasterSiteUpsertViewModel> GetAsync(int id);
 
         Task<bool> CreateAsync(MasterSite masterSite);
 

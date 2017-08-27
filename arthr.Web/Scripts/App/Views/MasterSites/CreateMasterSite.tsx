@@ -5,15 +5,15 @@ import * as React from 'react';
 import { BaseComponent } from '../../BaseComponent';
 
 // Module
-import { ProjectUpsertForm } from './ProjectUpsertForm';
+import { MasterSiteUpsertForm } from './MasterSiteUpsertForm';
 
-export class CreateProject extends BaseComponent<{}> {
+export class CreateMasterSite extends BaseComponent<{}> {
 
     componentDidMount() {
 
         const { appActions } = this.props;
 
-        appActions.project.getProjectTemplateAsync();
+        appActions.masterSite.getMasterSiteAsync(0);
     }
 
     render() {
@@ -25,7 +25,7 @@ export class CreateProject extends BaseComponent<{}> {
 
                     <h2>Create</h2>
 
-                    <ProjectUpsertForm {...this.props} />
+                    <MasterSiteUpsertForm {...this.props} />
 
                 </div>
 

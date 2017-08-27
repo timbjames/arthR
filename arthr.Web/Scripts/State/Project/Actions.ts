@@ -10,7 +10,7 @@ import { toastr } from 'react-redux-toastr'
 import { Api } from '../../Utility';
 
 // Models
-import { Project, ProjectUpsertViewModel, AnthRTask, TaskUpsertViewModel } from '../../Models'
+import { Project, ProjectUpsertViewModel } from '../../Models'
 
 // Services
 import { ProjectService } from '../../Services'

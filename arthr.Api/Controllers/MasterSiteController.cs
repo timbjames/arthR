@@ -1,8 +1,4 @@
-﻿
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace arthr.Api.Controllers
+﻿namespace arthr.Api.Controllers
 {
     #region Usings
 
@@ -47,7 +43,7 @@ namespace arthr.Api.Controllers
             return Ok(await _masterSiteService.GetAsync());
         }
 
-        [HttpGet, Route("/api/mastersite/{id:int}"), ReturnType(typeof(MasterSite))]
+        [HttpGet, Route("/api/mastersite/{id:int}"), ReturnType(typeof(MasterSiteUpsertViewModel))]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(await _masterSiteService.GetAsync(id));
@@ -62,7 +58,7 @@ namespace arthr.Api.Controllers
         [HttpPut, Route("/api/mastersite"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Put([FromBody]MasterSite masterSite)
         {
-            return Ok(await _masterSiteService.CreateAsync(masterSite));
+            return Ok(await _masterSiteService.EditAsync(masterSite));
         }
 
         #endregion

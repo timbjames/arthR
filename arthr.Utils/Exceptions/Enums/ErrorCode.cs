@@ -8,6 +8,7 @@
         Status,
         ArthRTask,
         Note,
-        Staff
+        Staff,
+        MasterSite
     }
 }

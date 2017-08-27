@@ -10,7 +10,8 @@
     {
         #region Properties
 
-        public List<MasterSite> MasterSites { get; set; }
+        public IEnumerable<MasterSite> MasterSites { get; set; }
+        public IEnumerable<Staff> Staff { get; set; }
 
         #endregion
     }

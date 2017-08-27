@@ -20,13 +20,15 @@
     public class TaskService : BaseService, ITaskService
     {
         private readonly IProjectService _projectService;
+        private readonly IStaffService _staffService;
         private readonly IStatusService _statusService;
 
         #region Constructors
 
-        public TaskService(IProjectService projectService, IStatusService statusService, IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
+        public TaskService(IProjectService projectService, IStaffService staffService, IStatusService statusService, IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
         {
             _projectService = projectService;
+            _staffService = staffService;
             _statusService = statusService;
         }
 
@@ -37,20 +39,21 @@
         public async Task<List<AnthRTask>> GetAsync()
         {
             IQueryable<AnthRTask> query = Db.AnthRTask
-                .Include(t => t.Project).ThenInclude(p => p.MasterSite);
+                .Include(t => t.Project).ThenInclude(p => p.MasterSite)
+                .Include(t => t.StaffOnTasks).ThenInclude(s => s.Staff);
 
             return await query.ToListAsync();
         }
 
-        public async Task<TaskUpsertViewModel> GetTemplateAsync(User user, int? projectid)
+        public async Task<TaskUpsertViewModel> GetTemplateAsync(User user, int? projectId)
         {
             var upsert = new TaskUpsertViewModel
             {
                 Model = new AnthRTask()
                 {
-                    ProjectId = projectid ?? default(int)
+                    ProjectId = projectId ?? default(int)
                 },
-                Tools = await GetTools(user.Username)
+                Tools = await GetTools(projectId, user.Username)
             };
 
             return upsert;
@@ -61,7 +64,7 @@
             var upsert = new TaskUpsertViewModel
             {
                 Model = await GetTask(id),
-                Tools = await GetTools(user.Username)
+                Tools = await GetTools(null, user.Username)
             };
 
             return upsert;
@@ -75,8 +78,30 @@
 
         public async Task<bool> EditAsync(AnthRTask anthRTask)
         {
+            var staffOnTask = anthRTask.StaffOnTasks.ToList();
+
             Db.Entry(anthRTask).State = EntityState.Modified;
-            return await Db.SaveChangesAsync() > 1;
+
+            var result =  await Db.SaveChangesAsync() > 0;
+
+            if (result)
+            {
+                var existingStaffOnTasks = await Db.StaffOnTask.Where(t => t.AnthRTaskId == anthRTask.AnthRTaskId).ToListAsync();
+
+                if (existingStaffOnTasks.Any())
+                {
+                    Db.RemoveRange(existingStaffOnTasks);
+                }
+
+                foreach (var sOT in staffOnTask)
+                {
+                    Db.StaffOnTask.Add(sOT);
+                }
+
+                result = await Db.SaveChangesAsync() > 0;
+            }
+
+            return result;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -89,14 +114,16 @@
 
         #region Private Methods
 
-        private async Task<AnthRTask> GetTask(int taskId) => await Db.AnthRTask.FirstOrNotFoundAsync(x => x.AnthRTaskId == taskId, ErrorCode.ArthRTask);
+        private async Task<AnthRTask> GetTask(int taskId) => await Db.AnthRTask
+            .Include(t => t.StaffOnTasks).ThenInclude(s => s.Staff).FirstOrNotFoundAsync(x => x.AnthRTaskId == taskId, ErrorCode.ArthRTask);
 
-        private async Task<TaskToolsViewModel> GetTools(string username)
+        private async Task<TaskToolsViewModel> GetTools(int? projectId, string username)
         {
             var tools = new TaskToolsViewModel
             {
                 Projects = await _projectService.GetProjectsAsync(username, false, string.Empty),
                 Priorities = Enumerable.Range(1, 4),
+                Staff = projectId.HasValue ? await _staffService.GetForProject(projectId.Value) : await _staffService.GetAsync(),
                 States = await _statusService.GetAsync()
             };
 

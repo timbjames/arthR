@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Models.Notes;
+    using arthr.Models.Core;
 
     public interface INotesService
     {
@@ -10,7 +11,7 @@
 
         Task<NoteUpsertViewModel> GetAsync(int id);
 
-        Task<bool> CreateAsync(Note note);
+        Task<bool> CreateAsync(Note note, string username);
 
         Task<bool> EditAsync(Note note);
 

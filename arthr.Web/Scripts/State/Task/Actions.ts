@@ -10,10 +10,10 @@ import { toastr } from 'react-redux-toastr'
 import { Api, IApiCallWithPayload } from '../../Utility';
 
 // Models
-import { Project, ProjectUpsertViewModel, AnthRTask, TaskUpsertViewModel } from '../../Models'
+import { AnthRTask, TaskUpsertViewModel } from '../../Models'
 
 // Services
-import { ProjectService, TaskService } from '../../Services'
+import { TaskService } from '../../Services'
 
 // State
 import { ActionTypes, ITaskState } from './State';

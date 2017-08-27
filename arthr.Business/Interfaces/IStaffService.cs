@@ -20,6 +20,8 @@
 
         Task<List<Staff>> GetAsync();
 
+        Task<List<Staff>> GetForProject(int projectId);
+
         Task<StaffUpsertViewModel> GetAsync(int id);
 
         Task<Staff> GetByUsernameAsync(string username);

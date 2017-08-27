@@ -4,9 +4,11 @@ import { handleActions, Action } from 'redux-actions';
 import { reducer as toastrReducer } from 'react-redux-toastr'
 
 // Models
-import { AnthRTask, Project, ProjectToolsViewModel, ProjectUpsertViewModel, Staff, StaffUpsertViewModel, TaskToolsViewModel, TaskUpsertViewModel } from '../Models';
+import { AnthRTask, MasterSite, MasterSiteUpsertViewModel, Note, NoteUpsertViewModel, Project, ProjectToolsViewModel, ProjectUpsertViewModel, Staff, StaffUpsertViewModel, TaskToolsViewModel, TaskUpsertViewModel } from '../Models';
 
 // Reducers
+import { MasterSiteReducer } from './MasterSite/State';
+import { NoteReducer } from './Note/State';
 import { ProjectReducer } from './Project/State';
 import { StaffReducer } from './Staff/State';
 import { TaskReducer } from './Task/State';
@@ -17,6 +19,14 @@ export interface IAppState {
         projects: Project[],
         projectTools: ProjectToolsViewModel,
         projectUpsert: ProjectUpsertViewModel
+    },
+    masterSite: {
+        masterSites: MasterSite[],
+        masterSiteUpsert: MasterSiteUpsertViewModel
+    },
+    note: {
+        notes: Note[],
+        noteUpsert: NoteUpsertViewModel
     },
     staff: {
         staffs: Staff[],
@@ -31,6 +41,8 @@ export interface IAppState {
 }
 
 const areaStateReducer = combineReducers({
+    masterSite: MasterSiteReducer,
+    note: NoteReducer,
     project: ProjectReducer,
     staff: StaffReducer,
     task: TaskReducer

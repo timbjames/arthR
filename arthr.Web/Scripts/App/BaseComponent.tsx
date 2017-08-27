@@ -8,12 +8,14 @@ export interface IAppProps {
     appState: IAppState;
 }
 
-export class BaseComponent extends React.Component<IAppProps, { }> {}
+export class BaseComponent<S> extends React.Component<IAppProps, S> {}
 
 interface IIndexOfIds {
+    masterSiteId: number;
+    noteId: number;
     projectId: number;
-    taskId: number;
     staffId: number;
+    taskId: number;
     userId: number;
 }
 

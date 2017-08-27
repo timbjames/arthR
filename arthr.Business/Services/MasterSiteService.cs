@@ -10,6 +10,8 @@
     using Models.Core;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
+    using arthr.Data.Extensions;
+    using arthr.Utils.Exceptions.Enums;
 
     #endregion
 
@@ -29,22 +31,29 @@
             return await query.ToListAsync();
         }
 
-        public Task<MasterSite> GetAsync(int id)
+        public async Task<MasterSiteUpsertViewModel> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            var upsert = new MasterSiteUpsertViewModel
+            {
+                Model = id == 0 ? new MasterSite() : await Db.MasterSite.FirstOrNotFoundAsync(m => m.MasterSiteId == id, ErrorCode.MasterSite)
+            };
+
+            return upsert;
         }
 
-        public Task<bool> CreateAsync(MasterSite masterSite)
+        public async Task<bool> CreateAsync(MasterSite masterSite)
         {
-            throw new System.NotImplementedException();
+            Db.MasterSite.Add(masterSite);
+            return await Db.SaveChangesAsync() > 1;
         }
 
-        public Task<bool> EditAsync(MasterSite masterSite)
+        public async Task<bool> EditAsync(MasterSite masterSite)
         {
-            throw new System.NotImplementedException();
+            Db.Entry(masterSite).State = EntityState.Modified;
+            return await Db.SaveChangesAsync() > 1;
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             throw new System.NotImplementedException();
         }

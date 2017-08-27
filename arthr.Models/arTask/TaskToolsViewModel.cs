@@ -10,5 +10,6 @@ namespace arthr.Models.arTask
         public IEnumerable<Project> Projects { get; set; }
         public IEnumerable<int> Priorities { get; set; }
         public IEnumerable<Status> States { get; set; }
+        public IEnumerable<Staff> Staff { get; set; }
     }
 }

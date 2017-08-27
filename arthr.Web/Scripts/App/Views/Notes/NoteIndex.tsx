@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
-export class StaffIndex extends BaseComponent<{}> {
+export class NoteIndex extends BaseComponent<{}> {
 
     componentDidMount() {
 
         const { appActions, appState } = this.props;
 
-        appActions.staff.getStaffsAsync();
+        appActions.note.getNotesAsync();
     }
 
     render() {
@@ -24,7 +24,7 @@ export class StaffIndex extends BaseComponent<{}> {
 
                 <div className="row">
                     <div className="col-xs-6">
-                        <Link className="btn btn-xs btn-primary" to="/staff/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Staff</Link>
+                        <Link className="btn btn-xs btn-primary" to="/notes/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Note</Link>
                     </div>
                 </div>
 
@@ -37,13 +37,7 @@ export class StaffIndex extends BaseComponent<{}> {
                             <thead>
                                 <tr>
                                     <th>
-                                        Gravatar
-                                    </th>
-                                    <th>
-                                        Name
-                                    </th>
-                                    <th>
-                                        Email
+                                        Title
                                     </th>
                                     <th className="text-right">Options</th>
                                 </tr>
@@ -52,20 +46,18 @@ export class StaffIndex extends BaseComponent<{}> {
                             <tbody>
 
                                 {
-                                    appState.staff.staffs
-                                    && appState.staff.staffs.map((p, i) => {
+                                    appState.note.notes
+                                    && appState.note.notes.map((p, i) => {
                                         return (
                                             <tr key={i}>
-                                                <td>N/A</td>
-                                                <td>{p.name}</td>
-                                                <td>{p.email}</td>
+                                                <td>{p.title}</td>
                                                 <td>
                                                     <div className="btn-group pull-right">
                                                         <button className="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
                                                             <span className="glyphicon glyphicon-menu-hamburger"></span>
                                                         </button>
                                                         <ul className="dropdown-menu" role="menu">
-                                                            <li><Link to={`/staff/edit/${p.staffId}`}>Edit</Link></li>
+                                                            <li><Link to={`/notes/edit/${p.noteId}`}>Edit</Link></li>
                                                         </ul>
                                                     </div>
                                                 </td>

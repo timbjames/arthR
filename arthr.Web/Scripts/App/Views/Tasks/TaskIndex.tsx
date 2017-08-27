@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
-export class TaskIndex extends BaseComponent {
+export class TaskIndex extends BaseComponent<{}> {
 
     componentDidMount() {
 
@@ -73,7 +73,7 @@ export class TaskIndex extends BaseComponent {
                                                     {t.deadline}
                                                 </td>
                                                 <td>
-                                                    {t.staffOnTasks ? 'TODO' : '-'}
+                                                    {t.staffOnTasks && t.staffOnTasks.map((s, i) => <span key={i}>{s.staff.name}</span>)}
                                                 </td>
                                                 <td>
                                                     <div className="btn-group pull-right">

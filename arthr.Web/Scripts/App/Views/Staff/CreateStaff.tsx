@@ -7,7 +7,7 @@ import { BaseComponent } from '../../BaseComponent';
 // Module
 import { StaffUpsertForm } from './StaffUpsertForm';
 
-export class CreateStaff extends BaseComponent {
+export class CreateStaff extends BaseComponent<{}> {
 
     componentDidMount() {
 

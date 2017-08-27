@@ -24,8 +24,8 @@ import { TopMenu } from './App/Navigation/TopMenu';
 import { CreateProject, EditProject, ProjectIndex } from './App/Views/Projects';
 import { CreateTask, EditTask, TaskIndex } from './App/Views/Tasks';
 import { Index as Schedule } from './App/Views/Schedule';
-import { Index as Notes } from './App/Views/Notes';
-import { Index as MasterSites } from './App/Views/MasterSites';
+import { CreateNote, EditNote, NoteIndex } from './App/Views/Notes';
+import { CreateMasterSite, EditMasterSite, MasterSiteIndex } from './App/Views/MasterSites';
 import { Index as Timesheets } from './App/Views/Timesheets';
 import { CreateStaff, EditStaff, StaffIndex } from './App/Views/Staff';
 
@@ -56,15 +56,26 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                             <div className="col-sm-12">
                                 <Switch>
                                     <MyRoute exact path="/" render={props => <Breadcrumb active="Home" />} />
+
                                     <MyRoute exact path="/projects" render={props => <Breadcrumb active="Projects" />} />
                                     <MyRoute exact path="/projects/create" render={props => <Breadcrumb active="Create Project" links={[{ href: '/projects', name: 'Projects' }]} />} />
                                     <MyRoute exact path="/projects/edit/:projectId" render={props => <Breadcrumb active="Edit Project" links={[{ href: '/projects', name: 'Projects' }]} />} />
+
                                     <MyRoute exact path="/tasks" render={props => <Breadcrumb active="Tasks" />} />
                                     <MyRoute exact path="/tasks/create/:projectId" render={props => <Breadcrumb active="Create Task" links={[{ href: '/tasks', name: 'Tasks' }]} />} />
                                     <MyRoute exact path="/tasks/edit/:taskId" render={props => <Breadcrumb active="Edit Task" links={[{ href: '/tasks', name: 'Tasks' }]} />} />
+
                                     <MyRoute exact path="/staff" render={props => <Breadcrumb active="Staff" />} />
                                     <MyRoute exact path="/staff/create" render={props => <Breadcrumb active="Create Staff" links={[{ href: '/staff', name: 'Staff' }]} />} />
                                     <MyRoute exact path="/staff/edit/:staffId" render={props => <Breadcrumb active="Edit Staff" links={[{ href: '/staff', name: 'Staff' }]} />} />
+
+                                    <MyRoute exact path="/notes" render={props => <Breadcrumb active="Notes" />} />
+                                    <MyRoute exact path="/notes/create" render={props => <Breadcrumb active="Create Note" links={[{ href: '/notes', name: 'Notes' }]} />} />
+                                    <MyRoute exact path="/notes/edit/:noteId" render={props => <Breadcrumb active="Edit Note" links={[{ href: '/notes', name: 'Notes' }]} />} />
+
+                                    <MyRoute exact path="/mastersites" render={props => <Breadcrumb active="Master Site" />} />
+                                    <MyRoute exact path="/mastersites/create" render={props => <Breadcrumb active="Create Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
+                                    <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <Breadcrumb active="Edit Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
                                 </Switch>
                             </div>
                         </div>
@@ -75,15 +86,25 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                 <MyRoute exact path="/projects" render={props => <ProjectIndex key="ProjectIndex" appActions={appActions} appState={appState} {...props} />} />
                                 <MyRoute exact path="/projects/create" render={props => <CreateProject appActions={appActions} appState={appState} />} />
                                 <MyRoute exact path="/projects/edit/:projectId" render={props => <EditProject appActions={appActions} appState={appState} {...props} />} />
+
                                 <MyRoute exact path="/tasks" render={props => <TaskIndex appActions={appActions} appState={appState} />} />
                                 <MyRoute exact path="/tasks/create/:projectId?" render={props => <CreateTask appActions={appActions} appState={appState} {...props} />} />
                                 <MyRoute exact path="/tasks/edit/:taskId" render={props => <EditTask appActions={appActions} appState={appState} {...props} />} />
+
                                 <MyRoute exact path="/schedule" render={props => <Schedule />} />
-                                <MyRoute exact path="/notes" render={props => <Notes />} />
-                                <MyRoute exact path="/mastersites" render={props => <MasterSites />} />
+
+                                <MyRoute exact path="/notes" render={props => <NoteIndex appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/notes/create" render={props => <CreateNote appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/notes/edit/:noteId" render={props => <EditNote appActions={appActions} appState={appState} {...props} />} />
+
+                                <MyRoute exact path="/mastersites" render={props => <MasterSiteIndex appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/mastersites/create" render={props => <CreateMasterSite appActions={appActions} appState={appState} />} />
+                                <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <EditMasterSite appActions={appActions} appState={appState} {...props} />} />
+
                                 <MyRoute exact path="/staff" render={props => <StaffIndex appActions={appActions} appState={appState} />} />
                                 <MyRoute exact path="/staff/create" render={props => <CreateStaff appActions={appActions} appState={appState} />} />
                                 <MyRoute exact path="/staff/edit/:staffId" render={props => <EditStaff appActions={appActions} appState={appState} {...props} />} />
+
                                 <MyRoute exact path="/timesheets" render={props => <Timesheets />} />
                             </Switch>
 

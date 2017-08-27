@@ -13,15 +13,19 @@
     using System.Linq;
     using arthr.Utils.Exceptions.Enums;
     using arthr.Data.Extensions;
+    using arthr.Models.Core;
 
     #endregion
 
     public class NotesService : BaseService, INotesService
     {
+        private readonly IStaffService _staffService;
+
         #region Constructors
 
-        public NotesService(IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
+        public NotesService(IStaffService staffService, IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
         {
+            _staffService = staffService;
         }
 
         #endregion
@@ -39,16 +43,22 @@
         {
             var upsert = new NoteUpsertViewModel
             {
-                Model =  await Db.Note.FirstOrNotFoundAsync(n => n.NoteId == id, ErrorCode.Note),
+                Model = id == 0 ? new Note() :  await Db.Note.FirstOrNotFoundAsync(n => n.NoteId == id, ErrorCode.Note),
                 Tools = null
             };
 
             return upsert;
         }
 
-        public async Task<bool> CreateAsync(Note note)
+        public async Task<bool> CreateAsync(Note note, string username)
         {
+            Staff staff = await _staffService.GetByUsernameAsync(username);
+
+            note.StaffId = staff.StaffId;
+            note.Username = username;
+
             Db.Note.Add(note);
+
             return await Db.SaveChangesAsync() > 1;
         }
 

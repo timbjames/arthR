@@ -13,6 +13,7 @@
     using Utils.Attributes;
     using arthr.Data.Extensions;
     using arthr.Utils.Exceptions.Enums;
+    using System.Linq;
 
     #endregion
 
@@ -53,6 +54,14 @@
         {
             return await Db.Staff
                 .Include(s => s.User)
+                .ToListAsync();
+        }
+
+        public async Task<List<Staff>> GetForProject(int projectId)
+        {
+            return await Db.Staff
+                .Include(s => s.User)
+                .Where(s => s.StaffOnProjects.Any(p => p.ProjectId == projectId))
                 .ToListAsync();
         }
 

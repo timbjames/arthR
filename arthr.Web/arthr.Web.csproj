@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\App\BaseComponent.tsx" />
     <None Remove="Scripts\App\Navigation\Breadcrumb.tsx" />
     <None Remove="Scripts\App\Views\Projects\CreateProject.tsx" />
     <None Remove="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
@@ -58,6 +59,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\App\BaseComponent.tsx" />
     <TypeScriptCompile Include="Scripts\App\Navigation\Breadcrumb.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\EditProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\CreateProject.tsx" />
@@ -86,6 +88,9 @@
     </None>
     <None Update="Scripts\Models\MasterSiteEditModel.ts">
       <CustomToolNamespace>..\arthr.Models\Core\MasterSiteEditModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\MasterSiteUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\Core\MasterSiteUpsertViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\Note.ts">
       <CustomToolNamespace>..\arthr.Models\Notes\Note.cs</CustomToolNamespace>

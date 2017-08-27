@@ -18,11 +18,14 @@
     public sealed class ProjectService : BaseService, IProjectService
     {
         private readonly IMasterSiteService _masterSiteService;
+        private readonly IStaffService _staffService;
+
         #region Constructors
 
-        public ProjectService(IMasterSiteService masterSiteService, IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
+        public ProjectService(IMasterSiteService masterSiteService, IStaffService staffService, IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
         {
             _masterSiteService = masterSiteService;
+            _staffService = staffService;
         }
 
         #endregion
@@ -40,6 +43,7 @@
         {
             IQueryable<Project> query = Db.Project
                 .Include(x => x.MasterSite)
+                .Include(x => x.StaffOnProjects).ThenInclude(s => s.Staff)
                 .Where(x => x.Completed == completed && (
                     x.Username.Equals(username)
                     || x.StaffOnProjects.Any(sp => sp.Staff.User.Username == username)
@@ -78,13 +82,35 @@
             project.Deleted = false;
 
             Db.Project.Add(project);
-            return await Db.SaveChangesAsync() > 1;
+
+            return await Db.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> EditProjectAsync(Project project, User user)
         {
+            var staffOnProjects = project.StaffOnProjects.ToList();
+
             Db.Entry(project).State = EntityState.Modified;
-            return await Db.SaveChangesAsync() > 1;
+
+            bool result = await Db.SaveChangesAsync() > 0;
+
+            if (result)
+            {
+                var existingStaffOnProjects = await Db.StaffOnProjects.Where(p => p.ProjectId == project.ProjectId).ToListAsync();
+                if (existingStaffOnProjects.Any())
+                {
+                    Db.RemoveRange(existingStaffOnProjects);
+                }
+
+                foreach (var staffOnProject in staffOnProjects)
+                {
+                    Db.StaffOnProjects.Add(staffOnProject);
+                }
+
+                result = await Db.SaveChangesAsync() > 0;
+            }
+
+            return result;
         }
 
         public async Task<bool> DeleteProjectAsync(int id)
@@ -99,14 +125,17 @@
 
         private async Task<Project> GetProject(int projectId)
         {
-            return await Db.Project.FirstOrNotFoundAsync(x => x.ProjectId == projectId, ErrorCode.Project);
+            return await Db.Project
+                .Include(p => p.StaffOnProjects).ThenInclude(s => s.Staff)
+                .FirstOrNotFoundAsync(x => x.ProjectId == projectId, ErrorCode.Project);
         }
 
         private async Task<ProjectToolsViewModel> GetUpsertTools()
         {
             ProjectToolsViewModel tools = new ProjectToolsViewModel
             {
-                MasterSites = await _masterSiteService.GetAsync()
+                MasterSites = await _masterSiteService.GetAsync(),
+                Staff = await _staffService.GetAsync()
             };
 
             return tools;
