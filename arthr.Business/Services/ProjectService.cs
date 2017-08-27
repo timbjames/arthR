@@ -44,6 +44,7 @@
             IQueryable<Project> query = Db.Project
                 .Include(x => x.MasterSite)
                 .Include(x => x.StaffOnProjects).ThenInclude(s => s.Staff)
+                .Include(x => x.Tasks)
                 .Where(x => x.Completed == completed && (
                     x.Username.Equals(username)
                     || x.StaffOnProjects.Any(sp => sp.Staff.User.Username == username)

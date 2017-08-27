@@ -11,6 +11,8 @@
   "dependencies": {
     "material-ui": "^0.18.7",
     "material-ui-number-input": "^5.0.24",
+    "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
@@ -25,6 +27,8 @@
   },
   "devDependencies": {
     "@types/material-ui": "^0.17.18",
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.2.34",
     "@types/react": "^15.0.39",
     "@types/react-dom": "^15.5.1",
     "@types/react-redux": "^4.4.47",

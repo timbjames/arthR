@@ -2,6 +2,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+// Utility
+import { DateHelper } from '../../../Utility/Helpers';
+
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
@@ -67,13 +70,13 @@ export class TaskIndex extends BaseComponent<{}> {
                                                     {t.name}
                                                 </td>
                                                 <td>
-                                                    {t.plannedStart}
+                                                    {DateHelper.dateConverter(t.plannedStart).toStandardDateDisplay()}
                                                 </td>
                                                 <td>
-                                                    {t.deadline}
+                                                    {DateHelper.dateConverter(t.deadline).toStandardDateDisplay()}
                                                 </td>
                                                 <td>
-                                                    {t.staffOnTasks && t.staffOnTasks.map((s, i) => <span key={i}>{s.staff.name}</span>)}
+                                                    {t.staffOnTasks && t.staffOnTasks.map((s, i) => <span key={i}><Link to={`/staff/edit/${s.staff.staffId}`}>{s.staff.name}</Link>{' '}</span>)}
                                                 </td>
                                                 <td>
                                                     <div className="btn-group pull-right">

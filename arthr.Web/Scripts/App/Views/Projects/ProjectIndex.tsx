@@ -59,7 +59,7 @@ export class ProjectIndex extends BaseComponent<{}> {
                                             <tr key={i}>
                                                 <td>{p.masterSite.name}</td>
                                                 <td>{p.name}</td>
-                                                <td>{p.staffOnProjects && p.staffOnProjects.map((s, i) => <span key={i}>{s.staff.name}</span>)}</td>
+                                                <td>{p.staffOnProjects && p.staffOnProjects.map((s, i) => <span key={i}><Link to={`/staff/edit/${s.staff.staffId}`}>{s.staff.name}</Link>{' '}</span>)}</td>
                                                 <td>{p.tasks ? p.tasks.filter(t => !t.dateCompleted).length : 0}</td>
                                                 <td>
                                                     <div className="btn-group pull-right">
