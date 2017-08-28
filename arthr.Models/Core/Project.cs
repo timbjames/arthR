@@ -7,6 +7,7 @@
     using System.ComponentModel.DataAnnotations;
     using arTask;
     using Utils.Attributes;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     #endregion
 
@@ -27,6 +28,9 @@
         public bool? Deleted { get; set; }
 
         public bool? HideFromTimesheet { get; set; }
+
+        [NotMapped]
+        public bool IsDeleted => Deleted.HasValue && Deleted.Value;
 
         public int ProjectId { get; set; }
 

@@ -13,6 +13,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import Tabs from 'material-ui/Tabs';
 import Tab from 'material-ui/Tabs/Tab';
+import CircularProgress from 'material-ui/CircularProgress';
 
 import { ReduxContainerBuilder } from './Utility/Components/ReduxContainer';
 
@@ -50,10 +51,11 @@ class Index extends React.Component<IReduxComponentProps, {}>{
 
                     <div>
 
-                        <TopMenu />
+                        <TopMenu {...this.props} />
 
                         <div className="row breadcrumb-row">
                             <div className="col-sm-12">
+
                                 <Switch>
                                     <MyRoute exact path="/" render={props => <Breadcrumb active="Home" />} />
 
@@ -77,13 +79,14 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                     <MyRoute exact path="/mastersites/create" render={props => <Breadcrumb active="Create Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
                                     <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <Breadcrumb active="Edit Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
                                 </Switch>
+
                             </div>
                         </div>
 
                         <div className="container body-content">
 
                             <Switch>
-                                <MyRoute exact path="/projects" render={props => <ProjectIndex key="ProjectIndex" appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/projects" render={props => <ProjectIndex key="ProjectIndex" {...this.props} {...props} />} />
                                 <MyRoute exact path="/projects/create" render={props => <CreateProject appActions={appActions} appState={appState} />} />
                                 <MyRoute exact path="/projects/edit/:projectId" render={props => <EditProject appActions={appActions} appState={appState} {...props} />} />
 
@@ -123,6 +126,15 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                             transitionIn="fadeIn"
                             transitionOut="fadeOut"
                             progressBar />
+
+                        {
+                            appState.page.processing &&
+                            (
+                                <div id="ajaxProgress">
+                                    <CircularProgress size={80} />
+                                </div>
+                            )
+                        }
 
                     </div>
 

@@ -7,6 +7,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core;
     using Utils.Attributes;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     #endregion
 
@@ -30,6 +31,11 @@
         public string Description { get; set; }
 
         public bool? HideFromTimesheet { get; set; }
+
+        [NotMapped]
+        public bool IsCompleted => DateCompleted.HasValue;
+
+        public bool? Deleted { get; set; }
 
         [Display(Name = "Task")]
         public string Name { get; set; }

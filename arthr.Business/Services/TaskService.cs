@@ -40,7 +40,8 @@
         {
             IQueryable<AnthRTask> query = Db.AnthRTask
                 .Include(t => t.Project).ThenInclude(p => p.MasterSite)
-                .Include(t => t.StaffOnTasks).ThenInclude(s => s.Staff);
+                .Include(t => t.StaffOnTasks).ThenInclude(s => s.Staff)
+                .Where(t => !t.Project.IsDeleted && !t.IsCompleted);
 
             return await query.ToListAsync();
         }
@@ -107,7 +108,9 @@
         public async Task<bool> DeleteAsync(int id)
         {
             AnthRTask task = await GetTask(id);
-            return await Db.SaveChangesAsync() > 1;
+            task.Deleted = true;
+
+            return await Db.SaveChangesAsync() > 0;
         }
 
         #endregion
@@ -128,6 +131,14 @@
             };
 
             return tools;
+        }
+
+        public async Task<bool> CompleteTask(int id, User user)
+        {
+            var task = await GetTask(id);
+            task.DateCompleted = DateTime.UtcNow;
+
+            return await Db.SaveChangesAsync() > 0;
         }
 
         #endregion

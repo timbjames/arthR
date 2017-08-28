@@ -7,6 +7,8 @@
 
     public interface ITaskService
     {
+        Task<bool> CompleteTask(int id, User user);
+
         Task<List<AnthRTask>> GetAsync();
 
         Task<TaskUpsertViewModel> GetAsync(int id, User user);

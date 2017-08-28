@@ -45,7 +45,7 @@
                 .Include(x => x.MasterSite)
                 .Include(x => x.StaffOnProjects).ThenInclude(s => s.Staff)
                 .Include(x => x.Tasks)
-                .Where(x => x.Completed == completed && (
+                .Where(x => !x.IsDeleted && x.Completed == completed && (
                     x.Username.Equals(username)
                     || x.StaffOnProjects.Any(sp => sp.Staff.User.Username == username)
                     || !string.IsNullOrEmpty(all)
@@ -119,7 +119,7 @@
             Project project = await GetProject(id);
             project.Deleted = true;
 
-            return await Db.SaveChangesAsync() > 1;
+            return await Db.SaveChangesAsync() > 0;
         }
 
         #endregion

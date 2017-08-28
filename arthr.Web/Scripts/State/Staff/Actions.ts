@@ -7,13 +7,19 @@ import { createHashHistory } from 'history';
 import { toastr } from 'react-redux-toastr'
 
 // Utility
-import { Api } from '../../Utility';
+import { IApiProgressFunctions } from '../../Utility';
 
 // Models
 import { Staff, StaffUpsertViewModel } from '../../Models'
 
 // Services
 import { StaffService } from '../../Services'
+
+// Page Actions
+import { PageDispatcherFactory } from '../Page/Actions';
+
+// Base
+import { Actions } from '../Base/Actions';
 
 // State
 import { ActionTypes, IStaffState } from './State';
@@ -26,7 +32,7 @@ export interface IStaffActions {
     receiveStaffUpsert: (upsert: StaffUpsertViewModel) => void;
 }
 
-class StaffActions implements IStaffActions {
+class StaffActions extends Actions implements IStaffActions {
 
     private onFailure = (error): void => {
         console.log(error);
@@ -38,7 +44,8 @@ class StaffActions implements IStaffActions {
             toastr.success('Staff Creation', 'Staff Created');
             createHashHistory().push('/staff');
         };
-        Api(dispatch).call(StaffService.post(), staff, onSuccess, this.onFailure);
+
+        this.api.call(StaffService.post(), staff, onSuccess, this.onFailure);
     }
 
     public editStaffAsync = (staff: Staff) => (dispatch: Dispatch<IStaffState>): void => {
@@ -48,7 +55,7 @@ class StaffActions implements IStaffActions {
             createHashHistory().push('/staff');
         };
 
-        Api(dispatch).call(StaffService.put(), staff, onSuccess, this.onFailure);
+        this.api.call(StaffService.put(), staff, onSuccess, this.onFailure);
     }
 
     public getStaffAsync = (staffId: number) => (dispatch: Dispatch<IStaffState>): void => {
@@ -57,7 +64,7 @@ class StaffActions implements IStaffActions {
             dispatch(this.receiveStaffUpsert(upsert));
         };
 
-        Api(dispatch).call(StaffService.getById(staffId), null, onSuccess, this.onFailure);
+        this.api.call(StaffService.getById(staffId), null, onSuccess, this.onFailure);
     }
 
     public getStaffsAsync = () => (dispatch: Dispatch<IStaffState>): void => {
@@ -66,16 +73,16 @@ class StaffActions implements IStaffActions {
             dispatch(this.receiveStaffs(staffs));
         };
 
-        Api(dispatch).call(StaffService.get(), null, onSuccess, this.onFailure);
+        this.api.call(StaffService.get(), null, onSuccess, this.onFailure);
     }
 
     private receiveStaffs = createAction(ActionTypes.receiveCollection, (staffs: Staff[]) => staffs);
     public receiveStaffUpsert = createAction(ActionTypes.receiveUpsert, (upsert: StaffUpsertViewModel) => upsert);
 }
 
-const dispatcherFactory = (dispatch: Dispatch<IStaffState>): IStaffActions => {
+const dispatcherFactory = (dispatch: Dispatch<IStaffState>, progressFunctions: IApiProgressFunctions): IStaffActions => {
 
-    const actions = new StaffActions();
+    const actions = new StaffActions(progressFunctions);
 
     return {
         createStaffAsync: (staff: Staff) => {

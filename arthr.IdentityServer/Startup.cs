@@ -13,6 +13,8 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using System.IO;
+    using System.Security.Cryptography.X509Certificates;
 
     #endregion
 
@@ -30,6 +32,7 @@
             builder.AddEnvironmentVariables();
 
             Configuration = builder.Build();
+            Environment = env;
         }
 
         #endregion
@@ -37,6 +40,7 @@
         #region Properties
 
         public IConfigurationRoot Configuration { get; }
+        public IHostingEnvironment Environment { get; }
 
         #endregion
 
@@ -64,19 +68,18 @@
             });
 
             app.UseMvcWithDefaultRoute();
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var contentRootPath = Environment.ContentRootPath;
+            var cert = new X509Certificate2(Path.Combine(contentRootPath, "devcert.pfx"), "Kfisher1");
+
             services.AddIdentityServer()
-                .AddTemporarySigningCredential()
+                //.AddTemporarySigningCredential()
+                .AddSigningCredential(cert)
                 .AddInMemoryIdentityResources(Config.GetIdentityResources())
                 .AddInMemoryApiResources(Config.GetApiResources())
                 .AddInMemoryClients(Config.GetClients())

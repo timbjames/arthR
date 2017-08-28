@@ -1,9 +1,12 @@
 ﻿namespace arthr.Api.Controllers
 {
+    using arthr.Models.Core;
+    using arthr.Utils.Attributes;
     #region Usings
 
     using Business.Interfaces;
     using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     #endregion
 
@@ -24,5 +27,11 @@
         }
 
         #endregion
+
+        [HttpGet, Route("/api/user/getloggedin"), ReturnType(typeof(User))]
+        public async Task<IActionResult> GetLoggedInUser()
+        {
+            return Ok(await _userService.FindByIdAsync(ArthRUser.UserId));
+        }
     }
 }

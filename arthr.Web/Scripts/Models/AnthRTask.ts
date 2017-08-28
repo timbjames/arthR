@@ -10,6 +10,8 @@ export class AnthRTask {
     deadline: Date;
     description: string;
     hideFromTimesheet: boolean;
+    isCompleted: boolean;
+    deleted: boolean;
     name: string;
     plannedStart: Date;
     priority: number;

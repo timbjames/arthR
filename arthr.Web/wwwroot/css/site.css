@@ -246,3 +246,11 @@ li.hide-me, li.hide-site {
     li.hide-me li i.glyphicon-eye-open, li.hide-me li i.glyphicon-eye-close {
         display: none;
     }
+
+#ajaxProgress{
+    position: fixed;
+    bottom: 50px;
+    left: 25px;
+    width: 50px;
+    height: 50px;
+}

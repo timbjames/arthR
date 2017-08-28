@@ -1,5 +1,7 @@
-﻿import 'whatwg-fetch';
+﻿// 3rd Party
+import 'whatwg-fetch';
 
+// Utility
 import { IAjaxInfo, IApiCallWithPayload } from '../Interfaces/ApiInterfaces';
 
 const checkStatus = (response: Response) => {
@@ -15,12 +17,19 @@ const parseResponse = (response: Response) => {
     return response.json();
 }
 
-const api = (dispatch: any) => {
+export interface IApiProgressFunctions {
+    incrementProgress: Function;
+    decrementProgress: Function;
+}
+
+const api = (apiFunctions: IApiProgressFunctions) => {
 
     return {
         call: <TRequest, TResponse>(api: IApiCallWithPayload<TRequest, TResponse>, payload: TRequest, onSuccess: (model: TResponse) => void, onFailure: any): void => {
 
             const body = payload && JSON.stringify(payload);
+
+            apiFunctions.incrementProgress();
 
             fetch(api.url,
                 {
@@ -38,12 +47,20 @@ const api = (dispatch: any) => {
             .then(checkStatus)
             .then(parseResponse)
             .then((data) => {
+
+                apiFunctions.decrementProgress();
+
                 const returnedData: TResponse = (data as any) as TResponse;
                 onSuccess(returnedData);
+
                 return;
             })
             .catch((error) => {
+
+                apiFunctions.decrementProgress();
+
                 onFailure(error);
+
                 console.log('error: ', error);
             });
         }

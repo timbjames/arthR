@@ -32,6 +32,12 @@
 
         #region Public Methods
 
+        [HttpPut, Route("/api/task/complete"), ReturnType(typeof(bool))]
+        public async Task<IActionResult> Complete(int id)
+        {
+            return Ok(await _taskService.CompleteTask(id, ArthRUser));
+        }
+
         [HttpDelete, Route("/api/task/{id:int}"), ReturnType(typeof(bool))]
         public async Task<IActionResult> Delete(int id)
         {

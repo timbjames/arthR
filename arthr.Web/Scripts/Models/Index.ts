@@ -20,3 +20,5 @@ export * from './StaffOnTask';
 
 export * from './TaskToolsViewModel';
 export * from './TaskUpsertViewModel';
+
+export * from './User';

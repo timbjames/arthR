@@ -7,13 +7,19 @@ import { createHashHistory } from 'history';
 import { toastr } from 'react-redux-toastr'
 
 // Utility
-import { Api } from '../../Utility';
+import { IApiProgressFunctions } from '../../Utility';
 
 // Models
 import { MasterSite, MasterSiteUpsertViewModel } from '../../Models'
 
 // Services
 import { MasterSiteService } from '../../Services'
+
+// Page Actions
+import { PageDispatcherFactory } from '../Page/Actions';
+
+// Base
+import { Actions } from '../Base/Actions';
 
 // State
 import { ActionTypes, IMasterSiteState } from './State';
@@ -26,7 +32,7 @@ export interface IMasterSiteActions {
     receiveMasterSiteUpsert: (upsert: MasterSiteUpsertViewModel) => void;
 }
 
-class MasterSiteActions implements IMasterSiteActions {
+class MasterSiteActions extends Actions implements IMasterSiteActions {
 
     private onFailure = (error): void => {
         console.log(error);
@@ -38,7 +44,8 @@ class MasterSiteActions implements IMasterSiteActions {
             toastr.success('MasterSite Creation', 'MasterSite Created');
             createHashHistory().push('/masterSites');
         };
-        Api(dispatch).call(MasterSiteService.post(), masterSite, onSuccess, this.onFailure);
+
+        this.api.call(MasterSiteService.post(), masterSite, onSuccess, this.onFailure);
     }
 
     public editMasterSiteAsync = (masterSite: MasterSite) => (dispatch: Dispatch<IMasterSiteState>): void => {
@@ -48,7 +55,7 @@ class MasterSiteActions implements IMasterSiteActions {
             createHashHistory().push('/masterSites');
         };
 
-        Api(dispatch).call(MasterSiteService.put(), masterSite, onSuccess, this.onFailure);
+        this.api.call(MasterSiteService.put(), masterSite, onSuccess, this.onFailure);
     }
 
     public getMasterSiteAsync = (masterSiteId: number) => (dispatch: Dispatch<IMasterSiteState>): void => {
@@ -57,7 +64,7 @@ class MasterSiteActions implements IMasterSiteActions {
             dispatch(this.receiveMasterSiteUpsert(upsert));
         };
 
-        Api(dispatch).call(MasterSiteService.getById(masterSiteId), null, onSuccess, this.onFailure);
+        this.api.call(MasterSiteService.getById(masterSiteId), null, onSuccess, this.onFailure);
     }
 
     public getMasterSitesAsync = () => (dispatch: Dispatch<IMasterSiteState>): void => {
@@ -66,16 +73,16 @@ class MasterSiteActions implements IMasterSiteActions {
             dispatch(this.receiveMasterSites(masterSites));
         };
 
-        Api(dispatch).call(MasterSiteService.get(), null, onSuccess, this.onFailure);
+        this.api.call(MasterSiteService.get(), null, onSuccess, this.onFailure);
     }
 
     private receiveMasterSites = createAction(ActionTypes.receiveCollection, (masterSites: MasterSite[]) => masterSites);
     public receiveMasterSiteUpsert = createAction(ActionTypes.receiveUpsert, (upsert: MasterSiteUpsertViewModel) => upsert);
 }
 
-const dispatcherFactory = (dispatch: Dispatch<IMasterSiteState>): IMasterSiteActions => {
+const dispatcherFactory = (dispatch: Dispatch<IMasterSiteState>, progressFunctions: IApiProgressFunctions): IMasterSiteActions => {
 
-    const actions = new MasterSiteActions();
+    const actions = new MasterSiteActions(progressFunctions);
 
     return {
         createMasterSiteAsync: (masterSite: MasterSite) => {

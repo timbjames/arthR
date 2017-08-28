@@ -2,21 +2,72 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+// Material UI
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
+// Models
+import { Project } from '../../../Models';
+
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
-export class ProjectIndex extends BaseComponent<{}> {
+export class ProjectIndex extends BaseComponent<{ deleteModalIsOpen: boolean, projectToDelete: Project }> {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            deleteModalIsOpen: false,
+            projectToDelete: null
+        };
+    }
 
     componentDidMount() {
 
         const { appActions, appState } = this.props;
-
+        appActions.project.reset();
         appActions.project.getProjectsAsync();
+    }
+
+    private handleDeleteOpen = (projectToDelete: Project) => (e: React.MouseEvent<HTMLAnchorElement>): void => {
+
+        e.preventDefault();
+
+        this.setState({ deleteModalIsOpen: true, projectToDelete });
+    }
+
+    private handleDeleteClose = (deleteAction: (projectToDelete: Project, callback: Function) => void, confirmed: boolean) => (): void => {
+
+        if (confirmed) {
+
+            deleteAction(this.state.projectToDelete, () => {
+                this.setState({ deleteModalIsOpen: false, projectToDelete: null });
+            });
+
+            return;
+        }
+
+        this.setState({ deleteModalIsOpen: false, projectToDelete: null });
     }
 
     render() {
 
-        const { appState } = this.props;
+        const { appActions, appState } = this.props;
+        const { deleteModalIsOpen, projectToDelete } = this.state
+
+        const deleteActions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onClick={this.handleDeleteClose(appActions.project.deleteProjectAsync, false)}
+            />,
+            <FlatButton
+                label="Confirm"
+                primary={true}
+                onClick={this.handleDeleteClose(appActions.project.deleteProjectAsync, true)}
+            />
+        ];
 
         return (
 
@@ -69,6 +120,7 @@ export class ProjectIndex extends BaseComponent<{}> {
                                                         <ul className="dropdown-menu" role="menu">
                                                             <li><Link to={`/tasks/create/${p.projectId}`}>Add Task</Link></li>
                                                             <li><Link to={`/projects/edit/${p.projectId}`}>Edit</Link></li>
+                                                            <li><a href="#" onClick={this.handleDeleteOpen(p)}>Delete</a></li>
                                                         </ul>
                                                     </div>
                                                 </td>
@@ -84,6 +136,10 @@ export class ProjectIndex extends BaseComponent<{}> {
                     </div>
 
                 </div>
+
+                <Dialog title="Delete Project" actions={deleteActions} modal={true} open={deleteModalIsOpen}>
+                    Are you sure you want to delete {projectToDelete && projectToDelete.name} ?
+                </Dialog>
 
             </div>
         );

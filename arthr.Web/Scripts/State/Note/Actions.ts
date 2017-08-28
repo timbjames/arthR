@@ -7,13 +7,19 @@ import { createHashHistory } from 'history';
 import { toastr } from 'react-redux-toastr'
 
 // Utility
-import { Api } from '../../Utility';
+import { IApiProgressFunctions } from '../../Utility';
 
 // Models
 import { Note, NoteUpsertViewModel } from '../../Models'
 
 // Services
 import { NotesService } from '../../Services'
+
+// Page Actions
+import { PageDispatcherFactory } from '../Page/Actions';
+
+// Base
+import { Actions } from '../Base/Actions';
 
 // State
 import { ActionTypes, INoteState } from './State';
@@ -26,7 +32,7 @@ export interface INoteActions {
     receiveNoteUpsert: (upsert: NoteUpsertViewModel) => void;
 }
 
-class NoteActions implements INoteActions {
+class NoteActions extends Actions implements INoteActions {
 
     private onFailure = (error): void => {
         console.log(error);
@@ -38,7 +44,8 @@ class NoteActions implements INoteActions {
             toastr.success('Note Creation', 'Note Created');
             createHashHistory().push('/notes');
         };
-        Api(dispatch).call(NotesService.post(), note, onSuccess, this.onFailure);
+
+        this.api.call(NotesService.post(), note, onSuccess, this.onFailure);
     }
 
     public editNoteAsync = (note: Note) => (dispatch: Dispatch<INoteState>): void => {
@@ -48,7 +55,7 @@ class NoteActions implements INoteActions {
             createHashHistory().push('/notes');
         };
 
-        Api(dispatch).call(NotesService.put(), note, onSuccess, this.onFailure);
+        this.api.call(NotesService.put(), note, onSuccess, this.onFailure);
     }
 
     public getNoteAsync = (noteId: number) => (dispatch: Dispatch<INoteState>): void => {
@@ -57,7 +64,7 @@ class NoteActions implements INoteActions {
             dispatch(this.receiveNoteUpsert(upsert));
         };
 
-        Api(dispatch).call(NotesService.getById(noteId), null, onSuccess, this.onFailure);
+        this.api.call(NotesService.getById(noteId), null, onSuccess, this.onFailure);
     }
 
     public getNotesAsync = () => (dispatch: Dispatch<INoteState>): void => {
@@ -66,16 +73,16 @@ class NoteActions implements INoteActions {
             dispatch(this.receiveNotes(notes));
         };
 
-        Api(dispatch).call(NotesService.get(), null, onSuccess, this.onFailure);
+        this.api.call(NotesService.get(), null, onSuccess, this.onFailure);
     }
 
     private receiveNotes = createAction(ActionTypes.receiveCollection, (notes: Note[]) => notes);
     public receiveNoteUpsert = createAction(ActionTypes.receiveUpsert, (upsert: NoteUpsertViewModel) => upsert);
 }
 
-const dispatcherFactory = (dispatch: Dispatch<INoteState>): INoteActions => {
+const dispatcherFactory = (dispatch: Dispatch<INoteState>, progressFunctions: IApiProgressFunctions): INoteActions => {
 
-    const actions = new NoteActions();
+    const actions = new NoteActions(progressFunctions);
 
     return {
         createNoteAsync: (note: Note) => {

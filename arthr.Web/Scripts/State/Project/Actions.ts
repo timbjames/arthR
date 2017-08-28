@@ -6,8 +6,8 @@ import { createHashHistory } from 'history';
 // https://github.com/diegoddox/react-redux-toastr
 import { toastr } from 'react-redux-toastr'
 
-// Utility
-import { Api } from '../../Utility';
+// Utils
+import { IApiProgressFunctions } from '../../Utility';
 
 // Models
 import { Project, ProjectUpsertViewModel } from '../../Models'
@@ -15,19 +15,27 @@ import { Project, ProjectUpsertViewModel } from '../../Models'
 // Services
 import { ProjectService } from '../../Services'
 
+// Page Actions
+import { PageDispatcherFactory } from '../Page/Actions';
+
+// Base
+import { Actions } from '../Base/Actions';
+
 // State
 import { ActionTypes, IProjectState } from './State';
 
 export interface IProjectActions {
     createProjectAsync: (project: Project) => void;
+    deleteProjectAsync: (project: Project, callback: Function) => void;
     editProjectAsync: (project: Project) => void;
     getProjectAsync: (projectId: number) => void;
     getProjectsAsync: () => void;
     getProjectTemplateAsync: () => void;
     receiveProjectUpsert: (upsert: ProjectUpsertViewModel) => void;
+    reset: () => void;
 }
 
-class ProjectActions implements IProjectActions {
+class ProjectActions extends Actions implements IProjectActions {
 
     private onFailure = (error): void => {
         console.log(error);
@@ -39,7 +47,19 @@ class ProjectActions implements IProjectActions {
             toastr.success('Project Creation', 'Project Created');
             createHashHistory().push('/projects');
         };
-        Api(dispatch).call(ProjectService.post(), project, onSuccess, this.onFailure);
+
+        this.api.call(ProjectService.post(), project, onSuccess, this.onFailure);
+    }
+
+    public deleteProjectAsync = (project: Project, callback: Function) => (dispatch: Dispatch<IProjectState>): void => {
+
+        const onSucces = () => {
+            toastr.success('Project Deletion', 'Project Deleted');
+            callback();
+            dispatch(this.getProjectsAsync());
+        };
+
+        this.api.call(ProjectService.delete(project.projectId), null, onSucces, this.onFailure);
     }
 
     public editProjectAsync = (project: Project) => (dispatch: Dispatch<IProjectState>): void => {
@@ -49,7 +69,7 @@ class ProjectActions implements IProjectActions {
             createHashHistory().push('/projects');
         };
 
-        Api(dispatch).call(ProjectService.put(), project, onSuccess, this.onFailure);
+        this.api.call(ProjectService.put(), project, onSuccess, this.onFailure);
     }
 
     public getProjectAsync = (projectId: number) => (dispatch: Dispatch<IProjectState>): void => {
@@ -58,7 +78,7 @@ class ProjectActions implements IProjectActions {
             dispatch(this.receiveProjectUpsert(upsert));
         };
 
-        Api(dispatch).call(ProjectService.getById(projectId), null, onSuccess, this.onFailure);
+        this.api.call(ProjectService.getById(projectId), null, onSuccess, this.onFailure);
     }
 
     public getProjectsAsync = () => (dispatch: Dispatch<IProjectState>): void => {
@@ -67,7 +87,7 @@ class ProjectActions implements IProjectActions {
             dispatch(this.receiveProjects(projects));
         };
 
-        Api(dispatch).call(ProjectService.get(false, ''), null, onSuccess, this.onFailure);
+        this.api.call(ProjectService.get(false, ''), null, onSuccess, this.onFailure);
     }
 
     public getProjectTemplateAsync = () => (dispatch: Dispatch<IProjectState>): void => {
@@ -76,20 +96,27 @@ class ProjectActions implements IProjectActions {
             dispatch(this.receiveProjectUpsert(upsert));
         };
 
-        Api(dispatch).call(ProjectService.getTemplate(), null, onSuccess, this.onFailure);
+        this.api.call(ProjectService.getTemplate(), null, onSuccess, this.onFailure);
     }
 
     private receiveProjects = createAction(ActionTypes.receiveCollection, (projects: Project[]) => projects);
     public receiveProjectUpsert = createAction(ActionTypes.receiveUpsert, (upsert: ProjectUpsertViewModel) => upsert);
+
+    public reset = () => (dispatch: Dispatch<IProjectState>): void => {
+        dispatch(this.receiveProjects(null));
+    }
 }
 
-const dispatcherFactory = (dispatch: Dispatch<IProjectState>): IProjectActions => {
+const dispatcherFactory = (dispatch: Dispatch<IProjectState>, progressFunctions: IApiProgressFunctions): IProjectActions => {
 
-    const actions = new ProjectActions();
+    const actions = new ProjectActions(progressFunctions);
 
     return {
         createProjectAsync: (project: Project) => {
             dispatch(actions.createProjectAsync(project));
+        },
+        deleteProjectAsync: (project: Project, callback: Function) => {
+            dispatch(actions.deleteProjectAsync(project, callback));
         },
         editProjectAsync: (project: Project) => {
             dispatch(actions.editProjectAsync(project));
@@ -105,6 +132,9 @@ const dispatcherFactory = (dispatch: Dispatch<IProjectState>): IProjectActions =
         },
         receiveProjectUpsert: (upsert: ProjectUpsertViewModel) => {
             dispatch(actions.receiveProjectUpsert(upsert));
+        },
+        reset: () => {
+            dispatch(actions.reset());
         }
     }
 }

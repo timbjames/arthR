@@ -1,4 +1,7 @@
 ﻿const taskApi = {
+    complete: (id: number) => {
+        return `/api/task/complete?id=${id}`
+    }, 
     delete: (id: number) => {
         return `/api/task/${id}`
     }, 

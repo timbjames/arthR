@@ -9,6 +9,7 @@ export class Project {
     deadline: Date;
     deleted: boolean;
     hideFromTimesheet: boolean;
+    isDeleted: boolean;
     projectId: number;
     masterSite: MasterSite;
     masterSiteId: number;
