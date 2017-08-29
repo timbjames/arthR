@@ -4,23 +4,28 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Services;
+    using Data.Extensions;
     using Interfaces;
     using Microsoft.EntityFrameworkCore;
     using Models.Core;
     using Utils.Attributes;
-    using arthr.Data.Extensions;
-    using arthr.Utils.Exceptions.Enums;
-    using System.Linq;
+    using Utils.Exceptions.Enums;
 
     #endregion
 
     [DependencyInjected]
     public sealed class StaffService : BaseService, IStaffService
     {
+        #region Fields
+
         private readonly IUserService _userService;
+
+        #endregion
+
         #region Constructors
 
         public StaffService(IUserService userService, IBaseServiceBundle baseServiceBundle)
@@ -39,7 +44,7 @@
             return await Db.SaveChangesAsync() > 1;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public Task<bool> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

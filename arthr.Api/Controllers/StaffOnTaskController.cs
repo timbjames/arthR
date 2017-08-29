@@ -2,7 +2,6 @@
 {
     #region Usings
 
-    using Business.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
     #endregion
@@ -10,19 +9,19 @@
     [Route("api/[controller]")]
     public sealed class StaffOnTaskController : BaseController
     {
-        #region Fields
+        //#region Fields
 
-        private readonly IStaffOnTaskService _staffOnTaskService;
+        //private readonly IStaffOnTaskService _staffOnTaskService;
 
-        #endregion
+        //#endregion
 
-        #region Constructors
+        //#region Constructors
 
-        public StaffOnTaskController(IStaffOnTaskService staffOnTaskService)
-        {
-            _staffOnTaskService = staffOnTaskService;
-        }
+        //public StaffOnTaskController(IStaffOnTaskService staffOnTaskService)
+        //{
+        //    _staffOnTaskService = staffOnTaskService;
+        //}
 
-        #endregion
+        //#endregion
     }
 }

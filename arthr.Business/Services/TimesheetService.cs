@@ -22,6 +22,8 @@
 
         #endregion
 
+        #region Interface Implementations
+
         public Task<bool> CreateAsync(Timesheet timesheet)
         {
             throw new NotImplementedException();
@@ -29,22 +31,24 @@
 
         public Task<bool> DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task<bool> EditAsync(Timesheet timesheet)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task<List<Timesheet>> GetAsync()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public Task<Timesheet> GetAsync(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

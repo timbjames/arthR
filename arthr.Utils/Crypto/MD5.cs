@@ -25,17 +25,16 @@
 
         public static string GetHash(string value)
         {
-            byte[] source;
             byte[] hash;
 
-            source = ASCIIEncoding.ASCII.GetBytes(value);
+            byte[] source = Encoding.ASCII.GetBytes(value);
 
             using (MD5 md5 = MD5.Create())
             {
                 hash = md5.ComputeHash(source);
             }
 
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             for (int i = 0; i < hash.Length; i++)
             {
                 sb.Append(hash[i].ToString("X2"));

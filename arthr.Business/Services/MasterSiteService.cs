@@ -2,16 +2,17 @@
 {
     #region Usings
 
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Services;
+    using Data.Extensions;
     using Interfaces;
-    using Models.Core;
-    using System.Linq;
     using Microsoft.EntityFrameworkCore;
-    using arthr.Data.Extensions;
-    using arthr.Utils.Exceptions.Enums;
+    using Models.Core;
+    using Utils.Exceptions.Enums;
 
     #endregion
 
@@ -24,6 +25,8 @@
         }
 
         #endregion
+
+        #region Interface Implementations
 
         public async Task<List<MasterSite>> GetAsync()
         {
@@ -53,9 +56,11 @@
             return await Db.SaveChangesAsync() > 1;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public Task<bool> DeleteAsync(int id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

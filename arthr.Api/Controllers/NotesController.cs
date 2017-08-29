@@ -1,13 +1,18 @@
 ﻿namespace arthr.Api.Controllers
 {
-    using arthr.Models.Notes;
-    using arthr.Utils.Attributes;
+    #region Usings
+
+    using Models.Notes;
+    using Utils.Attributes;
+
     #region Usings
 
     using Business.Interfaces;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    #endregion
 
     #endregion
 

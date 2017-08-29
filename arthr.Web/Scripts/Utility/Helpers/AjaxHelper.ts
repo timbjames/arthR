@@ -22,10 +22,17 @@ export interface IApiProgressFunctions {
     decrementProgress: Function;
 }
 
-const api = (apiFunctions: IApiProgressFunctions) => {
+type OnSuccess = <TResponse>(model: TResponse) => void;
+type OnFailure = (data: any) => void;
+
+export interface IApi {
+    call: <TRequest, TResponse>(api: IApiCallWithPayload<TRequest, TResponse>, payload: TRequest, onSuccess: (model: TResponse) => void, onFailure: OnFailure) => void;
+}
+
+const api = (apiFunctions: IApiProgressFunctions): IApi => {
 
     return {
-        call: <TRequest, TResponse>(api: IApiCallWithPayload<TRequest, TResponse>, payload: TRequest, onSuccess: (model: TResponse) => void, onFailure: any): void => {
+        call: <TRequest, TResponse>(api: IApiCallWithPayload<TRequest, TResponse>, payload: TRequest, onSuccess: (model: TResponse) => void, onFailure: OnFailure): void => {
 
             const body = payload && JSON.stringify(payload);
 

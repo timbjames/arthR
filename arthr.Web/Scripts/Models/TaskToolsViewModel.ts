@@ -1,14 +1,14 @@
 ﻿import { Project } from './Project';
-import { Status } from './Status';
 import { Staff } from './Staff';
+import { Status } from './Status';
 
 export class TaskToolsViewModel {
-    projects: Project[];
     priorities: number[];
-    states: Status[];
+    projects: Project[];
     staff: Staff[];
+    states: Status[];
 }
 /*
     Debug Info:
-    Unknown Types: Project, Status, Staff
+    Unknown Types: Project, Staff, Status
 */

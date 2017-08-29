@@ -4,24 +4,28 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Services;
     using Data.Extensions;
     using Interfaces;
-    using Models.arTask;
-    using Utils.Exceptions.Enums;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
-    using arthr.Models.Core;
+    using Models.arTask;
+    using Models.Core;
+    using Utils.Exceptions.Enums;
 
     #endregion
 
     public class TaskService : BaseService, ITaskService
     {
+        #region Fields
+
         private readonly IProjectService _projectService;
         private readonly IStaffService _staffService;
         private readonly IStatusService _statusService;
+
+        #endregion
 
         #region Constructors
 
@@ -79,24 +83,24 @@
 
         public async Task<bool> EditAsync(AnthRTask anthRTask)
         {
-            var staffOnTask = anthRTask.StaffOnTasks.ToList();
+            List<StaffOnTask> staffOnTask = anthRTask.StaffOnTasks.ToList();
 
             Db.Entry(anthRTask).State = EntityState.Modified;
 
-            var result =  await Db.SaveChangesAsync() > 0;
+            bool result =  await Db.SaveChangesAsync() > 0;
 
             if (result)
             {
-                var existingStaffOnTasks = await Db.StaffOnTask.Where(t => t.AnthRTaskId == anthRTask.AnthRTaskId).ToListAsync();
+                List<StaffOnTask> existingStaffOnTasks = await Db.StaffOnTask.Where(t => t.AnthRTaskId == anthRTask.AnthRTaskId).ToListAsync();
 
                 if (existingStaffOnTasks.Any())
                 {
                     Db.RemoveRange(existingStaffOnTasks);
                 }
 
-                foreach (var sOT in staffOnTask)
+                foreach (StaffOnTask sOt in staffOnTask)
                 {
-                    Db.StaffOnTask.Add(sOT);
+                    Db.StaffOnTask.Add(sOt);
                 }
 
                 result = await Db.SaveChangesAsync() > 0;
@@ -109,6 +113,14 @@
         {
             AnthRTask task = await GetTask(id);
             task.Deleted = true;
+
+            return await Db.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> CompleteTask(int id, User user)
+        {
+            AnthRTask task = await GetTask(id);
+            task.DateCompleted = DateTime.UtcNow;
 
             return await Db.SaveChangesAsync() > 0;
         }
@@ -131,14 +143,6 @@
             };
 
             return tools;
-        }
-
-        public async Task<bool> CompleteTask(int id, User user)
-        {
-            var task = await GetTask(id);
-            task.DateCompleted = DateTime.UtcNow;
-
-            return await Db.SaveChangesAsync() > 0;
         }
 
         #endregion

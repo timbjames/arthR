@@ -2,8 +2,6 @@
 {
     #region Usings
 
-    using System.Collections.Generic;
-
     #endregion
 
     // ReSharper disable InconsistentNaming

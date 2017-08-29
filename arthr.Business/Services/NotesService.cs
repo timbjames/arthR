@@ -4,22 +4,26 @@
 
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Interfaces;
     using Core.Services;
+    using Data.Extensions;
     using Interfaces;
-    using Models.Notes;
     using Microsoft.EntityFrameworkCore;
-    using System.Linq;
-    using arthr.Utils.Exceptions.Enums;
-    using arthr.Data.Extensions;
-    using arthr.Models.Core;
+    using Models.Core;
+    using Models.Notes;
+    using Utils.Exceptions.Enums;
 
     #endregion
 
     public class NotesService : BaseService, INotesService
     {
+        #region Fields
+
         private readonly IStaffService _staffService;
+
+        #endregion
 
         #region Constructors
 
@@ -68,7 +72,7 @@
             return await Db.SaveChangesAsync() > 1;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public Task<bool> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

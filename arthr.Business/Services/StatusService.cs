@@ -1,24 +1,34 @@
-﻿using arthr.Business.Core.Services;
-using arthr.Business.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using arthr.Models.Core;
-using System.Threading.Tasks;
-using arthr.Business.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
-namespace arthr.Business.Services
+﻿namespace arthr.Business.Services
 {
+    #region Usings
+
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Core.Interfaces;
+    using Core.Services;
+    using Interfaces;
+    using Microsoft.EntityFrameworkCore;
+    using Models.Core;
+
+    #endregion
+
     public class StatusService : BaseService, IStatusService
     {
+        #region Constructors
+
         public StatusService(IBaseServiceBundle baseServiceBundle) : base(baseServiceBundle)
         {
         }
+
+        #endregion
+
+        #region Interface Implementations
 
         public async Task<List<Status>> GetAsync()
         {
             return await Db.Status.ToListAsync();
         }
+
+        #endregion
     }
 }
