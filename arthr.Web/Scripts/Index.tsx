@@ -4,6 +4,7 @@ import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import { RouteProps } from 'react-router';
 import { HashRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import { Dispatch } from 'redux';
+import { EventEmitter } from 'eventemitter3';
 
 import ReduxToastr from 'react-redux-toastr'
 
@@ -22,6 +23,8 @@ import { IAppState, RootReducer } from './State/AppState';
 
 import { Breadcrumb } from './App/Navigation/Breadcrumb';
 import { TopMenu } from './App/Navigation/TopMenu';
+
+import { Home } from './App/Views/Home/Home';
 import { CreateProject, EditProject, ProjectIndex } from './App/Views/Projects';
 import { CreateTask, EditTask, TaskIndex } from './App/Views/Tasks';
 import { Index as Schedule } from './App/Views/Schedule';
@@ -37,9 +40,17 @@ class MyRoute extends Route<RouteProps> { }
 interface IReduxComponentProps extends React.Props<Index> {
     appActions: IAppActions;
     appState: IAppState;
+    emitter: EventEmitter;
 }
 
 class Index extends React.Component<IReduxComponentProps, {}>{
+
+    componentDidMount() {
+
+        this.props.emitter.on('WOW', () => {
+             console.log('wow');
+        });
+    }
 
     render() {
 
@@ -57,6 +68,7 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                             <div className="col-sm-12">
 
                                 <Switch>
+
                                     <MyRoute exact path="/" render={props => <Breadcrumb active="Home" />} />
 
                                     <MyRoute exact path="/projects" render={props => <Breadcrumb active="Projects" />} />
@@ -78,6 +90,7 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                     <MyRoute exact path="/mastersites" render={props => <Breadcrumb active="Master Site" />} />
                                     <MyRoute exact path="/mastersites/create" render={props => <Breadcrumb active="Create Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
                                     <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <Breadcrumb active="Edit Master Site" links={[{ href: '/mastersites', name: 'Master Site' }]} />} />
+
                                 </Switch>
 
                             </div>
@@ -86,29 +99,33 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                         <div className="container body-content">
 
                             <Switch>
-                                <MyRoute exact path="/projects" render={props => <ProjectIndex key="ProjectIndex" {...this.props} {...props} />} />
-                                <MyRoute exact path="/projects/create" render={props => <CreateProject appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/projects/edit/:projectId" render={props => <EditProject appActions={appActions} appState={appState} {...props} />} />
 
-                                <MyRoute exact path="/tasks" render={props => <TaskIndex appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/tasks/create/:projectId?" render={props => <CreateTask appActions={appActions} appState={appState} {...props} />} />
-                                <MyRoute exact path="/tasks/edit/:taskId" render={props => <EditTask appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/" render={props => <Home {...this.props} {...props} />} />
+
+                                <MyRoute exact path="/projects" render={props => <ProjectIndex key="ProjectIndex" {...this.props} {...props} />} />
+                                <MyRoute exact path="/projects/create" render={props => <CreateProject {...this.props} />} />
+                                <MyRoute exact path="/projects/edit/:projectId" render={props => <EditProject {...this.props} {...props} />} />
+
+                                <MyRoute exact path="/tasks" render={props => <TaskIndex {...this.props} />} />
+                                <MyRoute exact path="/tasks/create/:projectId?" render={props => <CreateTask {...this.props} {...props} />} />
+                                <MyRoute exact path="/tasks/edit/:taskId" render={props => <EditTask {...this.props} {...props} />} />
 
                                 <MyRoute exact path="/schedule" render={props => <Schedule />} />
 
-                                <MyRoute exact path="/notes" render={props => <NoteIndex appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/notes/create" render={props => <CreateNote appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/notes/edit/:noteId" render={props => <EditNote appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/notes" render={props => <NoteIndex {...this.props} />} />
+                                <MyRoute exact path="/notes/create" render={props => <CreateNote {...this.props} />} />
+                                <MyRoute exact path="/notes/edit/:noteId" render={props => <EditNote {...this.props} {...props} />} />
 
-                                <MyRoute exact path="/mastersites" render={props => <MasterSiteIndex appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/mastersites/create" render={props => <CreateMasterSite appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <EditMasterSite appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/mastersites" render={props => <MasterSiteIndex {...this.props} />} />
+                                <MyRoute exact path="/mastersites/create" render={props => <CreateMasterSite {...this.props} />} />
+                                <MyRoute exact path="/mastersites/edit/:masterSiteId" render={props => <EditMasterSite {...this.props} {...props} />} />
 
-                                <MyRoute exact path="/staff" render={props => <StaffIndex appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/staff/create" render={props => <CreateStaff appActions={appActions} appState={appState} />} />
-                                <MyRoute exact path="/staff/edit/:staffId" render={props => <EditStaff appActions={appActions} appState={appState} {...props} />} />
+                                <MyRoute exact path="/staff" render={props => <StaffIndex {...this.props} />} />
+                                <MyRoute exact path="/staff/create" render={props => <CreateStaff {...this.props} />} />
+                                <MyRoute exact path="/staff/edit/:staffId" render={props => <EditStaff {...this.props} {...props} />} />
 
                                 <MyRoute exact path="/timesheets" render={props => <Timesheets />} />
+
                             </Switch>
 
                             <hr />
@@ -152,7 +169,8 @@ class IndexRedux extends React.Component<{}, {}>{
         const ReduxWrapper = () => {
             return ReduxContainerBuilder().NoneProps({
                 mapDispatchToProps: (dispatch: Dispatch<IAppState>) => ({
-                    appActions: ActionsDispatcherFactory(dispatch)
+                    appActions: ActionsDispatcherFactory(dispatch),
+                    emitter: new EventEmitter()
                 }),
                 mapStateToProps: (state: { appState: IAppState }) => ({
                     appState: state.appState

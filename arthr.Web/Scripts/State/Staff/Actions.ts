@@ -34,7 +34,7 @@ export interface IStaffActions {
 
 class StaffActions extends Actions implements IStaffActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

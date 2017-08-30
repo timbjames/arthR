@@ -37,7 +37,7 @@ export interface IProjectActions {
 
 class ProjectActions extends Actions implements IProjectActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

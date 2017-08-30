@@ -38,7 +38,7 @@ export interface ITaskActions {
 
 class TaskActions extends Actions implements ITaskActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

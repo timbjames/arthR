@@ -34,7 +34,7 @@ export interface INoteActions {
 
 class NoteActions extends Actions implements INoteActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

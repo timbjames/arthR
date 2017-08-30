@@ -23,6 +23,7 @@
   <ItemGroup>
     <None Remove="Scripts\App\BaseComponent.tsx" />
     <None Remove="Scripts\App\Navigation\Breadcrumb.tsx" />
+    <None Remove="Scripts\App\Views\Home\Home.tsx" />
     <None Remove="Scripts\App\Views\Projects\CreateProject.tsx" />
     <None Remove="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />
     <None Remove="Scripts\App\Views\Staff\Index.ts" />
@@ -66,6 +67,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\App\BaseComponent.tsx" />
     <TypeScriptCompile Include="Scripts\App\Navigation\Breadcrumb.tsx" />
+    <TypeScriptCompile Include="Scripts\App\Views\Home\Home.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\EditProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\CreateProject.tsx" />
     <TypeScriptCompile Include="Scripts\App\Views\Projects\ProjectUpsertForm.tsx" />

@@ -48,7 +48,7 @@
             }
 
             List<Claim> claims = context.HttpContext.User.Claims.ToList();
-            int userId = int.Parse(claims.FirstOrDefault(x => x.Type == JwtClaimTypes.Subject).Value);
+            int userId = int.Parse(claims.FirstOrDefault(x => x.Type == JwtClaimTypes.Subject)?.Value);
             baseController.ArthRUser = _userService.FindByIdAsync(userId).Result;
         }
 

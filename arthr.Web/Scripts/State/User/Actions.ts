@@ -30,7 +30,7 @@ export interface IUserActions {
 
 class UserActions extends Actions implements IUserActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

@@ -39,7 +39,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=54C6BB3F_002D37BB_002D4757_002DAB31_002D63F0B2F9E502_002Fd_003AFundingProviders_002Fd_003AModels_002Ff_003AFundingPartnerProvider_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=5B7B030C_002DE2B1_002D40C1_002DA66D_002DEB3E6FE5944D_002Fd_003AMigrations/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=6CA3B4FA_002DB70F_002D4D31_002DB0A9_002D175FD90ADF54_002Fd_003AMigrations/@EntryIndexedValue">ExplicitlyExcluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=B1005448_002DEBD0_002D472A_002D9C58_002D85B2CB4167B2_002Fd_003AScripts/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=B1005448_002DEBD0_002D472A_002D9C58_002D85B2CB4167B2_002Fd_003Awwwroot/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D2BF0DD9_002D418E_002D4F61_002D80C4_002D868EDC7D43C5_002Fd_003AViews/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=D2BF0DD9_002D418E_002D4F61_002D80C4_002D868EDC7D43C5_002Fd_003Awwwroot/@EntryIndexedValue">ExplicitlyExcluded</s:String>
@@ -347,6 +347,7 @@
 	<s:Boolean x:Key="/Default/Environment/Feedback/ShouldPrompt/@EntryValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/GenerateMru/GroupByType/=Implementations/@EntryIndexedValue">False</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/GenerateMru/SortByName/=Implementations/@EntryIndexedValue">False</s:Boolean>
+	<s:String x:Key="/Default/Environment/Hierarchy/PsiConfigurationSettingsKey/CustomLocation/@EntryValue">C:\Users\tim\AppData\Local\JetBrains\Transient\ReSharperPlatformVs15\v09_0eed0ceb\SolutionCaches</s:String>
 	<s:Boolean x:Key="/Default/Environment/MemoryUsageIndicator/IsVisible/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SearchAndNavigation/FileAndDirsToSkip/=1D7DE8AD_002D53C1_002D4700_002DB0BF_002D49E4879F534C_002Fd_003Awwwroot_002Fd_003Ajs/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAddAccessorOwnerDeclarationBracesMigration/@EntryIndexedValue">True</s:Boolean>

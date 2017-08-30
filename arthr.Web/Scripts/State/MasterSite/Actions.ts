@@ -34,7 +34,7 @@ export interface IMasterSiteActions {
 
 class MasterSiteActions extends Actions implements IMasterSiteActions {
 
-    private onFailure = (error): void => {
+    private onFailure = (error: any): void => {
         console.log(error);
     }
 

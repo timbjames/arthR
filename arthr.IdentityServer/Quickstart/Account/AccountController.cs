@@ -98,7 +98,7 @@ namespace IdentityServer4.Quickstart.UI
                     {
                         var wi = wp.Identity as WindowsIdentity;
                         IdentityReferenceCollection groups = wi?.Groups.Translate(typeof(NTAccount));
-                        IEnumerable<Claim> roles = groups.Select(x => new Claim(JwtClaimTypes.Role, x.Value));
+                        IEnumerable<Claim> roles = (groups ?? throw new InvalidOperationException()).Select(x => new Claim(JwtClaimTypes.Role, x.Value));
                         id.AddClaims(roles);
                     }
 
