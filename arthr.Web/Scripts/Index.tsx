@@ -34,7 +34,7 @@ injectTapEventPlugin();
 
 class MyRoute extends Route<RouteProps> { }
 
-interface IReduxComponentProps extends React.Props<Index> {
+interface IReduxComponentProps {
     appActions: IAppActions;
     appState: IAppState;
 }
