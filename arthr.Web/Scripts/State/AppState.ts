@@ -16,6 +16,8 @@ import {
     StaffUpsertViewModel,
     TaskToolsViewModel,
     TaskUpsertViewModel,
+    Timesheet,
+    TimesheetUpsertViewModel,
     User
 } from '../Models';
 
@@ -26,6 +28,7 @@ import { PageReducer } from './Page/State';
 import { ProjectReducer } from './Project/State';
 import { StaffReducer } from './Staff/State';
 import { TaskReducer } from './Task/State';
+import { TimesheetReducer } from './Timesheet/State';
 import { UserReducer } from './User/State';
 
 export interface IAppState {
@@ -57,6 +60,10 @@ export interface IAppState {
         taskTools: TaskToolsViewModel,
         taskUpsert: TaskUpsertViewModel
     },
+    timesheet: {
+        timesheets: Timesheet[],
+        timesheetUpsert: TimesheetUpsertViewModel
+    },
     user: {
         loggedInUser: User
     }
@@ -69,6 +76,7 @@ const areaStateReducer = combineReducers({
     project: ProjectReducer,
     staff: StaffReducer,
     task: TaskReducer,
+    timesheet: TimesheetReducer,
     user: UserReducer
 });
 

@@ -41,10 +41,10 @@
             return Ok(await _timesheetService.GetAsync());
         }
 
-        [HttpGet, Route("/api/timesheet/{id:int}"), ReturnType(typeof(Timesheet))]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet, Route("/api/timesheet/{id:int}"), ReturnType(typeof(TimesheetUpsertViewModel))]
+        public async Task<IActionResult> GetById(int id, int? taskId)
         {
-            return Ok(await _timesheetService.GetAsync(id));
+            return Ok(await _timesheetService.GetAsync(id, taskId, 1));
         }
 
         [HttpPost, Route("/api/timesheet"), ReturnType(typeof(bool))]

@@ -12,6 +12,7 @@ import { PageDispatcherFactory } from './Page/Actions';
 import { IProjectActions, ProjectDispatcherFactory } from './Project/Actions';
 import { IStaffActions, StaffDispatcherFactory } from './Staff/Actions';
 import { ITaskActions, TaskDispatcherFactory } from './Task/Actions';
+import { ITimesheetActions, TimesheetDispatcherFactory } from './Timesheet/Actions';
 import { IUserActions, UserDispatcherFactory } from './User/Actions';
 
 export interface IAppActions {
@@ -20,6 +21,7 @@ export interface IAppActions {
     project: IProjectActions;
     staff: IStaffActions;
     task: ITaskActions;
+    timesheet: ITimesheetActions;
     user: IUserActions;
 }
 
@@ -33,6 +35,7 @@ const actionsDispatcherFactory = (dispatch: Dispatch<IAppState>): IAppActions =>
         project: ProjectDispatcherFactory(dispatch, pageActions),
         staff: StaffDispatcherFactory(dispatch, pageActions),
         task: TaskDispatcherFactory(dispatch, pageActions),
+        timesheet: TimesheetDispatcherFactory(dispatch, pageActions),
         user: UserDispatcherFactory(dispatch, pageActions)
     }
 }

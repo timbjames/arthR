@@ -10,12 +10,12 @@ import FlatButton from 'material-ui/FlatButton';
 import { DateHelper } from '../../../Utility/Helpers';
 
 // Models
-import { AnthRTask } from '../../../Models';
+import { Timesheet } from '../../../Models';
 
 // Base
 import { BaseComponent } from '../../BaseComponent';
 
-export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, deleteModalIsOpen: boolean, taskToAction: AnthRTask }> {
+export class TimesheetIndex extends BaseComponent<{ completeModalIsOpen: boolean, deleteModalIsOpen: boolean, timesheetToAction: Timesheet }> {
 
     constructor(props) {
         super(props);
@@ -23,7 +23,7 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
         this.state = {
             completeModalIsOpen: false,
             deleteModalIsOpen: false,
-            taskToAction: null
+            timesheetToAction: null
         };
     }
 
@@ -31,56 +31,56 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
 
         const { appActions, appState } = this.props;
 
-        appActions.task.getTasksAsync();
+        appActions.timesheet.getTimesheetsAsync();
     }
 
-    private handleCompleteOpen = (taskToAction: AnthRTask) => (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    private handleCompleteOpen = (timesheetToAction: Timesheet) => (e: React.MouseEvent<HTMLAnchorElement>): void => {
 
         e.preventDefault();
 
-        this.setState({ completeModalIsOpen: true, taskToAction });
+        this.setState({ completeModalIsOpen: true, timesheetToAction });
     }
 
-    private handleCompleteTask = (completeAction: (taskId: number, callback: Function) => void, confirmed: boolean) => (): void => {
+    private handleCompleteTimesheet = (completeAction: (timesheetId: number, callback: Function) => void, confirmed: boolean) => (): void => {
 
     }
 
-    private handleDeleteOpen = (taskToAction: AnthRTask) => (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    private handleDeleteOpen = (timesheetToAction: Timesheet) => (e: React.MouseEvent<HTMLAnchorElement>): void => {
 
         e.preventDefault();
 
-        this.setState({ deleteModalIsOpen: true, taskToAction });
+        this.setState({ deleteModalIsOpen: true, timesheetToAction });
     }
 
-    private handleDeleteClose = (deleteAction: (taskToDelete: AnthRTask, callback: Function) => void, confirmed: boolean) => (): void => {
+    private handleDeleteClose = (deleteAction: (timesheetToDelete: Timesheet, callback: Function) => void, confirmed: boolean) => (): void => {
 
         if (confirmed) {
 
-            deleteAction(this.state.taskToAction, () => {
-                this.setState({ deleteModalIsOpen: false, taskToAction: null });
+            deleteAction(this.state.timesheetToAction, () => {
+                this.setState({ deleteModalIsOpen: false, timesheetToAction: null });
             });
 
             return;
         }
 
-        this.setState({ deleteModalIsOpen: false, taskToAction: null });
+        this.setState({ deleteModalIsOpen: false, timesheetToAction: null });
     }
 
     render() {
 
         const { appActions, appState } = this.props;
-        const { completeModalIsOpen, deleteModalIsOpen, taskToAction } = this.state
+        const { completeModalIsOpen, deleteModalIsOpen, timesheetToAction } = this.state
 
         const completeActions = [
             <FlatButton
                 label="Cancel"
                 primary={true}
-                onClick={this.handleCompleteTask(appActions.task.completeTaskAsync, false)}
+                onClick={this.handleCompleteTimesheet(appActions.timesheet.completeTimesheetAsync, false)}
             />,
             <FlatButton
                 label="Confirm"
                 primary={true}
-                onClick={this.handleCompleteTask(appActions.task.completeTaskAsync, true)}
+                onClick={this.handleCompleteTimesheet(appActions.timesheet.completeTimesheetAsync, true)}
             />
         ];
 
@@ -88,12 +88,12 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
             <FlatButton
                 label="Cancel"
                 primary={true}
-                onClick={this.handleDeleteClose(appActions.task.deleteTaskAsync, false)}
+                onClick={this.handleDeleteClose(appActions.timesheet.deleteTimesheetAsync, false)}
             />,
             <FlatButton
                 label="Confirm"
                 primary={true}
-                onClick={this.handleDeleteClose(appActions.task.deleteTaskAsync, true)}
+                onClick={this.handleDeleteClose(appActions.timesheet.deleteTimesheetAsync, true)}
             />
         ];
 
@@ -103,7 +103,7 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
 
                 <div className="row">
                     <div className="col-xs-6">
-                        <Link className="btn btn-xs btn-primary" to="/tasks/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Task</Link>
+                        <Link className="btn btn-xs btn-primary" to="/timesheets/create"><i className="glyphicon glyphicon-plus-sign"></i> Create New Timesheet</Link>
                     </div>
                 </div>
 
@@ -116,7 +116,7 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                             <thead>
                                 <tr>
                                     <th>
-                                        Task
+                                        Timesheet
                                     </th>
                                     <th>
                                         Planned Start
@@ -124,7 +124,7 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                                     <th>
                                         Deadline
                                     </th>
-                                    <th>Staff On Task</th>
+                                    <th>Staff On Timesheet</th>
                                     <th className="text-right">Options</th>
                                 </tr>
                             </thead>
@@ -132,8 +132,8 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                             <tbody>
 
                                 {
-                                    appState.task.tasks
-                                    && appState.task.tasks.map((t, i) => {
+                                    appState.timesheet.timesheets
+                                    && appState.timesheet.timesheets.map((t, i) => {
                                         return (
                                             <tr key={i}>
                                                 <td>
@@ -152,7 +152,7 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                                                     {DateHelper.dateConverter(t.deadline).toStandardDateDisplay()}
                                                 </td>
                                                 <td>
-                                                    {t.staffOnTasks && t.staffOnTasks.map((s, i) => <span key={i}><Link to={`/staff/edit/${s.staff.staffId}`}>{s.staff.name}</Link>{' '}</span>)}
+                                                    {t.staffOnTimesheets && t.staffOnTimesheets.map((s, i) => <span key={i}><Link to={`/staff/edit/${s.staff.staffId}`}>{s.staff.name}</Link>{' '}</span>)}
                                                 </td>
                                                 <td>
                                                     <div className="btn-group pull-right">
@@ -161,10 +161,10 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                                                         </button>
                                                         <ul className="dropdown-menu" role="menu">
                                                             <li><Link to="">Add Staff</Link></li>
-                                                            <li><Link to={`/timesheet/create/${t.anthRTaskId}`}>Allocate Time</Link></li>
+                                                            <li><Link to={`/timesheet/create/${t.anthRTimesheetId}`}>Allocate Time</Link></li>
                                                             <li><Link to="">Time Allocated (0)</Link></li>
                                                             <li className="divider"></li>
-                                                            <li><Link to={`/tasks/edit/${t.anthRTaskId}`}>Edit</Link></li>
+                                                            <li><Link to={`/timesheets/edit/${t.anthRTimesheetId}`}>Edit</Link></li>
                                                             <li><a onClick={this.handleDeleteOpen(t)} href="#">Delete</a></li>
                                                             <li><a onClick={this.handleCompleteOpen(t)} href="#">Complete</a></li>
                                                         </ul>
@@ -182,14 +182,6 @@ export class TaskIndex extends BaseComponent<{ completeModalIsOpen: boolean, del
                     </div>
 
                 </div>
-
-                <Dialog title="Complete Task" actions={completeActions} modal={true} open={completeModalIsOpen}>
-                    Are you sure you want to delete {taskToAction && taskToAction.name} ?
-                </Dialog>
-
-                <Dialog title="Delete Task" actions={deleteActions} modal={true} open={deleteModalIsOpen}>
-                    Are you sure you want to delete {taskToAction && taskToAction.name} ?
-                </Dialog>
 
             </div>
         );

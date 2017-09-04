@@ -20,7 +20,7 @@
 
         Task<List<Timesheet>> GetAsync();
 
-        Task<Timesheet> GetAsync(int id);
+        Task<TimesheetUpsertViewModel> GetAsync(int? timesheetId, int? anthrTaskId, int? staffId);
 
         #endregion
     }

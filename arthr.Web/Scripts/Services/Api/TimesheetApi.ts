@@ -5,8 +5,8 @@
     get: () => {
         return `/api/timesheet`
     }, 
-    getById: (id: number) => {
-        return `/api/timesheet/${id}`
+    getById: (id: number, taskId: number) => {
+        return `/api/timesheet/${id}?taskId=${taskId}`
     }, 
     post: () => {
         return `/api/timesheet`

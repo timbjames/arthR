@@ -9,6 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
+    @* ReSharper disable Html.TagNotResolved *@
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link href="~/css/react-redux-toastr.css" rel="stylesheet" type="text/css">
@@ -44,8 +45,9 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
     </environment>
+    @* ReSharper restore Html.TagNotResolved *@
 
-    <script>
+<script>
         window.apiUrl = '@SettingsService.EnvironmentSettings.Value.ApiUrl';
     </script>
 

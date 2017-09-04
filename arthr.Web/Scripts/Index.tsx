@@ -30,32 +30,36 @@ import { CreateTask, EditTask, TaskIndex } from './App/Views/Tasks';
 import { Index as Schedule } from './App/Views/Schedule';
 import { CreateNote, EditNote, NoteIndex } from './App/Views/Notes';
 import { CreateMasterSite, EditMasterSite, MasterSiteIndex } from './App/Views/MasterSites';
-import { Index as Timesheets } from './App/Views/Timesheets';
+import { CreateTimesheet, EditTimesheet, TimesheetIndex } from './App/Views/Timesheets';
 import { CreateStaff, EditStaff, StaffIndex } from './App/Views/Staff';
 
 injectTapEventPlugin();
 
 class MyRoute extends Route<RouteProps> { }
 
-interface IReduxComponentProps extends React.Props<Index> {
+interface IReduxComponentProps{
     appActions: IAppActions;
     appState: IAppState;
-    emitter: EventEmitter;
+    /*emitter: EventEmitter;*/
+}
+
+interface IFooBar {
+    name: string;
 }
 
 class Index extends React.Component<IReduxComponentProps, {}>{
 
     componentDidMount() {
 
-        this.props.emitter.on('WOW', () => {
-             console.log('wow');
-        });
+        //this.props.emitter.on('WOW', () => {
+        //     console.log('wow');
+        //});
     }
 
     render() {
 
-        const { appActions, appState } = this.props
-
+        const { appActions, appState } = this.props;
+  
         return (
             <MuiThemeProvider /*muiTheme={getMuiTheme(darkThemeBase)}*/>
                 <Router>
@@ -124,7 +128,7 @@ class Index extends React.Component<IReduxComponentProps, {}>{
                                 <MyRoute exact path="/staff/create" render={props => <CreateStaff {...this.props} />} />
                                 <MyRoute exact path="/staff/edit/:staffId" render={props => <EditStaff {...this.props} {...props} />} />
 
-                                <MyRoute exact path="/timesheets" render={props => <Timesheets />} />
+                                <MyRoute exact path="/timesheets" render={props => <TimesheetIndex />} />
 
                             </Switch>
 
@@ -169,8 +173,8 @@ class IndexRedux extends React.Component<{}, {}>{
         const ReduxWrapper = () => {
             return ReduxContainerBuilder().NoneProps({
                 mapDispatchToProps: (dispatch: Dispatch<IAppState>) => ({
-                    appActions: ActionsDispatcherFactory(dispatch),
-                    emitter: new EventEmitter()
+                    appActions: ActionsDispatcherFactory(dispatch)/*,
+                    emitter: new EventEmitter()*/
                 }),
                 mapStateToProps: (state: { appState: IAppState }) => ({
                     appState: state.appState

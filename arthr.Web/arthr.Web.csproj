@@ -79,6 +79,8 @@
     <TypeScriptCompile Include="Scripts\State\Page\State.ts" />
     <TypeScriptCompile Include="Scripts\State\Project\Actions.ts" />
     <TypeScriptCompile Include="Scripts\State\Project\State.ts" />
+    <TypeScriptCompile Include="Scripts\State\Timesheet\Actions.ts" />
+    <TypeScriptCompile Include="Scripts\State\Timesheet\State.ts" />
     <TypeScriptCompile Include="Scripts\State\Task\Actions.ts" />
     <TypeScriptCompile Include="Scripts\State\Task\State.ts" />
     <TypeScriptCompile Include="Scripts\State\User\Actions.ts" />
@@ -154,6 +156,12 @@
     </None>
     <None Update="Scripts\Models\Timesheet.ts">
       <CustomToolNamespace>..\arthr.Models\arTask\Timesheet.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TimesheetToolsViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\TimesheetToolsViewModel.cs</CustomToolNamespace>
+    </None>
+    <None Update="Scripts\Models\TimesheetUpsertViewModel.ts">
+      <CustomToolNamespace>..\arthr.Models\arTask\TimesheetUpsertViewModel.cs</CustomToolNamespace>
     </None>
     <None Update="Scripts\Models\TodoEditItemModel.ts">
       <CustomToolNamespace>..\arthr.Models\Todo\TodoEditItemModel.cs</CustomToolNamespace>

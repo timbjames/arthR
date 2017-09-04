@@ -21,4 +21,8 @@ export * from './StaffOnTask';
 export * from './TaskToolsViewModel';
 export * from './TaskUpsertViewModel';
 
+export * from './Timesheet';
+export * from './TimesheetToolsViewModel';
+export * from './TimesheetUpsertViewModel';
+
 export * from './User';
